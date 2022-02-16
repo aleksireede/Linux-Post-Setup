@@ -56,6 +56,23 @@ sudo apt --assume-yes -y install \
     p7zip-full p7zip-rar software-properties-common \
     lsp-plugins
 
+#install lolcat if not found
+FILE="/usr/games/lolcat"
+if [ -f "$FILE" ]; then
+    echo "$FILE already exists."
+    echo "You don't want to install it twice"
+else 
+	cd ~
+	## install lolcat
+	sudo apt install rubygems cowsay neofetch fortune
+	wget https://github.com/aleksireede/lolcat/archive/master.zip
+	unzip master.zip
+	rm master.zip
+	cd lolcat-master/bin
+	sudo gem install lolcat
+	sudo mv lolcat /usr/games/lolcat
+fi
+
 # Install VSCode 
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
 sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
