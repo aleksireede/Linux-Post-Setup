@@ -29,7 +29,7 @@ cat << EOF
 |*openjdk-jre v8 v11 v17                                               |
 │                                                                      │
 │Optionally:install Wiimms iso and szs tools,                          │
-│install Microfost Fonts(iso required)                                 |
+│install Microfost Fonts(iso required), install bash aliases file      |
 |and remove the snap package manager.                                  │
 └──────────────────────────────────────────────────────────────────────┘
 EOF
@@ -113,9 +113,9 @@ done
 
 ## Install custom run_once script
 while true; do
-    read -p "Do you want to install custom stuff " yn
+    read -p "Do you want to install bash aliases? " yn
     case $yn in
-        [Yy]* ) ./utils/custom.sh; break;;
+        [Yy]* ) ./utils/bash_aliases.sh; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -123,7 +123,7 @@ done
 
 #install wiims iso and szs tools
 while true; do
-    read -p "Do you want to install wiimms iso and szs tools?" yn
+    read -p "Do you want to install wiimms iso and szs tools? " yn
     case $yn in
         [Yy]* ) ./utils/wiim_install.sh; break;;
         [Nn]* ) break;;
