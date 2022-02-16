@@ -3,7 +3,16 @@
 
 -Currently supports all debian based(ubuntu mint pop etc.) linux operating systems
 
--arch support is coming in the future
+-Supports also arc,btw! based distros
+
+# Installation
+-download archive
+
+-unzip
+
+-run ./setup_arch.sh if you are on arch based distro
+
+-run ./setup_debian if you have ubuntu or debian based distro
 
 # Some code is from external sources
 -snap-nuke.sh from https://github.com/grobo021/snap-nuke
