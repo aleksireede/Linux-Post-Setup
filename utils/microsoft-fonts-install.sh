@@ -1,12 +1,14 @@
 #!/bin/bash
-read -p "Path to windows iso: " file
-if [[ -f $file ]]
+if [ -f /etc/arch-release ]
 then
-    7z e $file sources/install.wim
-    sudo 7z e install.wim 1/Windows/{Fonts/"*".{ttf,ttc},System32/Licenses/neut>
-    rm install.wim
-    sudo chmod 655 /usr/share/fonts/WindowsFonts/
-    fc-cache --force
+#Only for ArchLinux
+yay -Suy ttf-ms-fonts
+elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
+then
+#Only for Ubuntu/Mint/Debian
+sudo apt update && sudo apt install ttf-mscorefonts-installer
 else
-    echo "Windows iso not found, skipping microsoft fonts installation."
+echo ""
+echo "Your system is not supported!"
+echo ""
 fi
