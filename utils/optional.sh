@@ -38,3 +38,13 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+
+#install latest noto-color-emoji.ttf
+while true; do
+    read -p "Do you want to install Noto color emoji font? " yn
+    case $yn in
+        [Yy] * ) ./utils/noto-color-emoji.sh; break;;
+        [Nn] * ) break;;
+        * ) echo "Please answer yes or no";;
+    esac
+done
