@@ -16,7 +16,6 @@ cat << EOF
 ┌──────────────────────────────────────────────────────────────────────┐
 |-This Script can install the following stuff on your linux pc:        |
 |*Flatpak                                                              |
-|*microsft fonts                                                       |
 |*vscode                                                               |
 |*chrome                                                               |
 |*git                                                                  |
@@ -93,6 +92,7 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 
 ##install optional stuff
 ./utils/optional.sh
+
 
 cat << EOF
 ┌─────────────────────────────────────────────────────────────────────┐
