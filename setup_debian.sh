@@ -83,7 +83,7 @@ sudo apt --assume-yes -y install \
     p7zip-full p7zip-rar software-properties-common \
     lsp-plugins gedit gnome-disk-utlity gparted \
     supertuxkart pulseeffects pulseaudio-equalizer \
-    libpulse-java
+    libpulse-java vlc
     
 while true; do
     read -p "Do you want to install discord? [Y/n]" yn
@@ -93,6 +93,15 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
+
+# Install telegram
+wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
+tar -xf telegram.tar.xz
+rm telegram.tar.xz
+cd Telegram
+sudo mv Telegram /usr/share/
+sudo mv Updater /usr/share/
+/usr/share/Updater
 
 # Install VSCode 
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
