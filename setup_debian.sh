@@ -16,16 +16,20 @@ cat << EOF
 ┌──────────────────────────────────────────────────────────────────────┐
 |-This Script can install the following stuff on your linux pc:        |
 |*Flatpak                                                              |
-|*vscode                                                               |
-|*chrome                                                               |
-|*git                                                                  |
-|*python3                                                              |
-|*brave browser                                                        |
-|*neofetch                                                             |
-|*lsp-plugins                                                          |
-|*cowsay                                                               |
-|*lolcat                                                               |
-|*openjdk-jre v8 v11 v17                                               |
+|*Vscode                                                               |
+|*Google Chrome                                                        |
+|*Git                                                                  |
+|*Python3                                                              |
+|*Brave browser                                                        |
+|*Neofetch                                                             |
+|*Lsp-plugins                                                          |
+|*Cowsay                                                               |
+|*Lolcat                                                               |
+|*Openjdk-jre v8 v11 v17                                               |
+|*Discord                                                              |
+|*Supertuxkart                                                         |
+|*Gedit                                                                |
+|*Gparted                                                              |
 │                                                                      │
 │Optionally:install Wiimms iso and szs tools,                          │
 │install Microfost Fonts(iso required), install bash aliases file      |
@@ -45,6 +49,7 @@ done
 # Add Universe and Multiverse repos
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
+sudo add-apt-repository ppa:stk/dev
 sudo apt-get update
 
 sudo apt --assume-yes -y install \
@@ -53,7 +58,17 @@ sudo apt --assume-yes -y install \
     openjdk-8-jre openjdk-11-jre openjdk-17-jre \
     python3 python3-pip python3-venv git \
     p7zip-full p7zip-rar software-properties-common \
-    lsp-plugins
+    lsp-plugins gedit gnome-disk-utlity gparted \
+    supertuxkart
+    
+while true; do
+    read -p "Do you want to install discord? " yn
+    case $yn in
+        [Yy]* ) xdg-open https://discord.com/api/download?platform=linux&format=deb; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
 
 #install lolcat if not found
 FILE="/usr/games/lolcat"
