@@ -106,6 +106,7 @@ sudo apt install flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 ##install optional stuff
+chmod u+x ./utils/optional.sh
 ./utils/optional.sh
 
 
