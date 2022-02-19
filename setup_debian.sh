@@ -117,6 +117,19 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=
 sudo apt update
 sudo apt --assume-yes -y install brave-browser
 
+# Install enpass
+sudo -i
+echo "deb https://apt.enpass.io/ stable main" > \
+  /etc/apt/sources.list.d/enpass.list
+wget -O - https://apt.enpass.io/keys/enpass-linux.key | tee /etc/apt/trusted.gpg.d/enpass.asc
+apt-get update
+apt-get install enpass
+exit
+
+# Install premid 
+curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=hirsute bash
+sudo apt install --assume-yes -y premid
+
 ##install optional stuff
 chmod u+x ./utils/optional.sh
 ./utils/optional.sh
