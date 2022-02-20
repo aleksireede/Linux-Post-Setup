@@ -1,23 +1,16 @@
 # Linux-First-Setup
--this script is intended to run only once when you first install your linux os
+This script is intended to run only once when you first install your linux os.
 
--Currently supports all debian based(ubuntu mint pop etc.) linux operating systems
+Currently supports all debian based(ubuntu mint pop etc.) linux operating systems.
 
--Supports also arc,btw! based distros
+Supports also arc,btw! based distros.
 
 # Installation
--download archive
+- download archive
 
--unzip
+- unzip
 
--run ./setup_arch.sh if you are on arch based distro
-
--run ./setup_debian if you have ubuntu or debian based distro
-
-# Some code is from external sources
--snap-nuke.sh from https://github.com/grobo021/snap-nuke
-
--base code from:https://github.com/grobo021/dotfiles
+- run ./Installer.sh (you may have to use chmod u+x on the file)
 
 # Legal
 <h3>License:</h3>
