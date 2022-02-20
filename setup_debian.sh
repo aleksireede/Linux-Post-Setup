@@ -83,7 +83,7 @@ sudo apt --assume-yes -y install \
     p7zip-full p7zip-rar software-properties-common \
     lsp-plugins gedit gnome-disk-utlity gparted \
     supertuxkart pulseeffects pulseaudio-equalizer \
-    libpulse-java vlc
+    libpulse-java vlc libreoffice gimp
     
 while true; do
     read -p "Do you want to install discord? [Y/n]" yn
