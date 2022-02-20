@@ -4,6 +4,9 @@ chmod u+x ./utils/snap-nuke.sh
 chmod u+x ./utils/bash_aliases.sh
 chmod u+x ./utils/wiim_install.sh
 chmod u+x ./utils/noto-color-emoji.sh
+chmod u+x ./utils/arduino.sh
+chmod u+x ./utils/telegram.sh
+
 # Microsoft Fonts Install
 while true; do
     read -p "Do you wish to install microsoft fonts? [Y/n]:" yn
@@ -24,7 +27,7 @@ while true; do
     esac
 done
 
-## Install custom run_once script
+## Install bash aliases
 while true; do
     read -p "Do you want to install bash aliases? [Y/n]:" yn
     case $yn in
@@ -54,11 +57,21 @@ while true; do
     esac
 done
 
-#install steam
+#install telegram
 while true; do
-    read -p "Do you want to install Steam? [Y/n]:" yn
+    read -p "Do you want to install Telegram? [Y/n]:" yn
     case $yn in
-        [Yy]* ) ./utils/steam.sh; break;;
+        [Yy]* ) ./utils/telegram.sh; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no";;
+    esac
+done
+
+#install arduino
+while true; do
+    read -p "Do you want to install Arduino? [Y/n]:" yn
+    case $yn in
+        [Yy]* ) ./utils/arduino.sh; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no";;
     esac
