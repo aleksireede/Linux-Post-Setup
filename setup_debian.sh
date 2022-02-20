@@ -94,14 +94,9 @@ while true; do
     esac
 done
 
-# Install telegram
-wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
-tar -xf telegram.tar.xz
-rm telegram.tar.xz
-cd Telegram
-sudo mv Telegram /usr/share/
-sudo mv Updater /usr/share/
-/usr/share/Updater
+# Install steam
+wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
+sudo apt install --assume-yes -y ./steam.deb
 
 # Install VSCode 
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
