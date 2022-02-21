@@ -125,7 +125,7 @@ sudo apt-get install enpass
 
 ##install optional stuff
 chmod u+x ./utils/optional.sh
-./utils/optional.sh | lolcat
+./utils/optional.sh
 
 # Install premid 
 curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=hirsute bash
