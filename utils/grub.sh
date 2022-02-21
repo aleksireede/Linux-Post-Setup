@@ -2,7 +2,7 @@
 grubfile="/etc/default/grub"
 customfile="/etc/grub.d/40_custom"
 cat <<EOF>> $grubfile
-'GRUB_SAVEDEFAULT=true'
+GRUB_SAVEDEFAULT=true
 EOF
 sudo sed -i "s/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/" $grubfile
 sudo sed -i "s/GRUB_TIMEOUT=0/GRUB_TIMEOUT=20/" $grubfile
@@ -34,3 +34,4 @@ cat <<EOF>> $customfile
 '    chainloader /EFI/Microsoft/Boot/bootmgfw.efi'
 '}'
 EOF
+sudo update-grub
