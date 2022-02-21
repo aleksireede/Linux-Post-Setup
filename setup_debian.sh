@@ -1,4 +1,5 @@
 #!/bin/bash
+
 #install lolcat if not found
 lolFILE="/usr/games/lolcat"
 if [ -f "$lolFILE" ]; then
@@ -18,10 +19,7 @@ fi
 
 if [[ "$EUID" == 0 ]]
 then
-if [ -f "$lolFILE" ]; then
-    lolcat << EOF
-else
-    cat << EOF
+lolcat << EOF
 ┌──────────────────────────────────────────────────────────────────────┐
 │Please do not run this script as root as it may break you system.     │
 │We will ask you for the password if we need root access.              │
@@ -31,10 +29,7 @@ EOF
 exit
 fi
 
-if [ -f "$lolFILE" ]; then
-    lolcat << EOF
-else
-    cat << EOF
+lolcat << EOF
 ┌──────────────────────────────────────────────────────────────────────┐
 |-This Script can install the following stuff on your linux pc:        |
 |*Flatpak                                                              |
@@ -122,13 +117,10 @@ sudo apt update
 sudo apt --assume-yes -y install brave-browser
 
 # Install enpass
-sudo -i
-echo "deb https://apt.enpass.io/ stable main" > \
-  /etc/apt/sources.list.d/enpass.list
-wget -O - https://apt.enpass.io/keys/enpass-linux.key | tee /etc/apt/trusted.gpg.d/enpass.asc
-apt-get update
-apt-get install enpass
-exit
+sudo echo "deb https://apt.enpass.io/ stable main">/etc/apt/sources.list.d/enpass.list
+sudo wget -O - https://apt.enpass.io/keys/enpass-linux.key | tee /etc/apt/trusted.gpg.d/enpass.asc
+sudo apt-get update
+sudo apt-get install enpass
 
 # Install premid 
 curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=hirsute bash
@@ -140,8 +132,7 @@ chmod u+x ./utils/optional.sh
 sudo apt update
 sudo apt --assume-yes -y upgrade
 
-
-cat << EOF
+lolcat << EOF
 ┌─────────────────────────────────────────────────────────────────────┐
 │All Done! This script has succesfully completed, please reboot so    │
 │that changes take effect.                                            │
