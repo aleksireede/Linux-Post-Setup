@@ -6,6 +6,7 @@ chmod u+x ./utils/wiim_install.sh
 chmod u+x ./utils/noto-color-emoji.sh
 chmod u+x ./utils/arduino.sh
 chmod u+x ./utils/telegram.sh
+chmod u+x ./utils/grub.sh
 
 # Microsoft Fonts Install
 while true; do
@@ -72,6 +73,16 @@ while true; do
     read -p "Do you want to install Arduino? [Y/n]:" yn
     case $yn in
         [Yy]* ) ./utils/arduino.sh; break;;
+        [Nn]* ) break;;
+        * ) echo "Please answer yes or no";;
+    esac
+done
+
+#install grub fixes
+while true; do
+    read -p "Do you want to make changes to grub? [Y/n]:" yn
+    case $yn in
+        [Yy]* ) ./utils/grub.sh; break;;
         [Nn]* ) break;;
         * ) echo "Please answer yes or no";;
     esac
