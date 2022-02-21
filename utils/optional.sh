@@ -8,82 +8,22 @@ chmod u+x ./utils/arduino.sh
 chmod u+x ./utils/telegram.sh
 chmod u+x ./utils/grub.sh
 
-# Microsoft Fonts Install
-while true; do
-    read -p "Do you wish to install microsoft fonts? [Y/n]:" yn
-    case $yn in
-        [Yy]* ) ./utils/microsoft-fonts-install.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+utility("Do you want to install microsoft fonts?","./utils/microsoft-fonts-install.sh")# Microsoft Fonts Install
+utility("Do you wish to remove the snap package manager?","./utils/snap-nuke.sh")# Snap Remove
+utility("Do you want to install bash aliases?","./utils/bash_aliases.sh")# Install bash aliases
+utility("Do you want to install wiimms iso and szs tools?","./utils/wiim_install.sh")#install wiims iso and szs tools
+utility("Do you want to install Noto color emoji font?","./utils/noto-color-emoji.sh")#install latest noto-color-emoji.ttf
+utility("Do you want to install Telegram?","./utils/telegram.sh")#install telegram
+utility("Do you want to install Arduino?","./utils/arduino.sh")#install arduino
+utility("Do you want to make changes to grub?","./utils/grub.sh")#install grub fixes
 
-# Snap Remove
-while true; do
-    read -p "Do you wish to remove the snap package manager? [Y/n]:" yn
-    case $yn in
-        [Yy]* ) ./utils/snap-nuke.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
-## Install bash aliases
-while true; do
-    read -p "Do you want to install bash aliases? [Y/n]:" yn
-    case $yn in
-        [Yy]* ) ./utils/bash_aliases.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
-#install wiims iso and szs tools
-while true; do
-    read -p "Do you want to install wiimms iso and szs tools? [Y/n]:" yn
-    case $yn in
-        [Yy]* ) ./utils/wiim_install.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
-
-#install latest noto-color-emoji.ttf
-while true; do
-    read -p "Do you want to install Noto color emoji font? [Y/n]:" yn
-    case $yn in
-        [Yy]* ) ./utils/noto-color-emoji.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no";;
-    esac
-done
-
-#install telegram
-while true; do
-    read -p "Do you want to install Telegram? [Y/n]:" yn
-    case $yn in
-        [Yy]* ) ./utils/telegram.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no";;
-    esac
-done
-
-#install arduino
-while true; do
-    read -p "Do you want to install Arduino? [Y/n]:" yn
-    case $yn in
-        [Yy]* ) ./utils/arduino.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no";;
-    esac
-done
-
-#install grub fixes
-while true; do
-    read -p "Do you want to make changes to grub? [Y/n]:" yn
-    case $yn in
-        [Yy]* ) ./utils/grub.sh; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no";;
-    esac
-done
+function utility($echoline, $util){
+    while true; do
+        read -p "$echoline [Y/n]:" yn
+        case $yn in
+            [Yy]* ) $util; break;;
+            [Nn]* ) break;;
+            * ) echo "Please answer yes or no.";;
+        esac
+    done
+}
