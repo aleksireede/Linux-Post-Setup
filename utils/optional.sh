@@ -26,4 +26,4 @@ utility "Do you want to install wiimms iso and szs tools?" ./utils/wiim_install.
 utility "Do you want to install Noto color emoji font?" ./utils/noto-color-emoji.sh #install latest noto-color-emoji.ttf
 utility "Do you want to install Telegram?" ./utils/telegram.sh #install telegram
 utility "Do you want to install Arduino?" ./utils/arduino.sh #install arduino
-utility "Do you want to make changes to grub?" ./utils/grub.sh #install grub fixes
+utility "Do you want to make changes to grub?" sudo ./utils/grub.sh #install grub fixes
