@@ -12,13 +12,12 @@ sudo sed -i "s/GRUB_TIMEOUT_STYLE=hidden/GRUB_TIMEOUT_STYLE=menu/" $grubfile
 while true; do
     read -p "Do you want to add windows 11 entry to grub? [Y/n]:" yn
     case $yn in
-        [Yy]* ) grubwindowsentry; break;;
-        [Nn]* ) break;;
+        [Yy]* ) break;;
+        [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
     esac
 done
 
-function grubwindowsentry(){
 cat <<EOF>> $grubfile
 GRUB_DISABLE_OS_PROBER=true
 EOF
@@ -35,4 +34,3 @@ cat <<EOF>> $customfile
 '    chainloader /EFI/Microsoft/Boot/bootmgfw.efi'
 '}'
 EOF
-}
