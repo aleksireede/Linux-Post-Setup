@@ -76,7 +76,7 @@ sudo apt --assume-yes -y install \
     openjdk-8-jre openjdk-11-jre openjdk-17-jre \
     python3 python3-pip python3-venv git \
     p7zip-full p7zip-rar software-properties-common \
-    lsp-plugins gedit gnome-disk-utlity gparted \
+    lsp-plugins gedit gnome-disk-utility gparted \
     supertuxkart pulseeffects pulseaudio-equalizer \
     libpulse-java vlc libreoffice gimp
     
@@ -92,6 +92,7 @@ done
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
 sudo apt install --assume-yes -y ./steam.deb
+rm ./steam.deb
 
 # Install VSCode 
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
@@ -122,13 +123,15 @@ sudo wget -O - https://apt.enpass.io/keys/enpass-linux.key | tee /etc/apt/truste
 sudo apt-get update
 sudo apt-get install enpass
 
+##install optional stuff
+chmod u+x ./utils/optional.sh
+./utils/optional.sh | lolcat
+
 # Install premid 
 curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=hirsute bash
 sudo apt install --assume-yes -y premid
 
-##install optional stuff
-chmod u+x ./utils/optional.sh
-./utils/optional.sh
+# Update packages
 sudo apt update
 sudo apt --assume-yes -y upgrade
 
