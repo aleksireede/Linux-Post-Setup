@@ -78,7 +78,9 @@ sudo apt --assume-yes -y install \
     p7zip-full p7zip-rar software-properties-common \
     lsp-plugins gedit gnome-disk-utility gparted \
     supertuxkart pulseeffects pulseaudio-equalizer \
-    libpulse-java vlc libreoffice gimp
+    libpulse-java vlc libreoffice gimp \
+    build-essential make bison flex libpam0g-dev \
+    keepassxc
     
 while true; do
     read -p "Do you want to install discord? [Y/n]" yn
@@ -117,11 +119,11 @@ echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=
 sudo apt update
 sudo apt --assume-yes -y install brave-browser
 
-# Install enpass
-sudo echo "deb https://apt.enpass.io/ stable main">/etc/apt/sources.list.d/enpass.list
-sudo wget -O - https://apt.enpass.io/keys/enpass-linux.key | tee /etc/apt/trusted.gpg.d/enpass.asc
+# Install Syncthing
+sudo curl -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
+echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
 sudo apt-get update
-sudo apt-get install enpass
+sudo apt-get install syncthing
 
 ##install optional stuff
 chmod u+x ./utils/optional.sh
