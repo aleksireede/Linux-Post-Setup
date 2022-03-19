@@ -1,9 +1,8 @@
 # Linux-First-Setup
 This script is intended to run only once when you first install your linux os.
 
-Currently supports all debian based(ubuntu mint pop etc.) linux operating systems.
+Supports ONLY debian based(ubuntu mint pop etc.) linux operating systems.
 
-Supports also arc,btw! based distros.
 
 # Installation
 - download archive
