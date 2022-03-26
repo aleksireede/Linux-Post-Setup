@@ -80,7 +80,7 @@ sudo apt --assume-yes -y install \
     supertuxkart pulseeffects pulseaudio-equalizer \
     libpulse-java vlc libreoffice gimp \
     build-essential make bison flex libpam0g-dev \
-    keepassxc
+    keepassxc xdg-utils
     
 while true; do
     read -p "Do you want to install discord? [Y/n]" yn
