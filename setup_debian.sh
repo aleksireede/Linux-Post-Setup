@@ -8,7 +8,7 @@ if [ -f "$lolFILE" ]; then
 else 
 	cd ~
 	## install lolcat
-    sudo apt --assume-yes -y install rubygems
+	sudo apt --assume-yes -y install rubygems
 	wget https://github.com/aleksireede/lolcat/archive/master.zip
 	unzip master.zip
 	rm master.zip
@@ -69,6 +69,7 @@ sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 sudo add-apt-repository ppa:stk/dev
 sudo apt-get update
+curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=impish bash
 
 sudo apt --assume-yes -y install \
     neofetch fortune cowsay wget eog \
@@ -80,16 +81,12 @@ sudo apt --assume-yes -y install \
     supertuxkart pulseeffects pulseaudio-equalizer \
     libpulse-java vlc libreoffice gimp \
     build-essential make bison flex libpam0g-dev \
-    keepassxc xdg-utils
+    keepassxc xdg-utils jq flatpak premid \
+    build-essential make bison flex libpam0g-dev \
+    vim
     
-while true; do
-    read -p "Do you want to install discord? [Y/n]" yn
-    case $yn in
-        [Yy]* ) xdg-open https://discord.com/api/download?platform=linux&format=deb; break;;
-        [Nn]* ) break;;
-        * ) echo "Please answer yes or no.";;
-    esac
-done
+# Install Flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
@@ -109,10 +106,6 @@ wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt --assume-yes -y install ./google-chrome-stable_current_amd64.deb
 rm google-chrome-stable_current_amd64.deb
 
-# Install Flatpak
-sudo apt --assume-yes -y install flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
 # Install brave-browser
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
 echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
@@ -125,17 +118,31 @@ echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://
 sudo apt-get update
 sudo apt-get install syncthing
 
+#Install doas
+git clone https://github.com/slicer69/doas.git
+cd ./doas
+make
+sudo make install
+sudo su
+cat << EOF >> /usr/local/etc/doas.conf
+permit persist keepenv :adm as root
+permit nopass keepenv aleksir as root
+permit nopass keepenv aleksi as root
+permit nopass :adm cmd apt
+permit nopass keepenv setenv { PATH } root as root
+EOF
+exit
+cd ..
+rm -rf ./doas
+
 ##install optional stuff
 chmod u+x ./utils/optional.sh
 ./utils/optional.sh
 
-# Install premid 
-curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=hirsute bash
-sudo apt install --assume-yes -y premid
-
 # Update packages
-sudo apt update
+sudo apt --assume-yes -y update
 sudo apt --assume-yes -y upgrade
+sudo apt --assume-yes -y autoremove
 
 lolcat << EOF
 ┌─────────────────────────────────────────────────────────────────────┐
