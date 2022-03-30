@@ -7,6 +7,8 @@ chmod u+x ./utils/noto-color-emoji.sh
 chmod u+x ./utils/arduino.sh
 chmod u+x ./utils/telegram.sh
 chmod u+x ./utils/grub.sh
+chmod u+x ./utils/appimage_zap.sh
+chmod u+x ./discord.sh
 
 function utility(){
     while true; do
@@ -27,3 +29,5 @@ utility "Do you want to install Noto color emoji font?" ./utils/noto-color-emoji
 utility "Do you want to install Telegram?" ./utils/telegram.sh #install telegram
 utility "Do you want to install Arduino?" ./utils/arduino.sh #install arduino
 utility "Do you want to make changes to grub?" sudo ./utils/grub.sh #install grub fixes
+utility "Do you want to install discord?" ./utils/discord.sh
+utility "Do you want to install zap appimage manager?" ./utils/appimage_zap.sh
