@@ -5,11 +5,13 @@ Supports ONLY debian based(ubuntu mint pop etc.) linux operating systems.
 
 
 # Installation
-- download archive
+- git clone https://github.com/aleksireede/Linux-First-Setup.git
 
-- unzip
+-  cd Linux-First-Setup/
 
-- run ./Installer.sh (you may have to use chmod u+x on the file)
+- chmod u+x ./Installer.sh
+
+- ./Installer.sh
 
 # Legal
 <h3>License:</h3>
