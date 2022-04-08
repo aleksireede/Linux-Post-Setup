@@ -15,6 +15,8 @@ else
 	cd lolcat-master/bin
 	sudo gem install lolcat
 	sudo mv lolcat /usr/games/lolcat
+	cd ~
+	rm -rf lolcat-master
 fi
 
 if [[ "$EUID" == 0 ]]
