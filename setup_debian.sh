@@ -8,15 +8,13 @@ if [ -f "$lolFILE" ]; then
 else 
 	cd ~
 	## install lolcat
-	sudo apt --assume-yes -y install rubygems
-	wget https://github.com/aleksireede/lolcat/archive/master.zip
-	unzip master.zip
-	rm master.zip
-	cd lolcat-master/bin
+	sudo apt --assume-yes -y install rubygems git
+	git clone https://github.com/aleksireede/lolcat.git
+	cd lolcat/bin
 	sudo gem install lolcat
 	sudo mv lolcat /usr/games/lolcat
 	cd ~
-	rm -rf lolcat-master
+	rm -rf ./lolcat
 fi
 
 if [[ "$EUID" == 0 ]]
@@ -83,9 +81,8 @@ sudo apt --assume-yes -y install \
     supertuxkart pulseeffects pulseaudio-equalizer \
     libpulse-java vlc libreoffice gimp \
     build-essential make bison flex libpam0g-dev \
-    keepassxc xdg-utils jq flatpak premid \
-    build-essential make bison flex libpam0g-dev \
-    vim
+    keepassxc xdg-utils jq flatpak \
+    vim mpv
     
 # Install Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -102,11 +99,6 @@ sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/p
 rm -f packages.microsoft.gpg
 sudo apt update
 sudo apt install --assume-yes -y code
-
-# Install Google Chrome
-wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt --assume-yes -y install ./google-chrome-stable_current_amd64.deb
-rm google-chrome-stable_current_amd64.deb
 
 # Install brave-browser
 sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
@@ -125,7 +117,7 @@ git clone https://github.com/slicer69/doas.git
 cd ./doas
 make
 sudo make install
-sudo su
+sudo chmod 777 /usr/local/etc/doas.conf
 cat << EOF >> /usr/local/etc/doas.conf
 permit persist keepenv :adm as root
 permit nopass keepenv aleksir as root
@@ -133,7 +125,7 @@ permit nopass keepenv aleksi as root
 permit nopass :adm cmd apt
 permit nopass keepenv setenv { PATH } root as root
 EOF
-exit
+sudo chmod 644 /usr/local/etc/doas.conf
 cd ..
 rm -rf ./doas
 
