@@ -57,14 +57,6 @@ while true; do
     esac
 done
 
-# Color Output and Parallel Downloads
-sudo sed -i "s/#Color/Color/" /etc/pacman.conf
-sudo sed -i "s/#ParallelDownloads=5/ParallelDownloads=5/" /etc/pacman.conf
-cat << EOF >> /etc/pacman.conf
-[multilib]
-Include = /etc/pacman.d/mirrorlist
-EOF
-
 # Install apps
 paru -Suy --noconfirm --needed \
     brave-bin wit wget curl\
@@ -95,19 +87,7 @@ paru -Suy --noconfirm --needed \
     downgrade inkscape xorg-xcursorgen \
     googledot-cursor-theme
 
-sudo touch /etc/doas.conf
-sudo chmod 777 /etc/doas.conf
-cat << EOF >> /etc/doas.conf
-permit persist keepenv :adm as root
-permit persist keepenv :wheel as root
-permit nopass keepenv aleksir as root
-permit nopass keepenv aleksi as root
-permit nopass :adm cmd apt
-permit nopass :wheel cmd pacman
-permit nopass :wheel cmd paru
-permit nopass :wheel cmd yay
-permit nopass keepenv setenv { PATH } root as root
-EOF
+sudo cp ./utils/doas.conf /etc/doas.conf
 sudo chown -c root:root /etc/doas.conf
 sudo chmod -c 0400 /etc/doas.conf
 paru -S opendoas-sudo
