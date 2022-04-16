@@ -83,9 +83,6 @@ sudo apt --assume-yes -y install \
     build-essential make bison flex libpam0g-dev \
     keepassxc xdg-utils jq flatpak \
     vim mpv
-    
-# Install Flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
