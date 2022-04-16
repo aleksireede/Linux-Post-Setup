@@ -1,7 +1,7 @@
 #!/bin/bash
 if [[ "$EUID" == 0 ]]
 then 
-cat << EOF
+lolcat << EOF
 ┌──────────────────────────────────────────────────────────────────────┐
 │Please don't run this script as root as it may break you system.      │
 │We will ask you for the password if we need root access.              │
@@ -11,7 +11,7 @@ EOF
 exit
 fi
 
-cat << EOF
+lolcat << EOF
 ┌──────────────────────────────────────────────────────────────────────┐
 │This Bash Script is made by u/Techno021 to nuke snaps from Ubuntu.    │
 │                                                                      │
@@ -54,7 +54,7 @@ sudo rm -rf /snap
 sudo rm -rf /var/snap
 sudo rm -rf /var/lib/snapd
 
-cat << EOF
+lolcat << EOF
 ┌─────────────────────────────────────────────────────────────────────┐
 │All Done! This script has succesfully completed, please reboot so    │
 │that changes take effect.                                            │
