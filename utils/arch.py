@@ -1,13 +1,10 @@
 # Importing Path from pathlib2 module
 from pathlib2 import Path
   
+global file = Path(r"/etc/pacman.conf")
 # Creating a function to
 # replace the text
-def replacetext(search_text, replace_text):
-  
-    # Opening the file using the Path function
-    file = Path(r"/etc/pacman.conf")
-  
+def replacetext(search_text, replace_text, global file):
     # Reading and storing the content of the file in
     # a data variable
     data = file.read_text()
@@ -24,7 +21,8 @@ def replacetext(search_text, replace_text):
   
 # Calling the replacetext function
 # and printing the returned statement
-print(replacetext("#[multilib]", "[multilib]"))
-print(replacetext("#Include = /etc/pacman.d/mirrorlist", "Include = /etc/pacman.d/mirrorlist"))
-print(replacetext("#ParallelDownloads=5", "ParallelDownloads=5"))
-print(replacetext("#Color", "Color"))
+if file.exists():
+    print(replacetext("#[multilib]", "[multilib]"))
+    print(replacetext("#Include = /etc/pacman.d/mirrorlist", "Include = /etc/pacman.d/mirrorlist"))
+    print(replacetext("#ParallelDownloads=5", "ParallelDownloads=5"))
+    print(replacetext("#Color", "Color"))
