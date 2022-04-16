@@ -135,6 +135,8 @@ sudo apt --assume-yes -y update
 sudo apt --assume-yes -y upgrade
 sudo apt --assume-yes -y autoremove
 
+python ./utils/pulseaudio.py
+
 lolcat << EOF
 ┌─────────────────────────────────────────────────────────────────────┐
 │All Done! This script has succesfully completed, please reboot so    │
