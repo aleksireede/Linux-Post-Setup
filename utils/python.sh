@@ -1,2 +1,2 @@
 #!/bin/bash
-pip install youtube-dl fetchcord
+pip install youtube-dl fetchcord pathlib2
