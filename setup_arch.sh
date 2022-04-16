@@ -94,6 +94,7 @@ paru -S opendoas-sudo
 
 ##install all optonal things
 ./utils/optional.sh
+python ./utils/arch.py
     
 lolcat << EOF
 ┌─────────────────────────────────────────────────────────────────────┐
