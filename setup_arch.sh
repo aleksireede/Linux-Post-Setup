@@ -86,7 +86,7 @@ paru -Suy --noconfirm --needed \
     archlinux-appstream-data-pamac \
     downgrade inkscape xorg-xcursorgen \
     googledot-cursor-theme lutris kdenlive \
-    wine-ge-custom
+    wine-ge-custom baobab
 
 sudo cp ./utils/doas.conf /etc/doas.conf
 sudo chown -c root:root /etc/doas.conf
