@@ -85,7 +85,8 @@ paru -Suy --noconfirm --needed \
     ocs-url appimagelauncher \
     archlinux-appstream-data-pamac \
     downgrade inkscape xorg-xcursorgen \
-    googledot-cursor-theme lutris kdenlive
+    googledot-cursor-theme lutris kdenlive \
+    wine-ge-custom
 
 sudo cp ./utils/doas.conf /etc/doas.conf
 sudo chown -c root:root /etc/doas.conf
