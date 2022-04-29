@@ -53,7 +53,7 @@ then
     execute
     chmod u+x ./arch/Packages.sh
     ./arch/Packages.sh
-    python ./utils/arch.py
+    python ./arch/arch.py
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
     #Only for Ubuntu/Mint/Debian
@@ -75,8 +75,10 @@ then
     sudocheck
     execute
     chmod u+x ./debian/Packages.sh
+    chmod u+x ./debian/doas.sh
     ./debian/Packages.sh
-    python ./utils/pulseaudio.py
+    ./debian/doas.sh
+    python ./debian/pulseaudio.py
 else
     echo ""
     echo "Your system is not supported!"
