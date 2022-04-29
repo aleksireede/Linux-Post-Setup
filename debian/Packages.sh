@@ -45,23 +45,6 @@ echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://
 sudo apt-get update
 sudo apt-get install syncthing
 
-#Install doas
-git clone https://github.com/slicer69/doas.git
-cd ./doas
-make
-sudo make install
-sudo chmod 777 /usr/local/etc/doas.conf
-cat << EOF >> /usr/local/etc/doas.conf
-permit persist keepenv :adm as root
-permit nopass keepenv aleksir as root
-permit nopass keepenv aleksi as root
-permit nopass :adm cmd apt
-permit nopass keepenv setenv { PATH } root as root
-EOF
-sudo chmod 644 /usr/local/etc/doas.conf
-cd ..
-rm -rf ./doas
-
 # Update packages
 sudo apt --assume-yes -y update
 sudo apt --assume-yes -y upgrade
