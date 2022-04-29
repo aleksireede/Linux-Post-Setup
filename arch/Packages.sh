@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Install Yay
+git clone https://aur.archlinux.org/paru.git/
+cd paru
+makepkg -si
+cd ..
+rm -rf paru/
+
 # Install apps
 paru -Suy --noconfirm --needed \
     brave-bin wit wget curl\
