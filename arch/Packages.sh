@@ -31,7 +31,9 @@ paru -Suy --noconfirm --needed \
     googledot-cursor-theme lutris kdenlive \
     wine-ge-custom baobab
 
-sudo cp ./utils/doas.conf /etc/doas.conf
+#doas    (sudo replacement)[better]{more secure}
+wget -O doas.conf https://pastebin.com/raw/EK6hud2S
+sudo cp ./doas.conf /etc/doas.conf
 sudo chown -c root:root /etc/doas.conf
 sudo chmod -c 0400 /etc/doas.conf
 paru -S opendoas-sudo
