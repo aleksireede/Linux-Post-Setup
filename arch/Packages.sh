@@ -7,20 +7,29 @@ makepkg -si
 cd ..
 rm -rf paru/
 
+sudo rm -rf /etc/pacman.conf
+sudo chmod 777 /etc/pacman.conf
+curl https://pastebin.com/raw/hJi4icEy >/etc/pacman.conf
+sudo chmod 644 /etc/pacman.conf
+sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
+sudo pacman-key --lsign-key F3B607488DB35A47
+sudo pacman -U 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-2-1-any.pkg.tar.zst' 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-8-1-any.pkg.tar.zst' 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-v3-mirrorlist-8-1-any.pkg.tar.zst'
+/lib/ld-linux-x86-64.so.2 --help | grep "x86-64-v3 (supported, searched)"
+
 # Install apps
 paru -Suy --noconfirm --needed \
     brave-bin wit wget curl\
     visual-studio-code-bin \
     premid gst-plugin-pipewire \
-    neofetch git supertuxkart \
-    base-devel flatpak lsp-plugins\
+    neofetch-btw git supertuxkart \
+    base-devel-meta flatpak lsp-plugins\
     p7zip cowsay fortune-mod \
     rubygems pipewire-pulse eog \
     steam discord noto-fonts-cjk\
     gedit vlc gimp libreoffice \
     gparted gnome-disk-utility \
     ufw pamac-aur vim mpv \
-    mailspring noto-fonts-emoji-apple \
+    noto-fonts-emoji-apple \
     pipewire-alsa pipewire-jack  \
     pipewire-v4l2 pipewire-x11-bell \
     easyeffects mda.lv2 opendoas \
@@ -36,7 +45,9 @@ paru -Suy --noconfirm --needed \
     archlinux-appstream-data-pamac \
     downgrade inkscape xorg-xcursorgen \
     googledot-cursor-theme lutris kdenlive \
-    wine-ge-custom baobab
+    baobab syncthing-gtk-python3 \
+    btw wine-gecko wine-mono winetricks \
+    wine
 
 #doas    (sudo replacement)[better]{more secure}
 wget -O doas.conf https://pastebin.com/raw/EK6hud2S
