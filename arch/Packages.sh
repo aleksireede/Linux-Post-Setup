@@ -33,12 +33,12 @@ paru -Suy --noconfirm --needed \
     pipewire-alsa pipewire-jack  \
     pipewire-v4l2 pipewire-x11-bell \
     easyeffects mda.lv2 opendoas \
-    python python-pip python-venv \
+    python python-pip \
     make bison flex keepassxc xdg-utils \
     cifs-utils samba jq rubygems \
     syncthing nextcloud audacious \
     fluidsynth freepats-general-midi \
-    soundfont-fluid mpg123 firefox-pwa \
+    soundfont-fluid mpg123 firefox-pwa-bin \
     whatsapp-nativefier dolphin-emu-git \
     archlinux-keyring lunar-client \
     ocs-url appimagelauncher \
