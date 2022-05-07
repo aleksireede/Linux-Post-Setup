@@ -21,7 +21,7 @@ paru -Suy --noconfirm --needed \
     brave-bin wit wget curl\
     visual-studio-code-bin \
     premid gst-plugin-pipewire \
-    neofetch-btw git supertuxkart \
+    neofetch git supertuxkart \
     base-devel-meta flatpak lsp-plugins\
     p7zip cowsay fortune-mod \
     rubygems pipewire-pulse eog \
