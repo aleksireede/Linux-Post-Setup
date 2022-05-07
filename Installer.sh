@@ -88,6 +88,8 @@ fi
 ##install all optonal things
 chmod u+x ./utils/optional.sh
 ./utils/optional.sh
+curl -sL http://0x0.st/-Y29.cow -o amogus.cow
+sudo mv ./amogus.cow /usr/share/cows/amogus.cow
 
 lolcat << EOF
 ┌─────────────────────────────────────────────────────────────────────┐
