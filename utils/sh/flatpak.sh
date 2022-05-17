@@ -1,7 +1,8 @@
 #!/bin/bash
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-function telegram-native(){#Telegram
+function telegram-native(){
+    #Telegram
     InstallPath="/usr/share/aleksireede/Telegram"
     wget -O telegram.tar.xz https://telegram.org/dl/desktop/linux
     tar -xf telegram.tar.xz
