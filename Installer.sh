@@ -48,7 +48,8 @@ then
         echo "You don't want to install it twice"
     else
         sudo pacman -S --noconfirm lolcat
-    fi#end lolcat
+    fi
+    #end lolcat
     sudocheck
     execute
     chmod u+x ./arch/Packages.sh
@@ -71,7 +72,8 @@ then
 	    sudo mv lolcat $lolcatbin
 	    cd ~
 	    rm -rf ./lolcat
-    fi#end lolcat
+    fi
+    #end lolcat
     sudocheck
     execute
     chmod u+x ./debian/Packages.sh
