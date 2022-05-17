@@ -18,7 +18,7 @@ sudo apt --assume-yes -y install \
     libpulse-java vlc libreoffice gimp \
     build-essential make bison flex libpam0g-dev \
     keepassxc xdg-utils jq flatpak \
-    vim mpv audacious
+    vim mpv audacious htop
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
