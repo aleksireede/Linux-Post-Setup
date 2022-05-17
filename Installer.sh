@@ -38,6 +38,7 @@ EOF
 # Download additional scripts from other sources
 cd ./utils/sh
 wget https://raw.githubusercontent.com/MasterGeekMX/snap-to-flatpak/main/snap-to-flatpak.sh
+cd ../../
 
 if [ -f /etc/arch-release ]
 then
