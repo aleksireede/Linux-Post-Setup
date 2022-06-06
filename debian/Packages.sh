@@ -4,8 +4,6 @@
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 sudo apt-get update
-curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=impish bash
-
 sudo flatpak install easyeffects
 
 sudo apt --assume-yes -y install \
@@ -37,12 +35,6 @@ sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/p
 rm -f packages.microsoft.gpg
 sudo apt update
 sudo apt install --assume-yes -y code
-
-# Install brave-browser
-sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list
-sudo apt update
-sudo apt --assume-yes -y install brave-browser
 
 # Install Syncthing
 sudo curl -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
