@@ -92,7 +92,14 @@ fi
 chmod u+x ./utils/optional.sh
 ./utils/optional.sh
 curl -sL http://0x0.st/-Y29.cow -o amogus.cow
+if [ -f /usr/share/cows/ ]
+then
 sudo mv ./amogus.cow /usr/share/cows/amogus.cow
+fi
+if [ -f /usr/share/cowsay/cows/ ]
+then
+sudo mv ./amogus.cow /usr/share/cowsay/cows/amogus.cow
+fi
 
 lolcat << EOF
 ┌─────────────────────────────────────────────────────────────────────┐
