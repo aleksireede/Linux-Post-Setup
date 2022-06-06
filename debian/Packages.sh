@@ -25,6 +25,8 @@ sudo apt --assume-yes -y install \
     libadwaita-1-dev cmake mainline \
     gnome-software gnupg firefoxpwa
 
+xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
+
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
 sudo apt install --assume-yes -y ./steam.deb
