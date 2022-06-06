@@ -8,8 +8,8 @@ sudo apt-get update
 sudo flatpak install easyeffects
 
 sudo apt --assume-yes -y install \
-    neofetch fortune cowsay wget eog \
-    curl apt-transport-https pulseaudio \
+    fortune cowsay wget eog \
+    curl apt-transport-https \
     openjdk-8-jre openjdk-11-jre openjdk-17-jre \
     python3 python3-pip python3-venv git \
     p7zip-full p7zip-rar software-properties-common \
@@ -28,6 +28,18 @@ sudo apt --assume-yes -y install \
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
 sudo apt install --assume-yes -y ./steam.deb
 rm ./steam.deb
+
+# Install fastfetch
+git clone https://github.com/LinusDierheimer/fastfetch.git
+cd fastfetch/
+mkdir -p build
+cd build
+cmake ..
+cmake --build . -j$(nproc) --target fastfetch --target flashfetch
+sudo make install
+cd ../../
+rm -rf ./fastfetch
+
 
 # Install VSCode 
 wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
