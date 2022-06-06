@@ -10,7 +10,7 @@ or arch based systems
 
 -  cd Linux-First-Setup/
 
-- chmod u+x ./Installer.sh
+- chmod +x ./Installer.sh
 
 - ./Installer.sh
 
