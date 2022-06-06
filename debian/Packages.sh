@@ -23,7 +23,8 @@ sudo apt --assume-yes -y install \
     synaptic gdebi itstool libtbb2-dev \
     libpipewire-0.3-dev libgtk-4-dev \
     libadwaita-1-dev cmake mainline \
-    gnome-software gnupg firefoxpwa
+    gnome-software gnupg firefoxpwa \
+    dos2unix
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
