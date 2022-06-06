@@ -23,7 +23,7 @@ sudo apt --assume-yes -y install \
     synaptic gdebi itstool libtbb2-dev \
     libpipewire-0.3-dev libgtk-4-dev \
     libadwaita-1-dev cmake mainline \
-    gnome-software
+    gnome-software gnupg
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
