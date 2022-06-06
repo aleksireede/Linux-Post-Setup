@@ -4,8 +4,11 @@
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 sudo add-apt-repository ppa:stk/dev
+sudo add-apt-repository ppa:embrosyn/cinnamon
 sudo apt-get update
 curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=impish bash
+
+sudo flatpak install easyeffects
 
 sudo apt --assume-yes -y install \
     neofetch fortune cowsay wget eog \
@@ -14,12 +17,13 @@ sudo apt --assume-yes -y install \
     python3 python3-pip python3-venv git \
     p7zip-full p7zip-rar software-properties-common \
     lsp-plugins gedit gnome-disk-utility gparted \
-    supertuxkart pulseeffects pulseaudio-equalizer \
-    libpulse-java vlc libreoffice gimp \
+    supertuxkart  \
+    libpulse-java libreoffice gimp \
     build-essential make bison flex libpam0g-dev \
     keepassxc xdg-utils jq flatpak \
     vim mpv audacious htop inkscape \
-    kate kdenlive
+    kate kdenlive nemo-nextcloud nemo \
+    synaptic gdebi
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
