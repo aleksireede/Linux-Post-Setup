@@ -12,7 +12,7 @@ function execute(){
 EOF
 
     while true; do
-        read -p "Do you wish to run the script? " yn
+        read -p "Do you wish to run the script? [Y/n]:" yn
         case $yn in
             [Yy]* ) break;;
             [Nn]* ) exit;;
