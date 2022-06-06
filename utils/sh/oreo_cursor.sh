@@ -5,4 +5,4 @@ ruby generator/convert.rb
 make build
 sudo make install
 cd ..
-sudo rm ./oreo-cursors
+sudo rm -rf ./oreo-cursors
