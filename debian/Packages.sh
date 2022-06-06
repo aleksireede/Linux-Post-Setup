@@ -24,7 +24,7 @@ sudo apt --assume-yes -y install \
     vim mpv audacious htop inkscape \
     kate kdenlive nemo-nextcloud nemo \
     synaptic gdebi itstool libtbb2-dev \
-    libpipewire-0.3-dev
+    libpipewire-0.3-dev libgtk-4-dev
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
