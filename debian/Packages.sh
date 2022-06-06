@@ -23,7 +23,7 @@ sudo apt --assume-yes -y install \
     keepassxc xdg-utils jq flatpak \
     vim mpv audacious htop inkscape \
     kate kdenlive nemo-nextcloud nemo \
-    synaptic gdebi itstool
+    synaptic gdebi itstool libtbb2-dev
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
