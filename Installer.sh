@@ -109,3 +109,5 @@ lolcat << EOF
 (╯°□°）╯︵ ┴─┴ 
 EOF
 echo
+cd ..
+rm -rf ./Linux-First-Setup
