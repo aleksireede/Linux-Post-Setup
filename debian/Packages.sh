@@ -3,8 +3,6 @@
 # Add Universe and Multiverse repos
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
-sudo add-apt-repository ppa:stk/dev
-sudo add-apt-repository ppa:embrosyn/cinnamon
 sudo apt-get update
 curl -s https://packagecloud.io/install/repositories/PreMiD/Linux/script.deb.sh | sudo os=Ubuntu dist=impish bash
 
