@@ -17,7 +17,7 @@ sudo apt --assume-yes -y install \
     python3 python3-pip python3-venv git \
     p7zip-full p7zip-rar software-properties-common \
     lsp-plugins gedit gnome-disk-utility gparted \
-    supertuxkart  \
+    supertuxkart libzita-convolver-dev \
     libpulse-java libreoffice gimp \
     build-essential make bison flex libpam0g-dev \
     keepassxc xdg-utils jq flatpak \
