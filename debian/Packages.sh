@@ -3,6 +3,7 @@
 # Add Universe and Multiverse repos
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
+sudo add-apt-repository ppa:cappelikan/ppa
 sudo apt-get update
 sudo flatpak install easyeffects
 
@@ -21,7 +22,7 @@ sudo apt --assume-yes -y install \
     kate kdenlive nemo-nextcloud nemo \
     synaptic gdebi itstool libtbb2-dev \
     libpipewire-0.3-dev libgtk-4-dev \
-    libadwaita-1-dev cmake
+    libadwaita-1-dev cmake mainline
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
