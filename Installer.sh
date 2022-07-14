@@ -66,6 +66,7 @@ then
     chmod +x ./arch/Packages.sh
     ./arch/Packages.sh
     optional
+    chmod +x ./arch/arch.py
     sudo ./arch/arch.py
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
