@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Install apps
+pacman -S base-devel
+
 # Install Yay
 git clone https://aur.archlinux.org/paru.git/
 cd paru
@@ -7,19 +10,9 @@ makepkg -si
 cd ..
 rm -rf paru/
 
-sudo rm -rf /etc/pacman.conf
-sudo chmod 777 /etc/pacman.conf
-curl https://pastebin.com/raw/hJi4icEy >/etc/pacman.conf
-sudo chmod 644 /etc/pacman.conf
-sudo pacman-key --recv-keys F3B607488DB35A47 --keyserver keyserver.ubuntu.com
-sudo pacman-key --lsign-key F3B607488DB35A47
-sudo pacman -U 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-2-1-any.pkg.tar.zst' 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-mirrorlist-8-1-any.pkg.tar.zst' 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-v3-mirrorlist-8-1-any.pkg.tar.zst'
-/lib/ld-linux-x86-64.so.2 --help | grep "x86-64-v3 (supported, searched)"
+paru -R archlinux-appstream-data
 
-# Install apps
-pacman -S base-devel
-
-paru -Suy --needed \
+paru -Suy --needed --quiet \
     wit wget curl\
     visual-studio-code-bin \
     premid gst-plugin-pipewire \
@@ -48,11 +41,10 @@ paru -Suy --needed \
     downgrade inkscape xorg-xcursorgen \
     googledot-cursor-theme lutris kdenlive \
     baobab syncthing-gtk-python3 \
-    btw adb fastboot firefox
+    btw android-tools firefox dos2unix \
+    xdg-utils
 
 #doas    (sudo replacement)[better]{more secure}
-wget -O doas.conf https://pastebin.com/raw/EK6hud2S
-sudo cp ./doas.conf /etc/doas.conf
-sudo chown -c root:root /etc/doas.conf
-sudo chmod -c 0400 /etc/doas.conf
+xdg-open https://pastebin.com/raw/EK6hud2S
+sudo vim /etc/doas.conf
 paru -S opendoas-sudo
