@@ -1,5 +1,4 @@
 #!/bin/bash
-lolcatbin="/usr/games/lolcat"
 function execute(){
     lolcat << EOF
     ┌──────────────────────────────────────────────────────────────────────┐
@@ -37,7 +36,7 @@ EOF
 
 function optional(){
 	##install all optonal things
-	chmod u+x ./utils/optional.sh
+	chmod +x ./utils/optional.sh
 	./utils/optional.sh
 	curl -sL http://0x0.st/-Y29.cow -o amogus.cow
 	if [ -f /usr/share/cows/ ]
@@ -58,43 +57,28 @@ cd ../../
 if [ -f /etc/arch-release ]
 then
     #Only for ArchLinux
-    # install lolcat
-    if [ -f "$lolcatbin" ]; then
-        echo "$lolcatbin already exists."
-        echo "You don't want to install it twice"
-    else
+    if ! command -v lolcat &> /dev/null
+    then
         sudo pacman -S --noconfirm lolcat
     fi
-    #end lolcat
     sudocheck
     execute
-    chmod u+x ./arch/Packages.sh
+    chmod +x ./arch/Packages.sh
     ./arch/Packages.sh
     optional
     sudo ./arch/arch.py
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
     #Only for Ubuntu/Mint/Debian
-    #install lolcat if not found
-    if [ -f "$lolcatbin" ]; then
-        echo "$lolcatbin already exists."
-        echo "You don't want to install it twice"
-    else 
-	    cd ~
-	    ## install lolcat
-	    sudo apt --assume-yes -y install rubygems git
-	    git clone https://github.com/aleksireede/lolcat.git
-	    cd lolcat/bin
-	    sudo gem install lolcat
-	    sudo mv lolcat $lolcatbin
-	    cd ~
-	    rm -rf ./lolcat
+    if ! command -v lolcat &> /dev/null
+    then
+        chmod +x ./utils/lolcat.sh
+        ./utils/lolcat.sh
     fi
-    #end lolcat
     sudocheck
     execute
-    chmod u+x ./debian/Packages.sh
-    chmod u+x ./debian/doas.sh
+    chmod +x ./debian/Packages.sh
+    chmod +x ./debian/doas.sh
     ./debian/Packages.sh
     ./debian/doas.sh
     optional
