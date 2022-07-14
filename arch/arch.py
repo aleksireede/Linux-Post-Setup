@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Importing Path from pathlib2 module
 from pathlib2 import Path
   
