@@ -45,7 +45,15 @@ paru -Suy --needed --quiet \
     googledot-cursor-theme lutris kdenlive \
     baobab syncthing-gtk-python3 \
     btw android-tools firefox dos2unix \
-    xdg-utils steam nextcloud-client
+    xdg-utils steam nextcloud-client \
+    firefox-pwa-bin nemo nemo-fileroller \
+    nemo-compare nemo-preview nemo-seahorse \
+    nemo-share nemo-terminal nemo-megasync \
+    nemo-media-columns nemo-pdf-tools \
+    nemo-folder-icons nemo-image-converter-git\
+    nemo-dropbox nemo-pastebin-git\
+    nemo-run-with-nvidia nemo-python-git\
+    nemo-audio-tab-git lutris
 
 #doas    (sudo replacement)[better]{more secure}
 if ! [ -f /etc/doas.conf ]
