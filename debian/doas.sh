@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 #Install doas
 git clone https://github.com/slicer69/doas.git
 cd ./doas
