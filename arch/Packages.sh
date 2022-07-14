@@ -42,7 +42,7 @@ paru -Suy --needed --quiet \
     googledot-cursor-theme lutris kdenlive \
     baobab syncthing-gtk-python3 \
     btw android-tools firefox dos2unix \
-    xdg-utils
+    xdg-utils steam
 
 #doas    (sudo replacement)[better]{more secure}
 xdg-open https://pastebin.com/raw/EK6hud2S
