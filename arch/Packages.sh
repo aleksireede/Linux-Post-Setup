@@ -17,15 +17,17 @@ sudo pacman -U 'https://mirror.cachyos.org/repo/x86_64/cachyos/cachyos-keyring-2
 /lib/ld-linux-x86-64.so.2 --help | grep "x86-64-v3 (supported, searched)"
 
 # Install apps
-paru -Suy --noconfirm --needed \
-    brave-bin wit wget curl\
+pacman -S base-devel
+
+paru -Suy --needed \
+    wit wget curl\
     visual-studio-code-bin \
     premid gst-plugin-pipewire \
     neofetch git supertuxkart \
     base-devel-meta flatpak lsp-plugins\
     p7zip cowsay fortune-mod \
     rubygems pipewire-pulse eog \
-    steam discord noto-fonts-cjk\
+    discord noto-fonts-cjk\
     gedit vlc gimp libreoffice \
     gparted gnome-disk-utility \
     ufw pamac-aur vim mpv \
@@ -39,15 +41,14 @@ paru -Suy --noconfirm --needed \
     syncthing nextcloud audacious \
     fluidsynth freepats-general-midi \
     soundfont-fluid mpg123 firefox-pwa-bin \
-    whatsapp-nativefier dolphin-emu-git \
+    whatsapp-nativefier \
     archlinux-keyring lunar-client \
     ocs-url appimagelauncher \
     archlinux-appstream-data-pamac \
     downgrade inkscape xorg-xcursorgen \
     googledot-cursor-theme lutris kdenlive \
     baobab syncthing-gtk-python3 \
-    btw wine-gecko wine-mono winetricks \
-    wine
+    btw adb fastboot firefox
 
 #doas    (sudo replacement)[better]{more secure}
 wget -O doas.conf https://pastebin.com/raw/EK6hud2S
