@@ -55,7 +55,7 @@ then
     execute
     chmod u+x ./arch/Packages.sh
     ./arch/Packages.sh
-    python ./arch/arch.py
+    sudo ./arch/arch.py
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
     #Only for Ubuntu/Mint/Debian
