@@ -54,7 +54,8 @@ paru -Suy --needed --quiet \
     nemo-dropbox nemo-pastebin-git\
     nemo-run-with-nvidia nemo-python-git\
     nemo-audio-tab-git lutris \
-    mangohud lib32-mangohud
+    mangohud lib32-mangohud proton-ge-custom-bin \
+    protonup-qt goverlay-bin grapejuice
 
 #doas    (sudo replacement)[better]{more secure}
 if ! [ -f /etc/doas.conf ]
