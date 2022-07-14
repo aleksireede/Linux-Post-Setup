@@ -53,7 +53,8 @@ paru -Suy --needed --quiet \
     nemo-folder-icons nemo-image-converter-git\
     nemo-dropbox nemo-pastebin-git\
     nemo-run-with-nvidia nemo-python-git\
-    nemo-audio-tab-git lutris
+    nemo-audio-tab-git lutris \
+    mangohud lib32-mangohud
 
 #doas    (sudo replacement)[better]{more secure}
 if ! [ -f /etc/doas.conf ]
