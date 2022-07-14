@@ -1,2 +1,2 @@
 #!/bin/bash
-pip install yt-dlp fetchcord pathlib2 telegram-send
+python3 -m pip install yt-dlp fetchcord pathlib2 telegram-send
