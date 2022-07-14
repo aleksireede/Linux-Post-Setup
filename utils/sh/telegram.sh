@@ -8,7 +8,7 @@ function telegram-native(){
     tar -xf telegram.tar.xz
     rm telegram.tar.xz
     cd Telegram
-    mkdir $InstallPath
+    sudo mkdir -p $InstallPath
     sudo mv Telegram $InstallPath
     sudo mv Updater $InstallPath
     $InstallPath/Updater
