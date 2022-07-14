@@ -35,6 +35,21 @@ EOF
     fi
 }
 
+function optional(){
+	##install all optonal things
+	chmod u+x ./utils/optional.sh
+	./utils/optional.sh
+	curl -sL http://0x0.st/-Y29.cow -o amogus.cow
+	if [ -f /usr/share/cows/ ]
+	then
+	sudo mv ./amogus.cow /usr/share/cows/amogus.cow
+	fi
+	if [ -f /usr/share/cowsay/cows/ ]
+	then
+	sudo mv ./amogus.cow /usr/share/cowsay/cows/amogus.cow
+	fi
+}
+
 # Download additional scripts from other sources
 cd ./utils/sh
 wget https://raw.githubusercontent.com/MasterGeekMX/snap-to-flatpak/main/snap-to-flatpak.sh
@@ -55,6 +70,7 @@ then
     execute
     chmod u+x ./arch/Packages.sh
     ./arch/Packages.sh
+    optional
     sudo ./arch/arch.py
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
@@ -81,24 +97,13 @@ then
     chmod u+x ./debian/doas.sh
     ./debian/Packages.sh
     ./debian/doas.sh
-    python ./debian/pulseaudio.py
+    optional
+    ./debian/pulseaudio.py
 else
     echo ""
     echo "Your system is not supported!"
     echo ""
     exit
-fi
-##install all optonal things
-chmod u+x ./utils/optional.sh
-./utils/optional.sh
-curl -sL http://0x0.st/-Y29.cow -o amogus.cow
-if [ -f /usr/share/cows/ ]
-then
-sudo mv ./amogus.cow /usr/share/cows/amogus.cow
-fi
-if [ -f /usr/share/cowsay/cows/ ]
-then
-sudo mv ./amogus.cow /usr/share/cowsay/cows/amogus.cow
 fi
 
 lolcat << EOF
