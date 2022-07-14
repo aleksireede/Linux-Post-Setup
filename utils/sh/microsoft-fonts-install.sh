@@ -2,7 +2,7 @@
 if [ -f /etc/arch-release ]
 then
     #Only for ArchLinux
-    paru -Suy ttf-ms-fonts
+    paru -Suy --quiet --needed --noconfirm ttf-ms-fonts
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
     #Only for Ubuntu/Mint/Debian
