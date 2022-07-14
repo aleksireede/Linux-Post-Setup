@@ -5,7 +5,8 @@ from pathlib2 import Path
 file = Path(r"/etc/pacman.conf")
 # Creating a function to
 # replace the text
-def replacetext(search_text, replace_text, global file):
+def replacetext(search_text, replace_text):
+    global file
     # Reading and storing the content of the file in
     # a data variable
     data = file.read_text()
