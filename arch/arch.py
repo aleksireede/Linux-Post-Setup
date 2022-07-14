@@ -1,7 +1,7 @@
 # Importing Path from pathlib2 module
 from pathlib2 import Path
   
-global file = Path(r"/etc/pacman.conf")
+file = Path(r"/etc/pacman.conf")
 # Creating a function to
 # replace the text
 def replacetext(search_text, replace_text, global file):
