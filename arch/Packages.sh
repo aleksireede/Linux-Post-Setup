@@ -3,12 +3,15 @@
 # Install apps
 pacman -S base-devel
 
-# Install Yay
-git clone https://aur.archlinux.org/paru.git/
-cd paru
-makepkg -si
-cd ..
-rm -rf paru/
+# Install paru
+if ! command -v paru &> /dev/null
+    then
+    git clone https://aur.archlinux.org/paru.git/
+    cd paru
+    makepkg -si
+    cd ..
+    rm -rf paru/
+fi
 
 paru -R archlinux-appstream-data
 
@@ -45,6 +48,9 @@ paru -Suy --needed --quiet \
     xdg-utils steam nextcloud-client
 
 #doas    (sudo replacement)[better]{more secure}
-xdg-open https://pastebin.com/raw/EK6hud2S
-sudo vim /etc/doas.conf
-paru -S opendoas-sudo
+if ! [ -f /etc/doas.conf ]
+then
+    xdg-open https://pastebin.com/raw/EK6hud2S
+    sudo vim /etc/doas.conf
+    paru -S opendoas-sudo
+fi
