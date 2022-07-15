@@ -55,7 +55,8 @@ paru -Suy --needed --quiet \
     nemo-run-with-nvidia nemo-python-git\
     nemo-audio-tab-git lutris \
     proton-ge-custom-bin \
-    protonup-qt goverlay-bin grapejuice
+    protonup-qt goverlay-bin grapejuice \
+    gnome-console
 
 #doas    (sudo replacement)[better]{more secure}
 if ! [ -f /etc/doas.conf ]
