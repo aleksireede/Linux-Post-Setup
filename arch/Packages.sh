@@ -19,7 +19,7 @@ paru -Suy --needed --quiet \
     wit wget curl\
     visual-studio-code-bin \
     premid gst-plugin-pipewire \
-    neofetch git supertuxkart \
+    neofetch git \
     base-devel-meta flatpak lsp-plugins\
     p7zip cowsay fortune-mod \
     rubygems pipewire-pulse eog \
@@ -55,7 +55,7 @@ paru -Suy --needed --quiet \
     nemo-run-with-nvidia nemo-python-git\
     nemo-audio-tab-git lutris \
     proton-ge-custom-bin \
-    protonup-qt goverlay-bin grapejuice \
+    protonup-qt goverlay-bin \
     gnome-console woeusb-ng
 
 #doas    (sudo replacement)[better]{more secure}
