@@ -34,7 +34,7 @@ paru -Suy --needed --quiet \
     python python-pip \
     make bison flex keepassxc xdg-utils \
     cifs-utils samba jq rubygems \
-    syncthing nextcloud audacious \
+    syncthing-gtk-python3 nextcloud audacious \
     fluidsynth freepats-general-midi \
     soundfont-fluid mpg123 firefox-pwa-bin \
     whatsapp-nativefier \
