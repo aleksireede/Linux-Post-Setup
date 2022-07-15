@@ -56,7 +56,7 @@ paru -Suy --needed --quiet \
     nemo-audio-tab-git lutris \
     proton-ge-custom-bin \
     protonup-qt goverlay-bin grapejuice \
-    gnome-console
+    gnome-console woeusb-ng
 
 #doas    (sudo replacement)[better]{more secure}
 if ! [ -f /etc/doas.conf ]
