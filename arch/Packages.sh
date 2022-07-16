@@ -59,12 +59,8 @@ paru -Suy --needed --quiet \
     gnome-console woeusb-ng \
     syncthingtray-qt6 boost-libs-git \
     c++utilities qtforkawesome-qt6 \
-    qtutilities-qt6 easyeffects libadwaita \
-    libbs2b fmt lilv rubberband libsamplerate \
-    libsigc++-3.0 libsndfile mda.lv2 zam-plugins \
-    calf gtk4 lsp-plugins pipewire-pulse rnnoise \
-    tbb zita-convolver appstream-glib libebur128 \
-    gnome-todo
+    qtutilities-qt6 gnome-todo
+flatpak install easyeffects
 
 #doas    (sudo replacement)[better]{more secure}
 if ! [ -f /etc/doas.conf ]
