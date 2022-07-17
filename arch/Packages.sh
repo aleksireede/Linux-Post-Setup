@@ -61,8 +61,6 @@ paru -Suy --needed --quiet \
     c++utilities qtforkawesome-qt6 \
     qtutilities-qt6 gnome-todo \
     mcpelauncher-linux-git rclone-bin \
-    mcpelauncher-msa-ui-qt-git \
-    mcpelauncher-msa-git \
     mcpelauncher-ui-git
 flatpak install easyeffects
 
