@@ -59,7 +59,8 @@ paru -Suy --needed --quiet \
     gnome-console woeusb-ng \
     syncthingtray-qt6 boost-libs-git \
     c++utilities qtforkawesome-qt6 \
-    qtutilities-qt6 gnome-todo
+    qtutilities-qt6 gnome-todo \
+    mcpelauncher-linux-git rclone-bin
 flatpak install easyeffects
 
 #doas    (sudo replacement)[better]{more secure}
