@@ -60,7 +60,10 @@ paru -Suy --needed --quiet \
     syncthingtray-qt6 boost-libs-git \
     c++utilities qtforkawesome-qt6 \
     qtutilities-qt6 gnome-todo \
-    mcpelauncher-linux-git rclone-bin
+    mcpelauncher-linux-git rclone-bin \
+    mcpelauncher-msa-ui-qt-git \
+    mcpelauncher-msa-git \
+    mcpelauncher-ui-git
 flatpak install easyeffects
 
 #doas    (sudo replacement)[better]{more secure}
