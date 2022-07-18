@@ -61,7 +61,7 @@ paru -Suy --needed --quiet \
     c++utilities qtforkawesome-qt6 \
     qtutilities-qt6 gnome-todo \
     mcpelauncher-linux-git rclone-bin \
-    mcpelauncher-ui-git
+    mcpelauncher-ui-git kdeconnect
 flatpak install easyeffects
 
 #doas    (sudo replacement)[better]{more secure}
