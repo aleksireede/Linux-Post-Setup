@@ -85,7 +85,6 @@ then
     ./debian/Packages.sh
     ./debian/doas.sh
     optional
-    ./debian/pulseaudio.py
 else
     echo ""
     echo "Your system is not supported!"
