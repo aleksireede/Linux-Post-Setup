@@ -5,6 +5,10 @@ sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 sudo add-apt-repository ppa:cappelikan/ppa
 
+sudo apt --assume-yes -y install \
+curl apt-transport-https \
+gnupg
+
 curl -fsSL https://packagecloud.io/filips/FirefoxPWA/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/firefoxpwa-keyring.gpg > /dev/null
 echo "deb [signed-by=/usr/share/keyrings/firefoxpwa-keyring.gpg] https://packagecloud.io/filips/FirefoxPWA/any any main" | sudo tee /etc/apt/sources.list.d/firefoxpwa.list > /dev/null
 
@@ -13,7 +17,6 @@ sudo flatpak install easyeffects
 
 sudo apt --assume-yes -y install \
     fortune-mod cowsay wget eog \
-    curl apt-transport-https \
     openjdk-8-jre openjdk-11-jre openjdk-17-jre \
     python3 python3-pip python3-venv git \
     p7zip-full p7zip-rar software-properties-common \
@@ -29,7 +32,7 @@ sudo apt --assume-yes -y install \
     libadwaita-1-dev cmake mainline \
     gnome-software gnupg firefoxpwa \
     dos2unix kate keepassxc inkscape \
-    libpam0g-dev cmake gnupg 
+    libpam0g-dev cmake
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
@@ -62,7 +65,7 @@ sudo apt install --assume-yes -y code
 sudo curl -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
 sudo apt-get update
-sudo apt-get install syncthing
+sudo apt-get -y --assume-yes install syncthing
 
 # Update packages
 sudo apt --assume-yes -y update
