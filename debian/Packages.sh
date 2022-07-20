@@ -8,7 +8,7 @@ sudo apt-get update
 sudo flatpak install easyeffects
 
 sudo apt --assume-yes -y install \
-    fortune cowsay wget eog \
+    fortune-mod cowsay wget eog \
     curl apt-transport-https \
     openjdk-8-jre openjdk-11-jre openjdk-17-jre \
     python3 python3-pip python3-venv git \
@@ -24,7 +24,7 @@ sudo apt --assume-yes -y install \
     libpipewire-0.3-dev libgtk-4-dev \
     libadwaita-1-dev cmake mainline \
     gnome-software gnupg firefoxpwa \
-    dos2unix
+    dos2unix kate keepassxc inkscape
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
