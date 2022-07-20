@@ -34,7 +34,7 @@ sudo apt -qq --assume-yes -y install \
     libadwaita-1-dev cmake mainline \
     gnome-software gnupg firefoxpwa \
     dos2unix kate keepassxc inkscape \
-    libpam0g-dev cmake
+    libpam0g-dev cmake aptitude synaptic
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
