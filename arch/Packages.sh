@@ -62,7 +62,8 @@ paru -Suy --needed --quiet \
     qtutilities-qt6 gnome-todo \
     mcpelauncher-linux-git rclone-bin \
     mcpelauncher-ui-git kdeconnect \
-    gvfs-smb appimagelauncher
+    gvfs-smb appimagelauncher \
+    heroic-games-launcher-bin
 flatpak install easyeffects
 
 #doas    (sudo replacement)[better]{more secure}
