@@ -5,17 +5,19 @@ sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 sudo add-apt-repository ppa:cappelikan/ppa
 
-sudo apt --assume-yes -y install \
+sudo apt -qq --assume-yes -y install \
 curl apt-transport-https \
 gnupg
 
 curl -fsSL https://packagecloud.io/filips/FirefoxPWA/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/firefoxpwa-keyring.gpg > /dev/null
 echo "deb [signed-by=/usr/share/keyrings/firefoxpwa-keyring.gpg] https://packagecloud.io/filips/FirefoxPWA/any any main" | sudo tee /etc/apt/sources.list.d/firefoxpwa.list > /dev/null
 
-sudo apt-get update
+bash <(wget -qO- https://raw.githubusercontent.com/Heroic-Games-Launcher/HeroicGamesLauncher/main/rauldipeas.sh)
+
+sudo apt-get -qq update
 sudo flatpak install easyeffects
 
-sudo apt --assume-yes -y install \
+sudo apt -qq --assume-yes -y install \
     fortune-mod cowsay wget eog \
     openjdk-8-jre openjdk-11-jre openjdk-17-jre \
     python3 python3-pip python3-venv git \
@@ -38,7 +40,7 @@ xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
 # Install steam
 wget -O steam.deb https://cdn.akamai.steamstatic.com/client/installer/steam.deb
-sudo apt install --assume-yes -y ./steam.deb
+sudo apt -qq install --assume-yes -y ./steam.deb
 rm ./steam.deb
 
 # Install fastfetch
@@ -58,16 +60,16 @@ wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > pa
 sudo install -o root -g root -m 644 packages.microsoft.gpg /etc/apt/trusted.gpg.d/
 sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/trusted.gpg.d/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
 rm -f packages.microsoft.gpg
-sudo apt update
-sudo apt install --assume-yes -y code
+sudo apt -qq update
+sudo apt -qq --assume-yes -y install code
 
 # Install Syncthing
 sudo curl -s -o /usr/share/keyrings/syncthing-archive-keyring.gpg https://syncthing.net/release-key.gpg
 echo "deb [signed-by=/usr/share/keyrings/syncthing-archive-keyring.gpg] https://apt.syncthing.net/ syncthing stable" | sudo tee /etc/apt/sources.list.d/syncthing.list
-sudo apt-get update
-sudo apt-get -y --assume-yes install syncthing
+sudo apt-get -qq update
+sudo apt-get -qq -y --assume-yes install syncthing
 
 # Update packages
-sudo apt --assume-yes -y update
-sudo apt --assume-yes -y upgrade
-sudo apt --assume-yes -y autoremove
+sudo apt -qq --assume-yes -y update
+sudo apt -qq --assume-yes -y upgrade
+sudo apt -qq --assume-yes -y autoremove
