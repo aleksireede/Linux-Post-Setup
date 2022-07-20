@@ -70,6 +70,8 @@ then
     chmod +x ./arch/Packages.sh
     ./arch/Packages.sh
     optional
+    chmod +x ./debian/pulseaudio.py
+    ./debian/pulseaudio.py
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
     #Only for Ubuntu/Mint/Debian
