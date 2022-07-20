@@ -4,6 +4,10 @@
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 sudo add-apt-repository ppa:cappelikan/ppa
+
+curl -fsSL https://packagecloud.io/filips/FirefoxPWA/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/firefoxpwa-keyring.gpg > /dev/null
+echo "deb [signed-by=/usr/share/keyrings/firefoxpwa-keyring.gpg] https://packagecloud.io/filips/FirefoxPWA/any any main" | sudo tee /etc/apt/sources.list.d/firefoxpwa.list > /dev/null
+
 sudo apt-get update
 sudo flatpak install easyeffects
 
@@ -25,7 +29,7 @@ sudo apt --assume-yes -y install \
     libadwaita-1-dev cmake mainline \
     gnome-software gnupg firefoxpwa \
     dos2unix kate keepassxc inkscape \
-    libpam0g-dev
+    libpam0g-dev cmake gnupg 
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
