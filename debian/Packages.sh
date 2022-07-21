@@ -41,7 +41,7 @@ sudo apt -qq --assume-yes -y install \
     glslang-tools libxnvctrl-dev wine64 \
     wine32 libasound2-plugins:i386 \
     libsdl2-2.0-0:i386 libdbus-1-3:i386 \
-    libsqlite3-0:i386
+    libsqlite3-0:i386 mono-complete
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
