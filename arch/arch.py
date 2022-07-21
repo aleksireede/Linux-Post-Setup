@@ -10,6 +10,8 @@ def replacetext(search_text, replace_text):
     # Reading and storing the content of the file in
     # a data variable
     data = file.read_text()
+    if not search_text in data:
+        return "String Not found:"+search_text
   
     # Replacing the text using the replace function
     data = data.replace(search_text, replace_text)
