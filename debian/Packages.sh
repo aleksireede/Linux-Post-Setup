@@ -37,7 +37,7 @@ sudo apt -qq --assume-yes -y install \
     dos2unix kate keepassxc inkscape \
     libpam0g-dev cmake aptitude synaptic \
     goverlay meson libdbus-1-dev glslang-dev \
-    glslang-tools
+    glslang-tools libxnvctrl-dev
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
