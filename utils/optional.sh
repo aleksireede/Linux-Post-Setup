@@ -11,8 +11,8 @@ function utility(){
     done
 }
 #loops through files with .sh ending and uses the below funtion "utility" to ask the user id they want to execute it
-readarray -d '' files < <(find . -type f -name "*.sh" ! -name "optional*" ! -name "setup*" \
-! -name "Packages*" ! -name "Installer*" ! -name "*.py" ! -name "*.conf" \
+readarray -d '' files < <(find ./sh -type f -name "*.sh"  -name "*.py" ! -name "optional*" ! -name "setup*" \
+! -name "Packages*" ! -name "Installer*" ! -name "*.conf" \
 ! -name "doas*" -print0)
 for i in ${!files[@]}; do
   chmod u+x ${files[$i]}
