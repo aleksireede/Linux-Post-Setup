@@ -4,6 +4,7 @@
 sudo add-apt-repository universe
 sudo add-apt-repository multiverse
 sudo add-apt-repository ppa:cappelikan/ppa
+sudo add-apt-repository ppa:flexiondotorg/mangohud
 
 sudo apt -qq --assume-yes -y install \
 curl apt-transport-https \
@@ -34,7 +35,8 @@ sudo apt -qq --assume-yes -y install \
     libadwaita-1-dev cmake mainline \
     gnome-software gnupg firefoxpwa \
     dos2unix kate keepassxc inkscape \
-    libpam0g-dev cmake aptitude synaptic
+    libpam0g-dev cmake aptitude synaptic \
+    goverlay
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
