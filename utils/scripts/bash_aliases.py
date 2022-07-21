@@ -32,4 +32,4 @@ def replacetext(search_text):
 # Calling the replacetext function
 # and printing the returned statement
 if bash.exists():
-    print(replacetext("if [ -f ~/.bash_aliases ]; then\n. ~/.bash_aliases\nfi"))
+    print(replacetext("if [ -f ~/.bash_aliases ];\n then\n. ~/.bash_aliases\nfi"))
