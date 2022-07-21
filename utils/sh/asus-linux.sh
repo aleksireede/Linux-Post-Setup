@@ -6,6 +6,8 @@ then
     cd asusctl
     make
     sudo make install
+    cd ..
+    sudo rm -rf ./asusctl
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
     #Only for Ubuntu/Mint/Debian
@@ -16,6 +18,8 @@ then
     cd asusctl
     make
     sudo make install
+    cd ..
+    sudo rm -rf ./asusctl
 else
     echo ""
     echo "Your system is not supported!"
