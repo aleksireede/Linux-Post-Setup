@@ -36,7 +36,7 @@ sudo apt -qq --assume-yes -y install \
     gnome-software gnupg firefoxpwa \
     dos2unix kate keepassxc inkscape \
     libpam0g-dev cmake aptitude synaptic \
-    goverlay meson
+    goverlay meson libdbus-1-dev
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
