@@ -11,6 +11,9 @@ sudo apt -qq --assume-yes -y install \
 curl apt-transport-https \
 gnupg
 
+wget -qO- https://Wiener234.github.io/ani-cli-ppa/KEY.gpg | sudo tee /etc/apt/trusted.gpg.d/ani-cli.asc
+wget -qO- https://Wiener234.github.io/ani-cli-ppa/ani-cli-debian.list | sudo tee /etc/apt/sources.list.d/ani-cli-debian.list
+
 curl -fsSL https://packagecloud.io/filips/FirefoxPWA/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/firefoxpwa-keyring.gpg > /dev/null
 echo "deb [signed-by=/usr/share/keyrings/firefoxpwa-keyring.gpg] https://packagecloud.io/filips/FirefoxPWA/any any main" | sudo tee /etc/apt/sources.list.d/firefoxpwa.list > /dev/null
 
@@ -47,7 +50,7 @@ sudo apt -qq --assume-yes -y install \
     libsqlite3-0:i386 mono-complete \
     grapejuice eog-plugins \
     gnome-software-plugin-flatpak \
-    gnome-tweaks nemo-gtkhash
+    gnome-tweaks nemo-gtkhash ani-cli
 
 xdg-mime default nemo.desktop inode/directory application/x-gnome-saved-search
 
