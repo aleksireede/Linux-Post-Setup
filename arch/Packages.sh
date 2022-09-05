@@ -61,7 +61,8 @@ paru -Suy --needed --quiet \
     mcpelauncher-ui-git kdeconnect \
     gvfs-smb appimagelauncher \
     eovpn telegram-desktop-bin \
-    cemu-experimental-wine
+    cemu-experimental-wine \
+    grapejuice
 flatpak install easyeffects
 
 #doas    (sudo replacement)[better]{more secure}
