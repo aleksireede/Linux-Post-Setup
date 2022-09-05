@@ -13,20 +13,18 @@ if ! command -v paru &> /dev/null
     rm -rf paru/
 fi
 
-paru -R archlinux-appstream-data
-
 paru -Suy --needed --quiet \
     wit wget curl\
     visual-studio-code-bin \
     premid gst-plugin-pipewire \
-    neofetch git \
+    fastfetch git \
     base-devel-meta flatpak lsp-plugins\
     p7zip cowsay fortune-mod \
     rubygems pipewire-pulse eog \
     discord noto-fonts-cjk\
     gedit vlc gimp libreoffice \
     gparted gnome-disk-utility \
-    ufw pamac-aur vim mpv \
+    ufw vim mpv \
     noto-fonts-emoji-apple \
     pipewire-alsa pipewire-jack  \
     pipewire-v4l2 pipewire-x11-bell \
@@ -40,7 +38,6 @@ paru -Suy --needed --quiet \
     whatsapp-nativefier \
     archlinux-keyring lunar-client \
     ocs-url appimagelauncher \
-    archlinux-appstream-data-pamac \
     downgrade inkscape xorg-xcursorgen \
     googledot-cursor-theme lutris kdenlive \
     baobab syncthing-gtk-python3 \
@@ -63,7 +60,7 @@ paru -Suy --needed --quiet \
     mcpelauncher-linux-git rclone-bin \
     mcpelauncher-ui-git kdeconnect \
     gvfs-smb appimagelauncher \
-    heroic-games-launcher-bin
+    eovpn telegram-desktop-bin
 flatpak install easyeffects
 
 #doas    (sudo replacement)[better]{more secure}
