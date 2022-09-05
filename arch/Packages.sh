@@ -14,7 +14,7 @@ if ! command -v paru &> /dev/null
 fi
 
 paru -Suy --needed --quiet \
-    wit wget curl\
+    wit wget curl google-chrome \
     visual-studio-code-bin \
     premid gst-plugin-pipewire \
     fastfetch git \
