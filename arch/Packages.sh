@@ -36,7 +36,7 @@ paru -Suy --needed --quiet \
     fluidsynth freepats-general-midi \
     soundfont-fluid mpg123 firefox-pwa-bin \
     whatsapp-nativefier \
-    archlinux-keyring lunar-client \
+    archlinux-keyring \
     ocs-url appimagelauncher \
     downgrade inkscape xorg-xcursorgen \
     googledot-cursor-theme lutris kdenlive \
