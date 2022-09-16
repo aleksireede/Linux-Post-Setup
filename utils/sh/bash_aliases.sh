@@ -20,8 +20,8 @@ elif [ -f ~/.zshrc ]
 then
 #Only for zsh
 cat << EOF >> ~/.zshrc
-if [ -f ~/.bash_aliases ]; then
-. ~/.bash_aliases
+if [ -f ~/.zsh_aliases ]; then
+. ~/.zsh_aliases
 fi
 EOF
 else
