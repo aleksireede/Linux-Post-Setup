@@ -1,21 +1,16 @@
 ┌──────────────────────────────────────────────────────────────────────┐
-│This Bash Script is made by Rishab (@Grobo021 on GitHub) to install:  │
+│This Bash Script is made by Mehukatti to install:                     │
 │* Vim                                                                 │
 │* HTop                                                                │
 │* Git                                                                 │
 │* ZSH                                                                 │
 │* VSCode                                                              │
-│* Chromium                                                            │
-│* Librewolf                                                           │
-│* Github CLI                                                          │
-│* Python3 with PiP and Venv                                           │
-│* NodeJS via the Node Version Manager                                 │
-│* Rust                                                                │
-│* Docker and Docker Compose                                           │
-│* Flatpak                                                             │
-│                                                                      │
-│Note: Please pay attention to yay prompts                             │
-│                                                                      │
-│Optionally: This script can also run ./utils/venv-create.sh for you   │
-│and install Microsoft Fonts.                                          │
+│* Firefox                                                             │
+│* Chrome                                                              │
+│* Krita                                                               │
+│* Supertuxkart                                                        │
+│* Nextcloud                                                           │
+│* Telegram                                                            │
+│* Keepassxc                                                           │
+│* Whatsapp etc.                                                       │
 └──────────────────────────────────────────────────────────────────────┘

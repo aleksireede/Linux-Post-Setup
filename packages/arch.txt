@@ -1,0 +1,47 @@
+    wit google-chrome \
+    visual-studio-code-bin \
+    gst-plugin-pipewire fastfetch \
+    base-devel-meta \
+    rubygems pipewire-pulse  \
+    noto-fonts-cjk vlc ufw  \
+    noto-fonts-emoji-apple \
+    pipewire-alsa pipewire-jack  \
+    pipewire-v4l2 pipewire-x11-bell \
+    easyeffects mda.lv2 opendoas cifs-utils samba nextcloud \
+    fluidsynth freepats-general-midi \
+    soundfont-fluid mpg123 firefox-pwa-bin \
+    whatsapp-nativefier archlinux-keyring \
+    ocs-url appimagelauncher \
+    downgrade  xorg-xcursorgen \
+    googledot-cursor-theme lutris \
+    baobab syncthing-gtk-python3 btw android-tools \
+    steam nextcloud-client \
+    firefox-pwa-bin  nemo-fileroller \
+    nemo-compare nemo-preview nemo-seahorse \
+    nemo-share nemo-terminal nemo-megasync \
+    nemo-media-columns nemo-pdf-tools \
+    nemo-folder-icons nemo-image-converter-git\
+    nemo-dropbox nemo-pastebin-git\
+    nemo-run-with-nvidia nemo-python-git\
+    nemo-audio-tab-git net-tools \
+    proton-ge-custom-bin protonup-qt \
+    gnome-console woeusb-ng \
+    syncthingtray-qt6 boost-libs-git \
+    c++utilities qtforkawesome-qt6 \
+    qtutilities-qt6 gnome-todo \
+    mcpelauncher-linux-git rclone-bin \
+    mcpelauncher-ui-git kdeconnect gvfs-smb eovpn \
+    cemu-experimental-wine vmware-horizon-client \
+    needrestart zoom dxvk-bin dropbox mkinitcpio-firmware \
+    7-zip-full etcher-bin android-sdk-platform-tools \
+    tor-browser mangohud-common mangohud \
+    mangoapp aur-auto-vote-git update-grub  \
+    geforcenow-electron wiibafu refind \
+    geogebra-5 dnsutils signal-desktop-beta-bin \
+    krita google-drive-nativefier gmail-nativefier \
+    google-keep-nativefier teams-nativefier \
+    youtubemusic-nativefier facebook-desktop-app \
+    ms-outlook-nativefier instagram-nativefier \
+    discord balena-etcher emacs pipewire-zeroconf \
+    manjaro-pipewire realtime-privileges \
+    pipewire-media-session plasma5-applets-volumewin7mixer \
