@@ -1,9 +1,9 @@
-ani-cli grapejuice wget curl \
-cowsay fortune-mod git eog \
-python3 python3-pip python3-venv \
-firefox keepassxc flatpak \
-inkscape kate gimp libreoffice \
-kdenlive nemo dos2unix vim mpv \
-audacious make bison flex xdg-utils \
-jq gparted gnome-disk-utility lsp-plugins \
-goverlay
+ani-cli grapejuice wget curl 
+cowsay fortune-mod git eog 
+python3 python3-pip python3-venv 
+firefox keepassxc flatpak 
+inkscape kate gimp libreoffice 
+kdenlive nemo dos2unix vim mpv 
+audacious make bison flex xdg-utils 
+jq gparted gnome-disk-utility lsp-plugins 
+goverlay 

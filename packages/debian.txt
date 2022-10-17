@@ -1,18 +1,19 @@
-    openjdk-8-jre openjdk-11-jre openjdk-17-jre \
-    p7zip-full p7zip-rar software-properties-common \
-    libzita-convolver-dev libpulse-java \
-    build-essential libpam0g-dev
-    htop nemo-nextcloud  \
-    synaptic gdebi itstool libtbb2-dev \
-    libpipewire-0.3-dev libgtk-4-dev \
-    libadwaita-1-dev cmake mainline \
-    gnome-software gnupg firefoxpwa \
-    libpam0g-dev aptitude synaptic \
-    meson libdbus-1-dev glslang-dev \
-    glslang-tools libxnvctrl-dev wine64 \
-    wine32 libasound2-plugins:i386 \
-    libsdl2-2.0-0:i386 libdbus-1-3:i386 \
-    libsqlite3-0:i386 mono-complete \
-    eog-plugins \
-    gnome-software-plugin-flatpak \
-    gnome-tweaks nemo-gtkhash \
+openjdk-8-jre openjdk-11-jre openjdk-17-jre 
+p7zip-full p7zip-rar software-properties-common 
+libzita-convolver-dev libpulse-java 
+build-essentials libpam0g-dev 
+htop nemo-nextcloud 
+synaptic gdebi itstool libtbb2-dev 
+libpipewire-0.3-dev libgtk-4-dev 
+libadwaita-1-dev cmake mainline 
+gnome-software gnupg firefoxpwa 
+libpam0g-dev aptitude synaptic 
+meson libdbus-1-dev glslang-dev 
+glslang-tools libxnvctrl-dev wine64 
+wine32 libasound2-plugins:i386 
+libsdl2-2.0-0:i386 libdbus-1-3:i386 
+libsqlite3-0:i386 mono-complete 
+eog-plugins ttf-mscorefonts-installer 
+gnome-software-plugin-flatpak 
+gnome-tweaks nemo-gtkhash 
+syncthing code libclang-dev libudev-dev 
