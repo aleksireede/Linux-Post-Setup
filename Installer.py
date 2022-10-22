@@ -54,6 +54,26 @@ def replacetext(search_text, replace_text, file):
     file.write_text(data)
     return "Text replaced"
 
+def oreo_cursors():
+    git.Repo.clone_from("https://github.com/varlesh/oreo-cursors.git",
+                        pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
+    subprocess.call(["ruby", "generator/convert.rb"],
+                    cwd=pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
+    subprocess.call(["make", "build"], cwd=pathlib2.Path(
+        pathlib2.Path.cwd(), "oreo-cursors"))
+    subprocess.call(["sudo", "make", "install"], cwd=pathlib2.Path(
+        pathlib2.Path.cwd(), "oreo-cursors"))
+    shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
+    subprocess.call(["clear"])
+def asus_linux():
+    git.Repo.clone_from("https://gitlab.com/asus-linux/asusctl.git",
+                    pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
+    subprocess.call(["make"], cwd=pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
+    subprocess.call(["sudo", "make", "install"],
+                cwd=pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
+    shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
+    subprocess.call(["clear"])
+
 
 # only for Arch linux because it uses different package manager than debian etc
 if pathlib2.Path("/etc/arch-release").is_file():
@@ -199,18 +219,6 @@ elif pathlib2.Path(r"/usr/share/fonts/noto/").exists():
                     "/usr/share/fonts/noto/NotoColorEmoji.ttf"])
     subprocess.call(["clear"])
 
-# Oreo Cursors
-git.Repo.clone_from("https://github.com/varlesh/oreo-cursors.git",
-                    pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
-subprocess.call(["ruby", "generator/convert.rb"],
-                cwd=pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
-subprocess.call(["make", "build"], cwd=pathlib2.Path(
-    pathlib2.Path.cwd(), "oreo-cursors"))
-subprocess.call(["sudo", "make", "install"], cwd=pathlib2.Path(
-    pathlib2.Path.cwd(), "oreo-cursors"))
-shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
-subprocess.call(["clear"])
-
 # Install Mangohud
 git.Repo.clone_from("https://github.com/flightlessmango/MangoHud.git",
                     pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
@@ -224,10 +232,30 @@ shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
 subprocess.call(["clear"])
 
 # Install asus-linux
-git.Repo.clone_from("https://gitlab.com/asus-linux/asusctl.git",
-                    pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
-subprocess.call(["make"], cwd=pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
-subprocess.call(["sudo", "make", "install"],
-                cwd=pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
-shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
-subprocess.call(["clear"])
+while True:
+    subprocess.call(["clear"])
+    subprocess.call(
+        ["lolcat"], input="Do you want to compile and install asus-linux? (y/N):", text=True)
+    yesno = input()
+    if yesno.lower() == "n":
+        exit()
+    elif yesno.lower() == "y":
+        asus_linux()
+        break
+    else:
+        print("Please answer yes or no!")
+
+
+# Oreo Cursors
+while True:
+    subprocess.call(["clear"])
+    subprocess.call(
+        ["lolcat"], input="Do you want to compile and install oreo cursor? (y/N):", text=True)
+    yesno = input()
+    if yesno.lower() == "n":
+        exit()
+    elif yesno.lower() == "y":
+        oreo_cursors()
+        break
+    else:
+        print("Please answer yes or no!")
