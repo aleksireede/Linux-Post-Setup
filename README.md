@@ -6,7 +6,7 @@ or arch based systems
 
 
 # Installation
-- git clone https://github.com/aleksireede/Linux-First-Setup.git && chmod +x ./Linux-First-Setup/Installer.sh && ./Linux-First-Setup/Installer.sh
+- git clone https://github.com/aleksireede/Linux-First-Setup.git && chmod +x ./Linux-First-Setup/start.sh && ./Linux-First-Setup/start.sh
 
 # Legal
 <h3>License:</h3>

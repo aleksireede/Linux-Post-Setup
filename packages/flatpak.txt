@@ -1,0 +1,1 @@
+com.discordapp.Discord net.supertuxkart.SuperTuxKart org.telegram.desktop com.lunarclient.LunarClient com.github.wwmm.easyeffects
