@@ -3,7 +3,7 @@ visual-studio-code-bin
 gst-plugin-pipewire fastfetch
 base-devel-meta ookla-speedtest-bin 
 rubygems pipewire-pulse ocs-url
-noto-fonts-cjk vlc ufw linux-xanmod-rog linux-xanmod-rog-headers
+noto-fonts-cjk vlc ufw
 noto-fonts-emoji-apple nvidia-dkms
 pipewire-alsa pipewire-jack
 pipewire-v4l2 pipewire-x11-bell
@@ -14,7 +14,7 @@ whatsapp-nativefier archlinux-keyring
 downgrade xorg-xcursorgen appimagelauncher
 googledot-cursor-theme lutris
 baobab syncthing-gtk-python3 btw android-tools
-steam nextcloud-client supergfxctl
+steam nextcloud-client
 firefox-pwa-bin nemo-fileroller
 nemo-compare nemo-preview nemo-seahorse
 nemo-share nemo-terminal nemo-media-columns
