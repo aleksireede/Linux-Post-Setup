@@ -25,8 +25,10 @@ pacman_conf = pathlib2.Path(r"/etc/pacman.conf")
 
 while True:
     subprocess.call(["clear"])
-    subprocess.run(["lolcat"], input=welcome_text, text=True, )
-    yes_no = input("Do you wish to run the script? [Y/n]:")
+    subprocess.run(["lolcat"], input=welcome_text, text=True)
+    subprocess.run(
+        ["lolcat"], input="Do you wish to run the script? [Y/n]:", text=True)
+    yes_no = input()
     if yes_no.lower() == "y" or yes_no.lower() == "yes":
         break
     elif yes_no.lower() == "n" or yes_no.lower() == "no":
@@ -147,7 +149,6 @@ def pacman_config():
     print(findtext(
         "[g14]\nSigLevel = DatabaseNever Optional TrustAll\nServer = https://arch.asus-linux.org", pacman_conf))
     subprocess.call(["sudo", "chmod", "644", pacman_conf])
-    subprocess.call(["sudo", "pacman", "-Suy"])
 
 
 # only for Arch linux because it uses different package manager than debian etc
@@ -164,9 +165,12 @@ if pathlib2.Path("/etc/arch-release").is_file():
         if app == "'" or app == "\\" or app == "":
             continue
         arch_app_list.append(app)
-    subprocess.call(arch_app_list, shell=True)
+    subprocess.call(arch_app_list, shell=True,text=True)
     subprocess.call(["clear"])
     arch_doas()
+    subprocess.call(["sudo", "systemctl", "enable", "--now",
+                    "power-profiles-daemon.service"])
+    subprocess.call(["sudo", "systemctl", "enable", "--now supergfxd"])
 
 
 # Debian only
@@ -272,9 +276,10 @@ subprocess.call(["clear"])
 # Oreo Cursors
 while True:
     subprocess.call(["clear"])
-    subprocess.call(
+    subprocess.run(
         ["lolcat"], input="Do you want to compile and install oreo cursor? (y/N):", text=True)
     yesno = input()
+    subprocess.call(["clear"])
     if yesno.lower() == "n":
         exit()
     elif yesno.lower() == "y":

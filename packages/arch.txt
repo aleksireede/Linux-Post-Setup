@@ -2,24 +2,22 @@ wit google-chrome
 visual-studio-code-bin
 gst-plugin-pipewire fastfetch
 base-devel-meta ookla-speedtest-bin 
-rubygems pipewire-pulse
-noto-fonts-cjk vlc ufw
-noto-fonts-emoji-apple
+rubygems pipewire-pulse ocs-url
+noto-fonts-cjk vlc ufw linux-xanmod-rog linux-xanmod-rog-headers
+noto-fonts-emoji-apple nvidia-dkms
 pipewire-alsa pipewire-jack
 pipewire-v4l2 pipewire-x11-bell
-easyeffects mda.lv2 opendoas cifs-utils samba nextcloud
+easyeffects mda.lv2 cifs-utils samba nextcloud
 fluidsynth freepats-general-midi
 soundfont-fluid mpg123 firefox-pwa-bin
 whatsapp-nativefier archlinux-keyring
-ocs-url appimagelauncher
-downgrade  xorg-xcursorgen
+downgrade xorg-xcursorgen appimagelauncher
 googledot-cursor-theme lutris
 baobab syncthing-gtk-python3 btw android-tools
-steam nextcloud-client
+steam nextcloud-client supergfxctl
 firefox-pwa-bin nemo-fileroller
 nemo-compare nemo-preview nemo-seahorse
-nemo-share nemo-terminal nemo-megasync
-nemo-media-columns nemo-pdf-tools
+nemo-share nemo-terminal nemo-media-columns
 nemo-folder-icons nemo-image-converter-git
 nemo-dropbox nemo-pastebin-git
 nemo-run-with-nvidia nemo-python-git
@@ -36,7 +34,7 @@ needrestart zoom dxvk-bin dropbox mkinitcpio-firmware
 7-zip-full etcher-bin android-sdk-platform-tools
 tor-browser mangohud-common mangohud
 mangoapp aur-auto-vote-git update-grub
-geforcenow-electron wiibafu refind
+geforcenow-electron refind
 geogebra-5 dnsutils signal-desktop-beta-bin
 krita google-drive-nativefier gmail-nativefier
 google-keep-nativefier teams-nativefier
