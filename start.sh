@@ -9,5 +9,6 @@ then
 fi
 /usr/bin/env python3 -m pip install python-telegram-bot -U --pre
 /usr/bin/env python3 -m pip install websockets GitPython wakeonlan pathlib2
+/usr/bin/env python3 -m pip install --user --upgrade pynvim
 chmod +x ./Installer.py
 ./Installer.py
