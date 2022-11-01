@@ -27,8 +27,8 @@ while True:
     subprocess.call(["clear"])
     subprocess.run(["lolcat"], input=welcome_text, text=True)
     subprocess.run(
-        ["lolcat"], input="Do you wish to run the script? [Y/n]:", text=True)
-    yes_no = input()
+        ["lolcat"], input="Do you wish to run the script?", text=True)
+    yes_no = input("(y/N):")
     if yes_no.lower() == "y" or yes_no.lower() == "yes":
         break
     elif yes_no.lower() == "n" or yes_no.lower() == "no":
@@ -151,12 +151,25 @@ def pacman_config():
     subprocess.call(["sudo", "chmod", "644", pacman_conf])
 
 
+def mangohud():
+    git.Repo.clone_from("https://github.com/flightlessmango/MangoHud.git",
+                        pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
+    subprocess.call(["chmod", "+x", "./build.sh"],
+                    cwd=pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
+    subprocess.call(["./build.sh", "build"],
+                    cwd=pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
+    subprocess.call(["./build.sh", "install"],
+                    cwd=pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
+    shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
+    subprocess.call(["clear"])
+
+
 # only for Arch linux because it uses different package manager than debian etc
 if pathlib2.Path("/etc/arch-release").is_file():
     subprocess.call(["clear"])
     pacman_config()
     check_for_aur_helper()
-    arch_app_list = ["paru", "-Suy", "--needed", "-quiet"]
+    arch_app_list = ["paru", "-Suy", "--needed"]
     for app in arch_packages.split(" "):
         if app == "'" or app == "\\" or app == "":
             continue
@@ -165,7 +178,7 @@ if pathlib2.Path("/etc/arch-release").is_file():
         if app == "'" or app == "\\" or app == "":
             continue
         arch_app_list.append(app)
-    subprocess.call(arch_app_list, shell=True,text=True)
+    subprocess.run(arch_app_list, shell=True, text=True)
     subprocess.call(["clear"])
     arch_doas()
     subprocess.call(["sudo", "systemctl", "enable", "--now",
@@ -261,24 +274,16 @@ elif pathlib2.Path(r"/usr/share/fonts/noto/").exists():
 subprocess.call(["clear"])
 
 # Install Mangohud
-git.Repo.clone_from("https://github.com/flightlessmango/MangoHud.git",
-                    pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
-subprocess.call(["chmod", "+x", "./build.sh"],
-                cwd=pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
-subprocess.call(["./build.sh", "build"],
-                cwd=pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
-subprocess.call(["./build.sh", "install"],
-                cwd=pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
-shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
-subprocess.call(["clear"])
+if not is_tool("mangohud"):
+    mangohud()
 
 
 # Oreo Cursors
 while True:
     subprocess.call(["clear"])
     subprocess.run(
-        ["lolcat"], input="Do you want to compile and install oreo cursor? (y/N):", text=True)
-    yesno = input()
+        ["lolcat"], input="Do you want to compile and install oreo cursor?", text=True)
+    yesno = input("(y/N):")
     subprocess.call(["clear"])
     if yesno.lower() == "n":
         exit()

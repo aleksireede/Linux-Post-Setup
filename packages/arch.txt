@@ -1,45 +1,111 @@
-wit google-chrome
+7-zip-full
+android-sdk-platform-tools
+android-tools
+appimagelauncher
+archlinux-keyring
+asusctl
+aur-auto-vote-git
+balena-etcher
+baobab
+base-devel-meta
+boost-libs-git
+btw
+c++utilities
+cemu-experimental-wine
+cifs-utils
+discord
+dnsutils
+downgrade
+dropbox
+dxvk-bin
+easyeffects
+emacs
+etcher-bin
+facebook-desktop-app
+fastfetch
+firefox-pwa-bin
+fluidsynth
+freepats-general-midi
+geforcenow-electron
+geogebra-5
+gmail-nativefier
+gnome-terminal
+gnome-todo
+google-drive-nativefier
+google-keep-nativefier
+googledot-cursor-theme
+gst-plugin-pipewire
+gvfs-smb
+instagram-nativefier
+kdeconnect
+krita
+lutris
+mangoapp
+mangohud
+mangohud-common
+manjaro-pipewire
+mcpelauncher-linux-git
+mcpelauncher-ui-git
+mda.lv2
+mkinitcpio-firmware
+mpg123
+ms-outlook-nativefier
+needrestart
+nemo-audio-tab-git
+nemo-compare
+nemo-dropbox
+nemo-fileroller
+nemo-folder-icons
+nemo-image-converter-git
+nemo-media-columns
+nemo-pastebin-git
+nemo-preview
+nemo-python-git
+nemo-run-with-nvidia
+nemo-seahorse
+nemo-share
+nemo-terminal
+net-tools
+nextcloud
+nextcloud-client
+noto-fonts-cjk
+noto-fonts-emoji-apple
+nvidia-dkms
+ocs-url
+ookla-speedtest-bin
+pipewire-alsa
+pipewire-jack
+pipewire-media-session
+pipewire-pulse
+pipewire-v4l2
+pipewire-x11-bell
+pipewire-zeroconf
+plasma5-applets-volumewin7mixer
+proton-ge-custom-bin
+protonup-qt
+qtforkawesome-qt6
+qtutilities-qt6
+rclone-bin
+realtime-privileges
+refind
+rubygems
+samba
+signal-desktop-beta-bin
+soundfont-fluid
+steam
+syncthing-gtk-python3
+syncthingtray-qt6
+teams-nativefier
+tor-browser
+ttf-ms-fonts
+ufw
+update-grub
 visual-studio-code-bin
-gst-plugin-pipewire fastfetch
-base-devel-meta ookla-speedtest-bin 
-rubygems pipewire-pulse ocs-url
-noto-fonts-cjk vlc ufw
-noto-fonts-emoji-apple nvidia-dkms
-pipewire-alsa pipewire-jack
-pipewire-v4l2 pipewire-x11-bell
-easyeffects mda.lv2 cifs-utils samba nextcloud
-fluidsynth freepats-general-midi
-soundfont-fluid mpg123 firefox-pwa-bin
-whatsapp-nativefier archlinux-keyring
-downgrade xorg-xcursorgen appimagelauncher
-googledot-cursor-theme lutris
-baobab syncthing-gtk-python3 btw android-tools
-steam nextcloud-client
-firefox-pwa-bin nemo-fileroller
-nemo-compare nemo-preview nemo-seahorse
-nemo-share nemo-terminal nemo-media-columns
-nemo-folder-icons nemo-image-converter-git
-nemo-dropbox nemo-pastebin-git
-nemo-run-with-nvidia nemo-python-git
-nemo-audio-tab-git net-tools
-proton-ge-custom-bin protonup-qt
-gnome-terminal woeusb-ng ttf-ms-fonts
-syncthingtray-qt6 boost-libs-git
-c++utilities qtforkawesome-qt6
-qtutilities-qt6 gnome-todo asusctl
-mcpelauncher-linux-git rclone-bin
-mcpelauncher-ui-git kdeconnect gvfs-smb
-cemu-experimental-wine vmware-horizon-client
-needrestart zoom dxvk-bin dropbox mkinitcpio-firmware
-7-zip-full etcher-bin android-sdk-platform-tools
-tor-browser mangohud-common mangohud
-mangoapp aur-auto-vote-git update-grub
-geforcenow-electron refind
-geogebra-5 dnsutils signal-desktop-beta-bin
-krita google-drive-nativefier gmail-nativefier
-google-keep-nativefier teams-nativefier
-youtube-music-bin facebook-desktop-app
-ms-outlook-nativefier instagram-nativefier
-discord balena-etcher emacs pipewire-zeroconf
-manjaro-pipewire realtime-privileges
-pipewire-media-session plasma5-applets-volumewin7mixer
+vlc
+vmware-horizon-client
+whatsapp-nativefier
+wit google-chrome
+woeusb-ng
+xorg-xcursorgen
+youtube-music-bin
+zoom

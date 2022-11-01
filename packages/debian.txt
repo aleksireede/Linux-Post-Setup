@@ -16,4 +16,5 @@ libsqlite3-0:i386 mono-complete
 eog-plugins ttf-mscorefonts-installer 
 gnome-software-plugin-flatpak 
 gnome-tweaks nemo-gtkhash 
-syncthing code libclang-dev libudev-dev 
+syncthing code libclang-dev libudev-dev
+python3-pip python3-venv
