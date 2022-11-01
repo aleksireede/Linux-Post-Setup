@@ -108,4 +108,6 @@ wit google-chrome
 woeusb-ng
 xorg-xcursorgen
 youtube-music-bin
-zoom
+handbrake
+virtualbox
+virtualbox-host-dkms

@@ -2,7 +2,6 @@
 import subprocess
 import pathlib2
 import shutil
-from tkinter import Pack
 import requests
 import git
 
