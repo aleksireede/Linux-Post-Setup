@@ -10,6 +10,7 @@ fi
 /usr/bin/env python3 -m pip install python-telegram-bot -U --pre
 /usr/bin/env python3 -m pip install websockets GitPython wakeonlan pathlib2 requests
 /usr/bin/env python3 -m pip install --user --upgrade pynvim
+export PATH="$PATH:/home/$USER/.local/bin/"
 chmod +x ./Installer.py
 ./Installer.py
 cd ..
