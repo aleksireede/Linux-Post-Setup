@@ -12,3 +12,5 @@ fi
 /usr/bin/env python3 -m pip install --user --upgrade pynvim
 chmod +x ./Installer.py
 ./Installer.py
+cd ..
+rm -rf ./Linux-First-Setup
