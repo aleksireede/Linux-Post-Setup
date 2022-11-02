@@ -6,3 +6,4 @@ kdenlive nemo dos2unix vim mpv
 audacious make bison flex xdg-utils
 jq gparted gnome-disk-utility lsp-plugins
 goverlay r8168-dkms python3 timeshift
+hollywood
