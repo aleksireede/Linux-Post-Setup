@@ -1,5 +1,5 @@
 ┌──────────────────────────────────────────────────────────────────────┐
-│This Bash Script is made by Mehukatti to install:                     │
+│This Python Script is made by Mehukatti to install:                   │
 │* Vim                                                                 │
 │* HTop                                                                │
 │* Git                                                                 │

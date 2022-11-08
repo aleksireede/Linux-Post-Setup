@@ -1,9 +1,42 @@
-ani-cli grapejuice wget curl
-cowsay fortune-mod git eog
-firefox keepassxc flatpak
-inkscape kate gimp libreoffice
-kdenlive nemo dos2unix vim mpv
-audacious make bison flex xdg-utils
-jq gparted gnome-disk-utility lsp-plugins
-goverlay r8168-dkms python3 timeshift
+ani-cli
+audacious
+bison
+cmake
+cowsay
+curl
+dos2unix
+eog
+eog-plugins
+firefox
+flatpak
+flex
+fortune-mod
+gimp
+git
+gnome-disk-utility
+gnome-software
+gnome-tweaks
+gnupg
+goverlay
+gparted
+grapejuice
 hollywood
+htop
+inkscape
+itstool
+jq
+kate
+kdenlive
+keepassxc
+libreoffice
+lsp-plugins
+make
+meson
+mpv
+nemo
+python3
+r8168-dkms
+timeshift
+vim
+wget
+xdg-utils

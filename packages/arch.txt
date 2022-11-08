@@ -34,6 +34,7 @@ gnome-todo
 google-drive-nativefier
 google-keep-nativefier
 googledot-cursor-theme
+gnome-software-packagekit-plugin
 gst-plugin-pipewire
 gvfs-smb
 instagram-nativefier
@@ -64,9 +65,7 @@ nemo-python-git
 nemo-run-with-nvidia
 nemo-seahorse
 nemo-share
-nemo-terminal
 net-tools
-nextcloud
 nextcloud-client
 noto-fonts-cjk
 noto-fonts-emoji-apple
@@ -94,7 +93,6 @@ signal-desktop-beta-bin
 soundfont-fluid
 steam
 syncthing-gtk-python3
-syncthingtray-qt6
 teams-nativefier
 tor-browser
 ttf-ms-fonts
@@ -102,13 +100,11 @@ ufw
 update-grub
 visual-studio-code-bin
 vlc
-vmware-horizon-client
-whatsapp-nativefier
-wit google-chrome
+whatsdesk-bin
+wit 
+google-chrome
 woeusb-ng
 xorg-xcursorgen
 youtube-music-bin
 handbrake
-virtualbox
-virtualbox-host-dkms
 usb_modeswitch
