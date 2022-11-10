@@ -110,10 +110,10 @@ def debian_doas():
         return
     git.Repo.clone_from("https://github.com/slicer69/doas.git",
                         doas_path)
-    subprocess.call(["make"],
-                    cwd=doas_path)
-    subprocess.call(["sudo", "make", "install"],
-                    cwd=doas_path)
+    subprocess.run(["make"],
+                    cwd=doas_path,shell=True)
+    subprocess.run(["sudo", "make", "install"],
+                    cwd=doas_path,shell=True)
     doas_part_two()
     doas_part_three()
 
@@ -121,17 +121,17 @@ def debian_doas():
 def doas_part_two():
     if doas_conf_path.exists():
         return
-    subprocess.call(["sudo", "chmod", "777", doas_conf_path])
+    subprocess.run(["sudo", "chmod", "777", doas_conf_path],shell=True)
     open(doas_conf_path, "wb"
          ).write(requests.get("https://pastebin.com/raw/EK6hud2S").content)
-    subprocess.call(["sudo", "dos2unix", doas_conf_path])
-    subprocess.call(["sudo", "chmod", "644", doas_conf_path])
-    subprocess.call(["sudo", "chown", "root:root", doas_conf_path])
+    subprocess.run(["sudo", "dos2unix", doas_conf_path],shell=True)
+    subprocess.run(["sudo", "chmod", "644", doas_conf_path],shell=True)
+    subprocess.run(["sudo", "chown", "root:root", doas_conf_path],shell=True)
 
 
 def doas_part_three():
     shutil.rmtree(doas_path)
-    subprocess.call(["doas", "chmod", "777", "/usr/bin/sudo"])
+    subprocess.run(["doas", "chmod", "777", "/usr/bin/sudo"],shell=True)
     shutil.rmtree(pathlib2.Path("/usr/bin/sudo"))
     pathlib2.Path(
         '/usr/bin/sudo').symlink_to(pathlib2.Path('/usr/bin/doas'))
@@ -140,7 +140,7 @@ def doas_part_three():
 def pacman_config():
     if not pacman_conf.exists():
         return
-    subprocess.call(["sudo", "chmod", "777", pacman_conf])
+    subprocess.run(["sudo", "chmod", "777", pacman_conf])
     print(replacetext("#[multilib]\n#Include = /etc/pacman.d/mirrorlist",
           "[multilib]\nInclude = /etc/pacman.d/mirrorlist", pacman_conf))
     print(replacetext("#ParallelDownloads=5", "ParallelDownloads=5", pacman_conf))
@@ -188,8 +188,8 @@ if pathlib2.Path("/etc/arch-release").is_file():
 # Debian only
 elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_version").is_file() or pathlib2.Path("/etc/linuxmint/info").is_file():
     subprocess.call(["clear"])
-    subprocess.run(["chmod", "+x", "./utils/debian_sources.sh",
-                    "&&", "./utils/debian_sources.sh"],shell=True)
+    subprocess.run(["chmod", "+x", "./utils/debian_sources.sh"],shell=True)
+    subprocess.run(["./utils/debian_sources.sh"],shell=True)
     subprocess.run(["sudo", "apt", "-qq", "update"],shell=True)
     subprocess.run(["sudo", "apt", "-qq", "--assume-yes", "-y",
                     "install", "\\", debian_packages, common_packages],shell=True)
@@ -203,8 +203,8 @@ elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_v
     git.Repo.clone_from(
         "https://github.com/LinusDierheimer/fastfetch.git", fastfetchpath)
     pathlib2.Path(fastfetchpath, "build").mkdir(parents=True, exist_ok=True)
-    subprocess.call(["cmake", ".."], cwd=pathlib2.Path(fastfetchpath, "build"))
-    subprocess.call(["cmake", "--build", ".", "-j$(nproc)", "--target", "fastfetch",
+    subprocess.run(["cmake", ".."], cwd=pathlib2.Path(fastfetchpath, "build"))
+    subprocess.run(["cmake", "--build", ".", "-j$(nproc)", "--target", "fastfetch",
                     "--target", "flashfetch"], cwd=pathlib2.Path(fastfetchpath, "build"))
     shutil.rmtree(fastfetchpath)
     subprocess.run(["sudo", "apt", "-qq", "update"],shell=True)
