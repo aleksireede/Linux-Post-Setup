@@ -121,6 +121,7 @@ def debian_doas():
 def doas_part_two():
     if doas_conf_path.exists():
         return
+    subprocess.run(["sudo", "touch", "/usr/local/etc/doas.conf"],shell=True)
     subprocess.run(["sudo", "chmod", "777", doas_conf_path],shell=True)
     open(doas_conf_path, "wb"
          ).write(requests.get("https://pastebin.com/raw/EK6hud2S").content)
