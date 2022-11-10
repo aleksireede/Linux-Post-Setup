@@ -188,15 +188,15 @@ if pathlib2.Path("/etc/arch-release").is_file():
 # Debian only
 elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_version").is_file() or pathlib2.Path("/etc/linuxmint/info").is_file():
     subprocess.call(["clear"])
-    subprocess.call(["chmod", "+x", "./utils/debian_sources.sh",
-                    "&&", "./utils/debian_sources.sh"])
-    subprocess.call(["sudo", "apt", "-qq", "update"])
-    subprocess.call(["sudo", "apt", "-qq", "--assume-yes", "-y",
-                    "install", "\\", debian_packages, common_packages])
+    subprocess.run(["chmod", "+x", "./utils/debian_sources.sh",
+                    "&&", "./utils/debian_sources.sh"],shell=True)
+    subprocess.run(["sudo", "apt", "-qq", "update"],shell=True)
+    subprocess.run(["sudo", "apt", "-qq", "--assume-yes", "-y",
+                    "install", "\\", debian_packages, common_packages],shell=True)
     open(pathlib2.Path(pathlib2.Path.cwd(), "steam.deb"), "wb").write(requests.get(
         "https://cdn.akamai.steamstatic.com/client/installer/steam.deb").content)
-    subprocess.call(["sudo", "apt", "qq", "install",
-                    "--assume-yes", "y", "./steam.deb"])
+    subprocess.run(["sudo", "apt", "qq", "install",
+                    "--assume-yes", "y", "./steam.deb"],shell=True)
     pathlib2.Path(pathlib2.Path.cwd(), "steam.deb").unlink()
     # Install fastfetch
     fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
@@ -207,11 +207,11 @@ elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_v
     subprocess.call(["cmake", "--build", ".", "-j$(nproc)", "--target", "fastfetch",
                     "--target", "flashfetch"], cwd=pathlib2.Path(fastfetchpath, "build"))
     shutil.rmtree(fastfetchpath)
-    subprocess.call(["sudo", "apt", "-qq", "update"])
-    subprocess.call(["sudo", "apt", "-qq", "upgrade"])
-    subprocess.call(["sudo", "apt", "-qq", "autoremove"])
-    subprocess.call(
-        ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"])
+    subprocess.run(["sudo", "apt", "-qq", "update"],shell=True)
+    subprocess.run(["sudo", "apt", "-qq", "upgrade"],shell=True)
+    subprocess.run(["sudo", "apt", "-qq", "autoremove"],shell=True)
+    subprocess.run(
+        ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"],shell=True)
     debian_doas()
     # Install asus-linux
     while True:
