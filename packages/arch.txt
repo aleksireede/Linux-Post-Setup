@@ -42,7 +42,6 @@ lutris
 mangoapp
 mangohud
 mangohud-common
-manjaro-pipewire
 mcpelauncher-linux-git
 mcpelauncher-ui-git
 mda.lv2
