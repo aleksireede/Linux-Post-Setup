@@ -1,1 +1,1 @@
-com.discordapp.Discord org.telegram.desktop com.lunarclient.LunarClient com.github.wwmm.easyeffects io.mrarm.mcpelauncher
+com.lunarclient.LunarClient com.github.wwmm.easyeffects io.mrarm.mcpelauncher

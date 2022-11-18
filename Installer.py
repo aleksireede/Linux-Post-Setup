@@ -18,8 +18,6 @@ debian_packages = open("./packages/debian.txt", "r").read()
 flatpak_packages = open("./packages/flatpak.txt", "r").read()
 arch_packages = arch_packages.replace("\n", " ")
 common_packages = common_packages.replace("\n", " ")
-doas_path = pathlib2.Path(pathlib2.Path.cwd(), "doas")
-doas_conf_path = pathlib2.Path(r"/usr/local/etc/doas.conf")
 pacman_conf = pathlib2.Path(r"/etc/pacman.conf")
 
 while True:
@@ -73,17 +71,6 @@ def oreo_cursors():
     subprocess.call(["clear"])
 
 
-def asus_linux():
-    git.Repo.clone_from("https://gitlab.com/asus-linux/asusctl.git",
-                        pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
-    subprocess.call(["make"], cwd=pathlib2.Path(
-        pathlib2.Path.cwd(), "asusctl"))
-    subprocess.call(["sudo", "make", "install"],
-                    cwd=pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
-    shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "asusctl"))
-    subprocess.call(["clear"])
-
-
 def check_for_aur_helper():
     if is_tool("paru") or is_tool("yay"):
         return
@@ -94,48 +81,6 @@ def check_for_aur_helper():
                     cwd=pathlib2.Path(pathlib2.Path.cwd(), "paru"))
     shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "paru"),
                   ignore_errors=False, onerror=None)
-
-
-def arch_doas():
-    if is_tool("doas"):
-        return
-    git.Repo.clone_from("https://aur.archlinux.org/doas.git", doas_path)
-    subprocess.call(["makepkg", "-si"], cwd=doas_path)
-    doas_part_two()
-    doas_part_three()
-
-
-def debian_doas():
-    if is_tool("doas"):
-        return
-    git.Repo.clone_from("https://github.com/slicer69/doas.git",
-                        doas_path)
-    subprocess.run(["make"],
-                    cwd=doas_path,shell=True)
-    subprocess.run(["sudo", "make", "install"],
-                    cwd=doas_path,shell=True)
-    doas_part_two()
-    doas_part_three()
-
-
-def doas_part_two():
-    if doas_conf_path.exists():
-        return
-    subprocess.run(["sudo", "touch", "/usr/local/etc/doas.conf"],shell=True)
-    subprocess.run(["sudo", "chmod", "777", doas_conf_path],shell=True)
-    open(doas_conf_path, "wb"
-         ).write(requests.get("https://pastebin.com/raw/EK6hud2S").content)
-    subprocess.run(["sudo", "dos2unix", doas_conf_path],shell=True)
-    subprocess.run(["sudo", "chmod", "644", doas_conf_path],shell=True)
-    subprocess.run(["sudo", "chown", "root:root", doas_conf_path],shell=True)
-
-
-def doas_part_three():
-    shutil.rmtree(doas_path)
-    subprocess.run(["doas", "chmod", "777", "/usr/bin/sudo"],shell=True)
-    shutil.rmtree(pathlib2.Path("/usr/bin/sudo"))
-    pathlib2.Path(
-        '/usr/bin/sudo').symlink_to(pathlib2.Path('/usr/bin/doas'))
 
 
 def pacman_config():
@@ -163,6 +108,26 @@ def mangohud():
     shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
     subprocess.call(["clear"])
 
+# Notocolor emoji apple
+
+
+def noto_emoji_apple():
+    open(pathlib2.Path(r"/tmp/NotoColorEmoji.ttf"), "wb").write(requests.get(
+        "https://gitlab.com/timescam/noto-fonts-emoji-apple/-/raw/master/NotoColorEmoji.ttf?inline=false").content)
+    if pathlib2.Path(r"/usr/share/fonts/truetype/").exists():
+        if pathlib2.Path(r"/usr/share/fonts/truetype/NotoColorEmoji.ttf").exists():
+            subprocess.call(
+                ["sudo", "rm", "/usr/share/fonts/truetype/NotoColorEmoji.ttf"])
+        subprocess.call(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
+                         "/usr/share/fonts/truetype/NotoColorEmoji.ttf"])
+    elif pathlib2.Path(r"/usr/share/fonts/noto/").exists():
+        if pathlib2.Path(r"/usr/share/fonts/noto/NotoColorEmoji.ttf").exists():
+            subprocess.call(
+                ["sudo", "rm", "/usr/share/fonts/truetype/NotoColorEmoji.ttf"])
+        subprocess.call(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
+                         "/usr/share/fonts/noto/NotoColorEmoji.ttf"])
+    subprocess.call(["clear"])
+
 
 # only for Arch linux because it uses different package manager than debian etc
 if pathlib2.Path("/etc/arch-release").is_file():
@@ -180,7 +145,6 @@ if pathlib2.Path("/etc/arch-release").is_file():
         arch_app_list.append(app)
     subprocess.run(arch_app_list, shell=True, text=True)
     subprocess.call(["clear"])
-    arch_doas()
     subprocess.call(["sudo", "systemctl", "enable", "--now",
                     "power-profiles-daemon.service"])
     subprocess.call(["sudo", "systemctl", "enable", "--now supergfxd"])
@@ -189,15 +153,15 @@ if pathlib2.Path("/etc/arch-release").is_file():
 # Debian only
 elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_version").is_file() or pathlib2.Path("/etc/linuxmint/info").is_file():
     subprocess.call(["clear"])
-    subprocess.run(["chmod", "+x", "./utils/debian_sources.sh"],shell=True)
-    subprocess.run(["./utils/debian_sources.sh"],shell=True)
-    subprocess.run(["sudo", "apt", "-qq", "update"],shell=True)
+    subprocess.run(["chmod", "+x", "./utils/debian_sources.sh"], shell=True)
+    subprocess.run(["./utils/debian_sources.sh"], shell=True)
+    subprocess.run(["sudo", "apt", "-qq", "update"], shell=True)
     subprocess.run(["sudo", "apt", "-qq", "--assume-yes", "-y",
-                    "install", "\\", debian_packages, common_packages],shell=True)
+                    "install", "\\", debian_packages, common_packages], shell=True)
     open(pathlib2.Path(pathlib2.Path.cwd(), "steam.deb"), "wb").write(requests.get(
         "https://cdn.akamai.steamstatic.com/client/installer/steam.deb").content)
     subprocess.run(["sudo", "apt", "qq", "install",
-                    "--assume-yes", "y", "./steam.deb"],shell=True)
+                    "--assume-yes", "y", "./steam.deb"], shell=True)
     pathlib2.Path(pathlib2.Path.cwd(), "steam.deb").unlink()
     # Install fastfetch
     fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
@@ -208,25 +172,21 @@ elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_v
     subprocess.run(["cmake", "--build", ".", "-j$(nproc)", "--target", "fastfetch",
                     "--target", "flashfetch"], cwd=pathlib2.Path(fastfetchpath, "build"))
     shutil.rmtree(fastfetchpath)
-    subprocess.run(["sudo", "apt", "-qq", "update"],shell=True)
-    subprocess.run(["sudo", "apt", "-qq", "upgrade"],shell=True)
-    subprocess.run(["sudo", "apt", "-qq", "autoremove"],shell=True)
+    subprocess.run(["sudo", "apt", "-qq", "update"], shell=True)
+    subprocess.run(["sudo", "apt", "-qq", "upgrade"], shell=True)
+    subprocess.run(["sudo", "apt", "-qq", "autoremove"], shell=True)
     subprocess.run(
-        ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"],shell=True)
-    debian_doas()
-    # Install asus-linux
-    while True:
-        subprocess.call(["clear"])
-        subprocess.call(
-            ["lolcat"], input="Do you want to compile and install asus-linux? (y/N):", text=True)
-        yesno = input()
-        if yesno.lower() == "n":
-            exit()
-        elif yesno.lower() == "y":
-            asus_linux()
-            break
-        else:
-            print("Please answer yes or no!")
+        ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"], shell=True)
+    noto_emoji_apple()
+    # Install Mangohud
+    if not is_tool("mangohud"):
+        mangohud()
+    # Arduino cli
+    open(pathlib2.Path(pathlib2.Path.cwd(), "arduino-cli.tgz"), "wb").write(requests.get(
+        "https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz").content)
+    subprocess.call(["sudo", "tar", "xf", "arduino-cli.tgz",
+                     "-C", "/usr/local/bin", "arduino-cli"])
+    pathlib2.Path(pathlib2.Path.cwd(), "arduino-cli.tgz").unlink()
 
 # Install Flatpak packages (universal)
 subprocess.call(["clear"])
@@ -248,34 +208,6 @@ elif zshrc.exists():
 # Make nemo default file manager
 subprocess.call(["xdg-mime", "default", "nemo.desktop",
                 "inode/directory", "application/x-gnome-saved-search"])
-
-# Arduino cli
-open(pathlib2.Path(pathlib2.Path.cwd(), "arduino-cli.tgz"), "wb").write(requests.get(
-    "https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz").content)
-subprocess.call(["sudo", "tar", "xf", "arduino-cli.tgz",
-                "-C", "/usr/local/bin", "arduino-cli"])
-pathlib2.Path(pathlib2.Path.cwd(), "arduino-cli.tgz").unlink()
-
-# Notocolor emoji apple
-open(pathlib2.Path(r"/tmp/NotoColorEmoji.ttf"), "wb").write(requests.get(
-    "https://gitlab.com/timescam/noto-fonts-emoji-apple/-/raw/master/NotoColorEmoji.ttf?inline=false").content)
-if pathlib2.Path(r"/usr/share/fonts/truetype/").exists():
-    if pathlib2.Path(r"/usr/share/fonts/truetype/NotoColorEmoji.ttf").exists():
-        subprocess.call(
-            ["sudo", "rm", "/usr/share/fonts/truetype/NotoColorEmoji.ttf"])
-    subprocess.call(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
-                     "/usr/share/fonts/truetype/NotoColorEmoji.ttf"])
-elif pathlib2.Path(r"/usr/share/fonts/noto/").exists():
-    if pathlib2.Path(r"/usr/share/fonts/noto/NotoColorEmoji.ttf").exists():
-        subprocess.call(
-            ["sudo", "rm", "/usr/share/fonts/truetype/NotoColorEmoji.ttf"])
-    subprocess.call(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
-                     "/usr/share/fonts/noto/NotoColorEmoji.ttf"])
-subprocess.call(["clear"])
-
-# Install Mangohud
-if not is_tool("mangohud"):
-    mangohud()
 
 
 # Oreo Cursors

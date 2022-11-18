@@ -14,8 +14,6 @@ fortune-mod
 gimp
 git
 gnome-disk-utility
-gnome-software
-gnome-tweaks
 gnupg
 goverlay
 gparted
@@ -35,7 +33,6 @@ meson
 mpv
 nemo
 python3
-r8168-dkms
 timeshift
 vim
 wget

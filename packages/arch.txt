@@ -1,9 +1,8 @@
 7-zip-full
 android-sdk-platform-tools
 android-tools
-appimagelauncher
 archlinux-keyring
-asusctl
+arduino-cli-git
 aur-auto-vote-git
 balena-etcher
 baobab
@@ -29,7 +28,6 @@ freepats-general-midi
 geforcenow-electron
 geogebra-5
 gmail-nativefier
-gnome-terminal
 gnome-todo
 google-drive-nativefier
 google-keep-nativefier
@@ -69,7 +67,6 @@ net-tools
 nextcloud-client
 noto-fonts-cjk
 noto-fonts-emoji-apple
-nvidia-dkms
 ocs-url
 ookla-speedtest-bin
 pipewire-alsa
