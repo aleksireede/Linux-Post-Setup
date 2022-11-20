@@ -31,9 +31,9 @@ lsp-plugins
 make
 meson
 mpv
-nemo
 python3
 timeshift
 vim
 wget
 xdg-utils
+zsh

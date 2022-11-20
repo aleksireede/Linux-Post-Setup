@@ -7,7 +7,7 @@
 │* VSCode                                                              │
 │* Firefox                                                             │
 │* Chrome                                                              │
-│* Krita                                                               │
+│* Steam                                                               │
 │* Supertuxkart                                                        │
 │* Nextcloud                                                           │
 │* Telegram                                                            │
