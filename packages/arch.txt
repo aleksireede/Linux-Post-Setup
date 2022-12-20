@@ -94,3 +94,7 @@ nkit
 xf86-input-xwiimote-git
 apple_cursor
 powerline-fonts
+otf-monocraft
+mcreator
+atlauncher-bin
+yakuake
