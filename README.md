@@ -6,7 +6,7 @@ or arch based systems
 
 
 # Installation
-- install git and python3-pip (sudo apt install git python3-pip or pacman -S git python3)
+- install git and python3-pip (sudo apt install git python3-pip or sudo pacman -S git python3 python-pip)
 - git clone https://github.com/aleksireede/Linux-First-Setup.git && cd ./Linux-First-Setup && chmod +x ./start.sh  && ./start.sh && cd ..
 
 # Legal
