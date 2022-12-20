@@ -98,3 +98,4 @@ otf-monocraft
 mcreator
 atlauncher-bin
 yakuake
+ark
