@@ -101,3 +101,4 @@ yakuake
 ark
 firefox-pwa-bin
 kvantum-qt5
+xorg-xkill
