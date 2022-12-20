@@ -100,3 +100,4 @@ atlauncher-bin
 yakuake
 ark
 firefox-pwa-bin
+kvantum-qt5
