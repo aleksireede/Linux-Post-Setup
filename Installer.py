@@ -219,12 +219,6 @@ def flatpak():
                        check=True, text=True)
 
 
-def doas():
-    subprocess.run(["xdg-open", "https://pastebin.com/EK6hud2S"],
-                   check=True, text=True)
-    input("modify /etc/doas.conf as sudo \nand put the text on the website into it \nand then press enter...")
-
-
 def oreo_cursors():
     # Oreo Cursors
     while True:
@@ -248,7 +242,6 @@ def main():
     elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_version").is_file() or pathlib2.Path("/etc/linuxmint/info").is_file():
         debian()
     flatpak()
-    doas()
     oh_my_zsh()
     oreo_cursors()
 
