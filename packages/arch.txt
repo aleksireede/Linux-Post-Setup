@@ -99,3 +99,4 @@ mcreator
 atlauncher-bin
 yakuake
 ark
+firefox-pwa-bin
