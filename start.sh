@@ -7,9 +7,9 @@ function tool_check(){
     fi
 }
 
-python_lib=("lolcat" "yt-dlp" "websockets" "GitPython" "pathlib2" "requests" "wakeonlan")
-for str in ${python_lib[@]}; do
-    tool_check(python_lib[$str])
+declare -a python_lib=("lolcat" "yt-dlp" "websockets" "GitPython" "pathlib2" "requests" "wakeonlan")
+for str in "${python_lib[@]}"; do
+    tool_check($str)
 done
 
 /usr/bin/env python3 -m pip install python-telegram-bot -U --pre
