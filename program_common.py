@@ -1,7 +1,7 @@
 import subprocess
 import pathlib2
 import requests
-import program_commands
+from program_commands import *
 import shutil
 import git
 
