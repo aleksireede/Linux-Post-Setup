@@ -67,7 +67,7 @@ def press_enter_to_continue():
 
 
 def os_check():
-    if sys.platform() != "linux":
+    if sys.platform != "linux":
         print("This is only for linux!\nThe program will now terminate!\nGoodbye!")
         press_enter_to_continue()
         exit(1)
