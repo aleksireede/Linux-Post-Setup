@@ -1,1 +1,1 @@
-com.lunarclient.LunarClient com.github.wwmm.easyeffects io.mrarm.mcpelauncher
+com.github.wwmm.easyeffects io.mrarm.mcpelauncher

@@ -2,7 +2,7 @@
 android-sdk-platform-tools
 android-tools
 archlinux-keyring
-arduino-cli-git
+arduino-ide-bin
 aur-auto-vote-git
 baobab
 base-devel-meta
@@ -102,3 +102,4 @@ ark
 firefox-pwa-bin
 kvantum-qt5
 xorg-xkill
+grub-customizer
