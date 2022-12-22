@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 import subprocess
-import program_commands
-import program_debian
-import program_arch
-import program_common
+from program_commands import *
+from program_debian import *
+from program_arch import *
+from program_common import *
 
 
 def main():
