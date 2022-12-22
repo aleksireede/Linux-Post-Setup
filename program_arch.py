@@ -4,8 +4,8 @@ import shutil
 import requests
 import git
 import getpass
-import program_commands
-import program_common
+from program_commands import *
+from program_common import *
 
 arch_packages = open("./packages/arch.txt", "r").read()
 arch_packages = arch_packages.replace("\n", " ")
