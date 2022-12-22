@@ -4,7 +4,7 @@ import shutil
 import requests
 import git
 import getpass
-import program_commandss
+import program_commands
 import program_common
 
 arch_packages = open("./packages/arch.txt", "r").read()
