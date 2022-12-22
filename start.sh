@@ -15,6 +15,6 @@ done
 /usr/bin/env python3 -m pip install python-telegram-bot -U --pre
 
 export PATH="$PATH:/home/$USER/.local/bin/"
-chmod +x ./Installer.py && sudo /usr/bin/env python3 ./Installer.py
+chmod +x ./Installer.py && ./Installer.py
 cd ..
-rm -rf ./Linux-First-Setup
+sudo rm -rf ./Linux-First-Setup
