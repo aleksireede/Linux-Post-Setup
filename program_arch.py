@@ -25,6 +25,7 @@ def arch():
 
 
 def arch_packages_install():
+    subprocess.run(["sudo","pacman","-Sy","archlinux-keyring"],check=True,text=True)
     arch_app_list = ["paru", "-Suy", "--needed"]
     for app in arch_packages.split(" "):
         if app == "'" or app == "\\" or app == "":
@@ -36,6 +37,7 @@ def arch_packages_install():
         arch_app_list.append(app)
     subprocess.run(
         arch_app_list, check=True, text=True)
+    subprocess.run(["sudo","pacman","-Qttdq","|","sudo","pacman","-Rns","-"],check=True,text=True)
 
 
 def check_for_aur_helper():
