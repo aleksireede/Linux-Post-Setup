@@ -43,7 +43,7 @@ def noto_emoji_apple():
 
 
 def oh_my_zsh():
-    subprocess.run('sh -c "$(wget https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"', shell=True)
+    subprocess.run('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"', shell=True)
     git.Repo.clone_from("https://github.com/zsh-users/zsh-syntax-highlighting.git",
                         "/home/"+get_user()+"/.oh-my-zsh/doas/plugins/zsh-syntax-highlighting")
     git.Repo.clone_from("https://github.com/zsh-users/zsh-autosuggestions",
