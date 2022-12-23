@@ -33,7 +33,7 @@ def arch_packages_install():
         arch_app_list, check=True, text=True)
     pacman_remove_orphans = subprocess.Popen("/usr/bin/pacman -Qtdq",shell=True, stdout=subprocess.PIPE)
     arch_orphaned_packages = pacman_remove_orphans.stdout.read()
-    subprocess.run(["sudo", "pacman", "-Rns"], check=True, text=True, input=arch_orphaned_packages)
+    subprocess.run(["sudo", "pacman", "-Rns"], check=True, text=True, input=arch_orphaned_packages.decode('ascii'))
 
 
 def check_for_aur_helper():
