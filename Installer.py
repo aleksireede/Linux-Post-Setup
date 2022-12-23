@@ -7,7 +7,7 @@ import program_debian
 
 
 def main():
-    program_commads.run_script_check()
+    program_commands.run_script_check()
     if program_commands.os_check() == "arch":
         program_arch.arch()
     elif profram_commands.os_check() == "debian":
