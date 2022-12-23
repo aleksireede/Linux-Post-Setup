@@ -106,3 +106,4 @@ def yes_no_check(greeting_text):
             break
         else:
             print("Please answer yes or no!")
+            press_enter_to_continue()
