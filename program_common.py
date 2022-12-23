@@ -45,9 +45,9 @@ def noto_emoji_apple():
 def oh_my_zsh():
     subprocess.run('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"', shell=True)
     git.Repo.clone_from("https://github.com/zsh-users/zsh-syntax-highlighting.git",
-                        "/home/"+get_user()+"/.oh-my-zsh/doas/plugins/zsh-syntax-highlighting")
+                        "/home/"+program_commands.get_user()+"/.oh-my-zsh/doas/plugins/zsh-syntax-highlighting")
     git.Repo.clone_from("https://github.com/zsh-users/zsh-autosuggestions",
-                        "/home/"+get_user()+"/.oh-my-zsh/doas/plugins/zsh-autosuggestions")
+                        "/home/"+program_commands.get_user()+"/.oh-my-zsh/doas/plugins/zsh-autosuggestions")
     print(program_commands.replacetext("plugins=(git)",
           "plugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)", zsh_alias))
     print(program_commands.replacetext('ZSH_THEME="robbyrussell"',
