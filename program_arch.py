@@ -31,7 +31,7 @@ def arch_packages_install():
     arch_app_list.extend(program_common.package_filter(program_common.common_packages))
     subprocess.run(
         arch_app_list, check=True, text=True)
-    pacman_remove_orphans = subprocess.run(["sudo", "pacman", "-Qtdq"],check=True, text=True, stdout=subprocess.PIPE)
+    pacman_remove_orphans = subprocess.Popen(["sudo", "pacman", "-Qtdq"], stdout=subprocess.PIPE)
     arch_orphaned_packages = pacman_remove_orphans.stdout.read()
     subprocess.run(["sudo", "pacman", "-Rns"], check=True, text=True, input=arch_orphaned_packages)
 
