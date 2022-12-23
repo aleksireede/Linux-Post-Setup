@@ -24,7 +24,7 @@ def arch():
 
 
 def arch_packages_install():
-    subprocess.run(["sudo", "pacman", "-Sy", "archlinux-keyring"],
+    subprocess.run(["sudo", "pacman", "-Sy", "--needed", "archlinux-keyring"],
                    check=True, text=True)
     arch_app_list = ["paru", "-Suy", "--needed"]
     arch_app_list.extend(program_common.package_filter(arch_packages))
