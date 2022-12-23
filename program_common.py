@@ -44,12 +44,12 @@ def noto_emoji_apple():
 
 def oh_my_zsh():
     subprocess.run('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"', shell=True)
-    if pathlib2.Path("/home/"+program_commands.get_user()+"/.oh-my-zsh/custom/plugins).exists:
+    if pathlib2.Path("/home/",program_commands.get_user(),"/.oh-my-zsh/custom/plugins).exists:
         return
     git.Repo.clone_from("https://github.com/zsh-users/zsh-syntax-highlighting.git",
-                        "/home/"+program_commands.get_user()+"/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting")
+                        pathlib2.Path("/home/",program_commands.get_user(),"/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"))
     git.Repo.clone_from("https://github.com/zsh-users/zsh-autosuggestions",
-                        "/home/"+program_commands.get_user()+"/.oh-my-zsh/custom/plugins/zsh-autosuggestions")
+                        pathlib2.Path("/home/",program_commands.get_user(),"/.oh-my-zsh/custom/plugins/zsh-autosuggestions"))
     print(program_commands.replacetext("plugins=(git)",
           "plugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)", zsh_alias))
     print(program_commands.replacetext('ZSH_THEME="robbyrussell"',
