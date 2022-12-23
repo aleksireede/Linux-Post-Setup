@@ -6,7 +6,7 @@ arduino-ide-bin
 aur-auto-vote-git
 baobab
 base-devel-meta
-boost-libs-git
+boost-libs
 btw
 c++utilities
 cemu-experimental-wine
@@ -87,8 +87,6 @@ v4l2loopback-dkms
 scrcpy
 sndcpy
 activate-linux-git
-friidump
-xcursor-theme-wii
 dolphin-emu-ishiiruka-git
 nkit
 xf86-input-xwiimote-git
