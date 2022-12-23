@@ -10,6 +10,7 @@ from program_common import *
 
 debian_packages = open("./packages/debian.txt", "r").read()
 flatpak_packages = open("./packages/flatpak.txt", "r").read()
+fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
 
 
 def debian():
@@ -27,6 +28,7 @@ def debian():
     if not is_tool("mangohud"):
         if yes_no_check("Do you want to compile and install mangohud"):
             debian_mangohud()
+            clear_screen()
 
 
 def flatpak():
@@ -39,13 +41,15 @@ def debian_packages_installs():
     subprocess.run(["chmod", "+x", "./utils/debian_sources.sh"],
                    check=True, text=True)
     subprocess.run(["./utils/debian_sources.sh"], check=True, text=True)
-    subprocess.run(["apt", "-qq", "update"], check=True, text=True)
-    subprocess.run(["apt", "-qq", "--assume-yes", "-y",
+    subprocess.run(["sudo", "apt", "-qq", "update"], check=True, text=True)
+    subprocess.run(["sudo", "apt", "-qq", "--assume-yes", "-y",
                     "install", "\\", debian_packages, common_packages], check=True, text=True)
-    subprocess.run(["apt", "-qq", "upgrade"], check=True, text=True)
-    subprocess.run(["apt", "-qq", "autoremove"], check=True, text=True)
+    subprocess.run(["sudo", "apt", "-qq", "upgrade"], check=True, text=True)
+    subprocess.run(["sudo", "apt", "-qq", "autoremove"], check=True, text=True)
     subprocess.run(
         ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"], check=True, text=True)
+
+# possibly needs fix
 
 
 def debian_arduino_cli():
@@ -57,7 +61,6 @@ def debian_arduino_cli():
 
 
 def debian_fastfetch():
-    fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
     git.Repo.clone_from(
         "https://github.com/LinusDierheimer/fastfetch.git", fastfetchpath)
     pathlib2.Path(fastfetchpath, "build").mkdir(parents=True, exist_ok=True)
@@ -84,6 +87,6 @@ def debian_mangohud():
 def debian_steam():
     open(pathlib2.Path(pathlib2.Path.cwd(), "steam.deb"), "wb").write(requests.get(
         "https://cdn.akamai.steamstatic.com/client/installer/steam.deb").content)
-    subprocess.run(["apt", "qq", "install",
+    subprocess.run(["sudo", "apt", "qq", "install",
                     "--assume-yes", "y", "./steam.deb"], check=True, text=True)
     pathlib2.Path(pathlib2.Path.cwd(), "steam.deb").unlink()

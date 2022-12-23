@@ -4,8 +4,8 @@ import shutil
 import requests
 import git
 import getpass
-from program_commands import *
-from program_common import *
+import program_commands
+import program_common
 
 arch_packages = open("./packages/arch.txt", "r").read()
 arch_packages = arch_packages.replace("\n", " ")
@@ -14,34 +14,29 @@ paru_path = pathlib2.Path(pathlib2.Path.cwd(), "paru")
 
 
 def arch():
-    clear_screen()
+    program_commands.clear_screen()
     pacman_config()
-    clear_screen()
+    program_commands.clear_screen()
     check_for_aur_helper()
-    clear_screen()
+    program_commands.clear_screen()
     arch_packages_install()
-    clear_screen()
-    press_enter_to_continue()
+    program_commands.clear_screen()
 
 
 def arch_packages_install():
-    subprocess.run(["sudo","pacman","-Sy","archlinux-keyring"],check=True,text=True)
+    subprocess.run(["sudo", "pacman", "-Sy", "archlinux-keyring"],
+                   check=True, text=True)
     arch_app_list = ["paru", "-Suy", "--needed"]
-    for app in arch_packages.split(" "):
-        if app == "'" or app == "\\" or app == "":
-            continue
-        arch_app_list.append(app)
-    for app in common_packages.split(" "):
-        if app == "'" or app == "\\" or app == "":
-            continue
-        arch_app_list.append(app)
+    arch_app_list.extend(package_filter(arch_packages))
+    arch_app_list.extend(package_filter(program_common.common_packages))
     subprocess.run(
         arch_app_list, check=True, text=True)
-    subprocess.run(["sudo","pacman","-Qttdq","|","sudo","pacman","-Rns","-"],check=True,text=True)
+    subprocess.run(["sudo", "pacman", "-Qttdq", "|", "sudo",
+                   "pacman", "-Rns", "-"], check=True, text=True)
 
 
 def check_for_aur_helper():
-    if is_tool("paru") or is_tool("yay"):
+    if program_commands.is_tool("paru") or is_tool("yay"):
         return
     subprocess.run(["pacman", "-S", "--needed",
                    "base-devel"], check=True, text=True)
@@ -53,11 +48,12 @@ def check_for_aur_helper():
 def pacman_config():
     if not pacman_conf.exists():
         return
-    # subprocess.run([ "chmod", "777", pacman_conf],
-    #                check=True, text=True)
-    print(replacetext("#[multilib]\n#Include = /etc/pacman.d/mirrorlist",
+    subprocess.run(["sudo", "chmod", "777", pacman_conf],
+                   check=True, text=True)
+    print(program_commands.replacetext("#[multilib]\n#Include = /etc/pacman.d/mirrorlist",
           "[multilib]\nInclude = /etc/pacman.d/mirrorlist", pacman_conf))
-    print(replacetext("#ParallelDownloads=5", "ParallelDownloads=5", pacman_conf))
-    print(replacetext("#Color", "Color", pacman_conf))
-    # subprocess.run([ "chmod", "644", pacman_conf],
-    #                check=True, text=True)
+    print(program_commands.replacetext(
+        "#ParallelDownloads=5", "ParallelDownloads=5", pacman_conf))
+    print(program_commands.replacetext("#Color", "Color", pacman_conf))
+    subprocess.run(["sudo", "chmod", "644", pacman_conf],
+                   check=True, text=True)

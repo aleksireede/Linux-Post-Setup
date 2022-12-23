@@ -53,7 +53,6 @@ def findtext(text, file):
 
 
 def replacetext(search_text, replace_text, file):
-    # replace text in a file
     data = file.read_text()
     if not search_text in data:
         return "String Not found:"+search_text
@@ -92,7 +91,7 @@ def run_script_check():
 
 
 def yes_no_check(greeting_text):
-    greeting_text += "\n(y/N):"
+    greeting_text += "\n(yes/NO):"
     while True:
         clear_screen()
         text_lolcat(greeting_text)

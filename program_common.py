@@ -1,7 +1,7 @@
 import subprocess
 import pathlib2
 import requests
-from program_commands import *
+import program_commands
 import shutil
 import git
 
@@ -13,6 +13,16 @@ zsh_alias = pathlib2.Path(pathlib2.Path.home(), r"/.zsh_aliases")
 
 common_packages = open("./packages/common.txt", "r").read()
 common_packages = common_packages.replace("\n", " ")
+character_blacklist = ["'", "", "\\", "/", "\"", ",", "."]
+
+
+def package_filter(package_list):
+    package_list_complete = []
+    for app in package_list.split(" "):
+        if app in character_blacklist:
+            continue
+        package_list_complete.append(app)
+    return package_list_complete
 
 
 def noto_emoji_apple():
@@ -39,14 +49,15 @@ def oh_my_zsh():
                         "/home/"+get_user()+"/.oh-my-zsh/doas/plugins/zsh-syntax-highlighting")
     git.Repo.clone_from("https://github.com/zsh-users/zsh-autosuggestions",
                         "/home/"+get_user()+"/.oh-my-zsh/doas/plugins/zsh-autosuggestions")
-    print(replacetext("plugins=(git)",
+    print(program_commands.replacetext("plugins=(git)",
           "plugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)", zsh_alias))
-    print(replacetext('ZSH_THEME="robbyrussell"',
+    print(program_commands.replacetext('ZSH_THEME="robbyrussell"',
           'ZSH_THEME="agnoster"', zsh_alias))
-    print(findtext('DEFAULT_USER="'+get_user()+'"\nprompt_context(){}'))
+    print(program_commands.findtext('DEFAULT_USER="' +
+          program_commands.get_user()+'"\nprompt_context(){}'))
     # shell aliases
     print(
-        findtext("if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi", zshrc))
+        program_commands.findtext("if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi", zshrc))
     open(pathlib2.Path(pathlib2.Path.home(), r"/.zsh_aliases"),
          "wb").write(zsh_response.content)
 
