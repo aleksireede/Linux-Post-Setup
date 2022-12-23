@@ -28,14 +28,14 @@ def package_filter(package_list):
 def noto_emoji_apple():
     open(pathlib2.Path(r"/tmp/NotoColorEmoji.ttf"), "wb").write(requests.get(
         "https://gitlab.com/timescam/noto-fonts-emoji-apple/-/raw/master/NotoColorEmoji.ttf?inline=false").content)
-    if pathlib2.Path(r"/usr/share/fonts/truetype/").exists():
-        if pathlib2.Path(r"/usr/share/fonts/truetype/NotoColorEmoji.ttf").exists():
+    if pathlib2.Path("/usr/share/fonts/truetype").exists():
+        if pathlib2.Path("/usr/share/fonts/truetype/NotoColorEmoji.ttf").exists():
             subprocess.run(
                 ["sudo", "rm", "/usr/share/fonts/truetype/NotoColorEmoji.ttf"], check=True, text=True)
         subprocess.run(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
                         "/usr/share/fonts/truetype/NotoColorEmoji.ttf"], check=True, text=True)
-    elif pathlib2.Path(r"/usr/share/fonts/noto/").exists():
-        if pathlib2.Path(r"/usr/share/fonts/noto/NotoColorEmoji.ttf").exists():
+    elif pathlib2.Path("/usr/share/fonts/noto").exists():
+        if pathlib2.Path("/usr/share/fonts/noto/NotoColorEmoji.ttf").exists():
             subprocess.run(
                 ["sudo", "rm", "/usr/share/fonts/truetype/NotoColorEmoji.ttf"], check=True, text=True)
         subprocess.run(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
