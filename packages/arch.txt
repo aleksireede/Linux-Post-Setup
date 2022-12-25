@@ -101,3 +101,4 @@ xorg-xcursorgen
 xorg-xkill
 yakuake
 youtube-music-bin
+wireguard
