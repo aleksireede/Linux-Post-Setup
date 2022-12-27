@@ -104,3 +104,4 @@ youtube-music-bin
 wireguard
 spectacle
 okular
+telegram-desktop-bin
