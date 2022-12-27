@@ -103,3 +103,4 @@ yakuake
 youtube-music-bin
 wireguard
 spectacle
+okular
