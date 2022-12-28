@@ -75,7 +75,7 @@ proton-ge-custom-bin
 protonup-qt
 qtforkawesome-qt6
 qtutilities-qt6
-rclone-bin
+rclone
 realtime-privileges
 rubygems
 samba
