@@ -43,7 +43,7 @@ def noto_emoji_apple():
 
 
 def oh_my_zsh():
-    subprocess.run('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"', shell=True)
+    subprocess.run('sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended', shell=True)
     if pathlib2.Path("/home/",program_commands.get_user(),"/.oh-my-zsh/custom/plugins").exists:
         return
     git.Repo.clone_from("https://github.com/zsh-users/zsh-syntax-highlighting.git",
