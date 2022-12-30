@@ -107,3 +107,5 @@ wireguard
 spectacle
 okular
 telegram-desktop-bin
+bluez
+bluez-utils
