@@ -13,17 +13,17 @@ flatpak_packages = open("./packages/flatpak.txt", "r").read()
 fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
 
 def debian():
-    clear_screen()
+    program_commands.clear_screen()
     debian_steam()
-    clear_screen()
+    program_commands.clear_screen()
     debian_packages_install()
-    clear_screen()
-    clear_screen()
+    program_commands.clear_screen()
     flatpak()
-    if not is_tool("mangohud"):
-        if yes_no_check("Do you want to compile and install mangohud"):
+    program_commands.clear_screen()
+    if not program_commands.is_tool("mangohud"):
+        if program_commands.yes_no_check("Do you want to compile and install mangohud"):
             debian_mangohud()
-            clear_screen()
+            program_commands.clear_screen()
 
 
 def flatpak():
