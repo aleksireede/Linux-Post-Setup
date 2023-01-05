@@ -32,7 +32,7 @@ def flatpak():
                        check=True, text=True)
 
 
-def debian_packages_installs():
+def debian_packages_install():
     subprocess.run(["chmod", "+x", "./utils/debian_sources.sh"],
                    check=True, text=True)
     subprocess.run(["./utils/debian_sources.sh"], check=True, text=True)
