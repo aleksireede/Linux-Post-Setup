@@ -37,3 +37,4 @@ syncthing
 ttf-mscorefonts-installer
 wine32
 wine64
+fonts-powerline
