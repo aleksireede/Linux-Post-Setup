@@ -16,8 +16,6 @@ def debian():
     clear_screen()
     debian_steam()
     clear_screen()
-    debian_arduino_cli()
-    clear_screen()
     debian_fastfetch()
     clear_screen()
     debian_packages_install()
@@ -50,16 +48,6 @@ def debian_packages_installs():
     subprocess.run(["sudo", "apt", "-qq", "autoremove"], check=True, text=True)
     subprocess.run(
         ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"], check=True, text=True)
-
-# possibly needs fix
-
-
-def debian_arduino_cli():
-    open(pathlib2.Path(pathlib2.Path.cwd(), "arduino-cli.tgz"), "wb").write(requests.get(
-        "https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz").content)
-    subprocess.run(["tar", "-xf", "arduino-cli.tgz",
-                    "-C", "/usr/local/bin/arduino-cli"], check=True, text=True)
-    pathlib2.Path(pathlib2.Path.cwd(), "arduino-cli.tgz").unlink()
 
 
 def debian_fastfetch():
