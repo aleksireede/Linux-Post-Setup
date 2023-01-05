@@ -12,25 +12,6 @@ debian_packages = open("./packages/debian.txt", "r").read()
 flatpak_packages = open("./packages/flatpak.txt", "r").read()
 fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
 
-
-def debian():
-    clear_screen()
-    flatpak()
-    clear_screen()
-    debian_steam()
-    clear_screen()
-    debian_arduino_cli()
-    clear_screen()
-    debian_fastfetch()
-    clear_screen()
-    debian_packages_install()
-    clear_screen()
-    if not is_tool("mangohud"):
-        if yes_no_check("Do you want to compile and install mangohud"):
-            debian_mangohud()
-            clear_screen()
-
-
 def flatpak():
     for app in flatpak_packages.split(" "):
         subprocess.run(["flatpak", "install", "flathub", app],
@@ -93,3 +74,20 @@ def debian_steam():
     subprocess.run(["sudo", "apt", "qq", "install",
                     "--assume-yes", "y", "./steam.deb"], check=True, text=True)
     pathlib2.Path(pathlib2.Path.cwd(), "steam.deb").unlink()
+
+def debian():
+    clear_screen()
+    flatpak()
+    clear_screen()
+    debian_steam()
+    clear_screen()
+    debian_arduino_cli()
+    clear_screen()
+    debian_fastfetch()
+    clear_screen()
+    debian_packages_install()
+    clear_screen()
+    if not is_tool("mangohud"):
+        if yes_no_check("Do you want to compile and install mangohud"):
+            debian_mangohud()
+            clear_screen()
