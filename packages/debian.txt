@@ -5,6 +5,7 @@ firefoxpwa
 gdebi
 glslang-dev
 glslang-tools
+neofetch
 gnome-software-plugin-flatpak
 libadwaita-1-dev
 libasound2-plugins:i386
