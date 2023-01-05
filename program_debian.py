@@ -58,7 +58,7 @@ def debian_arduino_cli():
     open(pathlib2.Path(pathlib2.Path.cwd(), "arduino-cli.tgz"), "wb").write(requests.get(
         "https://downloads.arduino.cc/arduino-cli/arduino-cli_latest_Linux_64bit.tar.gz").content)
     subprocess.run(["tar", "-xf", "arduino-cli.tgz",
-                    "-C", "/usr/local/bin", "arduino-cli"], check=True, text=True)
+                    "-C", "/usr/local/bin/arduino-cli"], check=True, text=True)
     pathlib2.Path(pathlib2.Path.cwd(), "arduino-cli.tgz").unlink()
 
 
