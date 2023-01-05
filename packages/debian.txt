@@ -1,5 +1,4 @@
 aptitude
-build-essentials
 code
 firefoxpwa
 gdebi
