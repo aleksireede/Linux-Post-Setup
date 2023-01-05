@@ -10,7 +10,7 @@ def main():
     program_commands.run_script_check()
     if program_commands.os_check() == "arch":
         program_arch.arch()
-    elif profram_commands.os_check() == "debian":
+    elif program_commands.os_check() == "debian":
         program_debian.debian()
     if program_commands.yes_no_check("Do you want to install oh my zsh?"):
         program_commands.clear_screen()
