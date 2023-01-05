@@ -9,7 +9,9 @@ import program_commands
 import program_common
 
 debian_packages = open("./packages/debian.txt", "r").read()
+debian_packages = debian_packages.replace("\n", " ")
 flatpak_packages = open("./packages/flatpak.txt", "r").read()
+flatpak_packages = flatpak_packages.replace("\n", " ")
 fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
 
 def debian():
