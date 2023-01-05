@@ -16,8 +16,6 @@ def debian():
     clear_screen()
     debian_steam()
     clear_screen()
-    debian_fastfetch()
-    clear_screen()
     debian_packages_install()
     clear_screen()
     clear_screen()
@@ -48,17 +46,6 @@ def debian_packages_installs():
     subprocess.run(["sudo", "apt", "-qq", "autoremove"], check=True, text=True)
     subprocess.run(
         ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"], check=True, text=True)
-
-
-def debian_fastfetch():
-    git.Repo.clone_from(
-        "https://github.com/LinusDierheimer/fastfetch.git", fastfetchpath)
-    pathlib2.Path(fastfetchpath, "build").mkdir(parents=True, exist_ok=True)
-    subprocess.run(["cmake", ".."], cwd=pathlib2.Path(
-        fastfetchpath, "build"), check=True, text=True)
-    subprocess.run(["cmake", "--build", ".", "-j$(nproc)", "--target", "fastfetch",
-                    "--target", "flashfetch"], cwd=pathlib2.Path(fastfetchpath, "build"), check=True, text=True)
-    shutil.rmtree(fastfetchpath)
 
 
 def debian_mangohud():
