@@ -5,8 +5,8 @@ import requests
 import git
 import getpass
 import sys
-from program_commands import *
-from program_common import *
+import program_commands
+import program_common
 
 debian_packages = open("./packages/debian.txt", "r").read()
 flatpak_packages = open("./packages/flatpak.txt", "r").read()
