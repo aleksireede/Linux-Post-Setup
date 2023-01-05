@@ -90,6 +90,6 @@ def debian_steam():
     open(pathlib2.Path(pathlib2.Path.cwd(), "steam.deb"), "wb").write(requests.get(
         "https://cdn.akamai.steamstatic.com/client/installer/steam.deb").content)
     subprocess.run(["sudo", "apt", "-qq", "install",
-                    "--assume-yes", "y", "./steam.deb"], check=True, text=True)
+                    "--assume-yes", "-y", "./steam.deb"], check=True, text=True)
     pathlib2.Path(pathlib2.Path.cwd(), "steam.deb").unlink()
 
