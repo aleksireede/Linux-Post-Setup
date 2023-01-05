@@ -38,8 +38,8 @@ def debian_packages_install():
     subprocess.run(["chmod", "+x", "./utils/debian_sources.sh"],
                    check=True, text=True)
     subprocess.run(["./utils/debian_sources.sh"], check=True, text=True)
-    subprocess.run(["sudo", "apt", "-qq", "update"], check=True, text=True)
-    debian_app_list = ["sudo", "apt", "-qq", "--assume-yes", "-y", "install"]
+    subprocess.run(["sudo", "apt", "-q", "update"], check=True, text=True)
+    debian_app_list = ["sudo", "apt", "-q", "--assume-yes", "-y", "install"]
     debian_app_list.extend(program_common.package_filter(debian_packages))
     debian_app_list.extend(program_common.package_filter(program_common.common_packages))
     subprocess.run(
