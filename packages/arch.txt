@@ -16,7 +16,6 @@ btw
 c++utilities
 cemu-experimental-wine
 cifs-utils
-discord
 dnsutils
 dolphin-emu-ishiiruka-git
 downgrade
@@ -109,3 +108,5 @@ okular
 telegram-desktop-bin
 bluez
 bluez-utils
+discord_arch_electron
+gnome-calculator
