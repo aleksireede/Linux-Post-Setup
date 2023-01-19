@@ -38,24 +38,26 @@ def get_user():
     return user
 
 
-def is_tool(name):
-    # check if program exists
+def is_tool(name):    # check if program exists
     return shutil.which(name) is not None
 
 
-def findtext(text, file):
+def insert_text(text, file):
     data = file.read_text()
     if text in data:
-        return "Text already found:"+text
+        return "Text already inserted:"+text
     data = data+text
     file.write_text(data)
     return "Text written"
 
 
-def replacetext(search_text, replace_text, file):
+def replace_text(search_text, replace_text, file):
     data = file.read_text()
-    if not search_text in data:
-        return "String Not found:"+search_text
+    if search_text not in data and replace_text not in data:
+        insert_text(replace_text, file)
+        return
+    if replace_text in data and search_text not in data:
+        return "Text already replaced"+replace_text
     data = data.replace(search_text, replace_text)
     file.write_text(data)
     return "Text replaced"

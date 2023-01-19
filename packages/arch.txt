@@ -24,7 +24,6 @@ dxvk-bin
 emacs
 etcher-bin
 facebook-desktop-app
-fastfetch
 firefox-pwa-bin
 firefox-pwa-bin
 fluidsynth

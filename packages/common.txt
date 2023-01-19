@@ -38,3 +38,4 @@ wget
 xdg-utils
 zsh
 arduino
+screenfetch
