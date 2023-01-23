@@ -109,3 +109,5 @@ bluez
 bluez-utils
 discord_arch_electron
 gnome-calculator
+dotnet-runtime
+dotnet-sdk
