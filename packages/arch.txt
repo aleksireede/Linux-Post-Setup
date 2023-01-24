@@ -68,7 +68,6 @@ pulseaudio-bluetooth
 pulseaudio-equalizer 
 pulseaudio-rtp 
 pulseeffects-legacy
-zam_plugins
 plasma5-applets-volumewin7mixer
 powerline-fonts
 proton-ge-custom-bin
