@@ -29,7 +29,6 @@ firefox-pwa-bin
 fluidsynth
 freepats-general-midi
 geforcenow-electron
-geogebra-5
 gmail-nativefier
 google-chrome
 google-drive-nativefier
