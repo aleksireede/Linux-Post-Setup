@@ -110,3 +110,4 @@ gnome-calculator
 dotnet-runtime
 dotnet-sdk
 netcoredbg
+freerdp
