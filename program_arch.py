@@ -36,7 +36,7 @@ def arch_packages_install():
 
 
 def check_for_aur_helper():
-    if program_commands.is_tool("paru") or is_tool("yay"):
+    if program_commands.is_tool("paru") or program_commands.is_tool("yay"):
         return
     subprocess.run(["sudo", "pacman", "-S", "--needed",
                    "base-devel"], check=True, text=True)
