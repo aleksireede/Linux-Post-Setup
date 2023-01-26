@@ -14,10 +14,8 @@ base-devel-meta
 boost-libs
 btw
 c++utilities
-cemu-experimental-wine
 cifs-utils
-dnsutils
-dolphin-emu-ishiiruka-git
+dnsutilss
 downgrade
 dropbox
 dxvk-bin
