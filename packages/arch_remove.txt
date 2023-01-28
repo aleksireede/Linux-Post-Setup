@@ -2,3 +2,8 @@ pulseaudio-alsa
 pulseaudio
 pulseeffects-legacy
 pulseaudio-bluetooth
+pulseaudio-equalizer
+pulseaudio-jack
+pulseaudio-lirc
+pulseaudio-rtp
+pulseaudio-zeroconf
