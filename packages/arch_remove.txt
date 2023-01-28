@@ -1,0 +1,4 @@
+pulseaudio-alsa
+pulseaudio
+pulseeffects-legacy
+pulseaudio-bluetooth

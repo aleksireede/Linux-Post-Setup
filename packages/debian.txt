@@ -1,11 +1,7 @@
 aptitude
-code
-firefoxpwa
-gdebi
 glslang-dev
 glslang-tools
 neofetch
-gnome-software-plugin-flatpak
 libadwaita-1-dev
 libasound2-plugins:i386
 libclang-dev
@@ -22,8 +18,6 @@ libudev-dev
 libxnvctrl-dev
 libzita-convolver-dev
 mono-complete
-nemo-gtkhash
-nemo-nextcloud
 openjdk-8-jre
 openjdk-11-jre
 openjdk-17-jre
@@ -32,9 +26,4 @@ p7zip-rar
 python3-pip
 python3-venv
 software-properties-common
-synaptic
-syncthing
-ttf-mscorefonts-installer
-wine32
-wine64
 fonts-powerline

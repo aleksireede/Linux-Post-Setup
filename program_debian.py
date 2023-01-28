@@ -10,6 +10,8 @@ import program_common
 
 debian_packages = open("./packages/debian.txt", "r").read()
 debian_packages = debian_packages.replace("\n", " ")
+debian_desktop_packages = open("./packages/debian_desktop.txt", "r").read()
+debian_desktop_packages = debian_desktop_packages.replace("\n", " ")
 flatpak_packages = open("./packages/flatpak.txt", "r").read()
 flatpak_packages = flatpak_packages.replace("\n", " ")
 fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
@@ -29,6 +31,8 @@ def debian():
 
 
 def flatpak():
+    if program_commands.is_server():
+        return
     for app in flatpak_packages.split(" "):
         subprocess.run(["flatpak", "install", "flathub", app],
                        check=True, text=True)
@@ -41,6 +45,9 @@ def debian_packages_install():
     subprocess.run(["sudo", "apt", "-q", "update"], check=True, text=True)
     debian_app_list = ["sudo", "apt", "-q", "--assume-yes", "-y", "install"]
     debian_app_list.extend(program_common.package_filter(debian_packages))
+    if not program_commands.is_server():
+        debian_app_list.extend(program_common.package_filter(debian_desktop_packages))
+        debian_app_list.extend(program_common.package_filter(program_common.common_desktop_packages))
     debian_app_list.extend(program_common.package_filter(program_common.common_packages))
     subprocess.run(
         debian_app_list, check=True, text=True)
@@ -51,6 +58,8 @@ def debian_packages_install():
 
 
 def debian_mangohud():
+    if program_commands.is_server():
+        return
     git.Repo.clone_from("https://github.com/flightlessmango/MangoHud.git",
                         pathlib2.Path(pathlib2.Path.cwd(), "Mangohud"))
     subprocess.run(["chmod", "+x", "./build.sh"],
@@ -64,6 +73,8 @@ def debian_mangohud():
 
 
 def debian_steam():
+    if program_commands.is_server():
+        return
     open(pathlib2.Path(pathlib2.Path.cwd(), "steam.deb"), "wb").write(requests.get(
         "https://cdn.akamai.steamstatic.com/client/installer/steam.deb").content)
     subprocess.run(["sudo", "apt", "-qq", "install",

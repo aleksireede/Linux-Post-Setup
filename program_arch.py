@@ -1,14 +1,16 @@
 import subprocess
 import pathlib2
 import shutil
-import requests
 import git
-import getpass
 import program_commands
 import program_common
 
 arch_packages = open("./packages/arch.txt", "r").read()
 arch_packages = arch_packages.replace("\n", " ")
+arch_packages_remove = open("./packages/arch_remove.txt", "r").read()
+arch_packages_remove = arch_packages_remove.replace("\n", " ")
+arch_desktop_packages = open("./packages/arch_desktop.txt", "r").read()
+arch_desktop_packages = arch_desktop_packages.replace("\n", " ")
 pacman_conf = pathlib2.Path(r"/etc/pacman.conf")
 paru_path = pathlib2.Path(pathlib2.Path.cwd(), "paru")
 
@@ -27,12 +29,18 @@ def arch_packages_install():
     subprocess.run(["sudo", "pacman", "-Sy", "--needed", "archlinux-keyring"],
                    check=True, text=True)
     arch_app_list = ["paru", "-Suy", "--needed"]
+    arch_app_remove = ["paru" "-R"]
+    arch_app_remove.extend(arch_packages_remove)
+    if not program_commands.is_server():
+        arch_app_list.extend(program_common.package_filter(arch_desktop_packages))
+        arch_app_list.extend(program_common.package_filter(program_common.common_desktop_packages))
     arch_app_list.extend(program_common.package_filter(arch_packages))
     arch_app_list.extend(program_common.package_filter(
         program_common.common_packages))
     subprocess.run(
         arch_app_list, check=True, text=True)
     subprocess.run("pacman -Qtdq | sudo pacman -Rns -", shell=True)
+    subprocess.run(arch_app_remove,check=True,text=True)
 
 
 def check_for_aur_helper():
@@ -46,7 +54,7 @@ def check_for_aur_helper():
 
 
 def pacman_config():
-    if not pacman_conf.exists():
+    if not pacman_conf.exists() or program_commands.is_server():
         return
     subprocess.run(["sudo", "chmod", "777", pacman_conf],
                    check=True, text=True)

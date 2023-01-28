@@ -14,6 +14,8 @@ zsh_alias = pathlib2.Path(
 
 common_packages = open("./packages/common.txt", "r").read()
 common_packages = common_packages.replace("\n", " ")
+common_desktop_packages = open("./packages/common_desktop.txt", "r").read()
+common_desktop_packages = common_desktop_packages.replace("\n", " ")
 character_blacklist = ["'", "", "\\", "/", "\"", ",", "."]
 
 
@@ -27,6 +29,8 @@ def package_filter(package_list):
 
 
 def noto_emoji_apple():
+    if program_commands.is_server():
+        return
     open(pathlib2.Path(r"/tmp/NotoColorEmoji.ttf"), "wb").write(requests.get(
         "https://gitlab.com/timescam/noto-fonts-emoji-apple/-/raw/master/NotoColorEmoji.ttf?inline=false").content)
     if pathlib2.Path("/usr/share/fonts/truetype").exists():
@@ -64,7 +68,7 @@ def oh_my_zsh():
 
 
 def install_oreo_cursors():
-    if pathlib2.Path("/usr/share/icons/oreo_blue_cursors/cursor.theme").exists():
+    if pathlib2.Path("/usr/share/icons/oreo_blue_cursors/cursor.theme").exists() or program_commands.is_server():
         return  # exit if cursors already exist
     git.Repo.clone_from("https://github.com/varlesh/oreo-cursors.git",
                         pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))

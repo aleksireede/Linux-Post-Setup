@@ -7,8 +7,10 @@ import pwd
 import getpass
 
 welcome_text = open("welcome_text.txt", "r").read()
-input_yes = ["y", "yes", "k", "kyllä", "ye", "kyl", "kyll"]
-input_no = ["n", "no", "e", "ei", "eii", "eiii"]
+input_yes = ("y", "yes", "k", "kyllä", "ye", "kyl", "kyll", "kylä")
+input_no = ("n", "no", "e", "ei", "eii", "eiii")
+input_desktop = ("d", "de", "desk", "desktop", "dekstop", "deskto", "des")
+input_server = ("s", "se", "ser", "server", "serv", "srv", "serve")
 
 
 def get_user():
@@ -82,30 +84,43 @@ def clear_screen():
     subprocess.run(["clear"], check=True, text=True)
 
 
-def text_lolcat(lolcat_text):
+def lolcat_print(lolcat_text):
     subprocess.run(["lolcat"], input=lolcat_text, check=True, text=True)
 
 
 def run_script_check():
     clear_screen()
-    text_lolcat(welcome_text)
+    lolcat_print(welcome_text)
     yes_no_check("Do you wish to run the script?")
 
 
 def yes_no_check(greeting_text):
-    greeting_text += "\n(yes/NO):"
     while True:
         clear_screen()
-        text_lolcat(greeting_text)
-        yes_no = input("")
+        lolcat_print(greeting_text)
+        yes_no = input("(y/N):")
         if yes_no.lower() in input_yes:
+            clear_screen()
             return True
-            clear_screen()
-            break
         elif yes_no.lower() in input_no:
-            return False
             clear_screen()
-            break
+            return False
         else:
             print("Please answer yes or no!")
+            press_enter_to_continue()
+
+def is_server():
+    while True:
+        clear_screen()
+        lolcat_print(
+            "do you want to install only (server) or all (desktop) applications?")
+        choice = input("(s/D):")
+        if choice.lower() in input_server:
+            clear_screen()
+            return True
+        elif choice.lower() in input_desktop:
+            clear_screen()
+            return False
+        else:
+            print("Please answer server or desktop!")
             press_enter_to_continue()
