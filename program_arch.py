@@ -38,7 +38,8 @@ def arch_packages_install():
     arch_app_list.extend(program_common.package_filter(
         program_common.common_packages))
     subprocess.run(arch_app_remove,check=True,text=True)
-    subprocess.run(
+    if program_commands.is_tool("pulseaudio"):
+        subprocess.run(
         arch_app_list, check=True, text=True)
     subprocess.run("pacman -Qtdq | sudo pacman -Rns -", shell=True)
 
