@@ -62,3 +62,4 @@ dotnet-runtime
 dotnet-sdk
 netcoredbg
 freerdp
+plasma-pa
