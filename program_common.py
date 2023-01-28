@@ -53,9 +53,9 @@ def oh_my_zsh():
     if pathlib2.Path("/home/", program_commands.get_user(), "/.oh-my-zsh/custom/plugins").exists():
         return
     git.Repo.clone_from("https://github.com/zsh-users/zsh-syntax-highlighting.git",
-                        pathlib2.Path("/home/", program_commands.get_user(), "/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"))
+                        pathlib2.Path("/home", program_commands.get_user(), ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"))
     git.Repo.clone_from("https://github.com/zsh-users/zsh-autosuggestions",
-                        pathlib2.Path("/home/", program_commands.get_user(), "/.oh-my-zsh/custom/plugins/zsh-autosuggestions"))
+                        pathlib2.Path("/home", program_commands.get_user(), ".oh-my-zsh/custom/plugins/zsh-autosuggestions"))
     print(program_commands.replace_text("plugins=(git)",
           "plugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)", zsh_alias))
     print(program_commands.replace_text('ZSH_THEME="robbyrussell"',
