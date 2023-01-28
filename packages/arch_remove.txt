@@ -8,3 +8,4 @@ pulseaudio-lirc
 pulseaudio-rtp
 pulseaudio-zeroconf
 plasma-pa
+plasma5-applets-volumewin7mixer
