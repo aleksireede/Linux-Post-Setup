@@ -8,9 +8,9 @@ import git
 
 zsh_URL = "https://pastebin.com/raw/t5rM9rxa"
 zsh_response = requests.get(zsh_URL)
-zshrc = pathlib2.Path("/home/", program_commands.get_user(), "/.zshrc")
+zshrc = pathlib2.Path("/home", program_commands.get_user(), ".zshrc")
 zsh_alias = pathlib2.Path(
-    "/home/", program_commands.get_user(), "/.zsh_aliases")
+    "/home", program_commands.get_user(), ".zsh_aliases")
 
 common_packages = open("./packages/common.txt", "r").read()
 common_packages = common_packages.replace("\n", " ")
