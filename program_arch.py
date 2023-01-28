@@ -37,10 +37,10 @@ def arch_packages_install():
     arch_app_list.extend(program_common.package_filter(arch_packages))
     arch_app_list.extend(program_common.package_filter(
         program_common.common_packages))
+    subprocess.run(arch_app_remove,check=True,text=True)
     subprocess.run(
         arch_app_list, check=True, text=True)
     subprocess.run("pacman -Qtdq | sudo pacman -Rns -", shell=True)
-    subprocess.run(arch_app_remove,check=True,text=True)
 
 
 def check_for_aur_helper():
