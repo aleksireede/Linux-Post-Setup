@@ -9,7 +9,7 @@ boost-libs
 btw
 c++utilities
 cifs-utils
-dnsutilss
+dnsutils
 downgrade
 emacs
 fluidsynth
