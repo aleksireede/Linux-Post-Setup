@@ -7,3 +7,4 @@ pulseaudio-jack
 pulseaudio-lirc
 pulseaudio-rtp
 pulseaudio-zeroconf
+plasma-pa
