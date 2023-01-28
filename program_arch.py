@@ -29,8 +29,8 @@ def arch_packages_install():
     subprocess.run(["sudo", "pacman", "-Sy", "--needed", "archlinux-keyring"],
                    check=True, text=True)
     arch_app_list = ["paru", "-Suy", "--needed"]
-    arch_app_remove = "paru -R"
-    arch_app_remove += arch_packages_remove.split()
+    arch_app_remove = ["paru", "-R"]
+    arch_app_remove.extend(program_common.package_filter(arch_packages_remove))
     if not program_commands.is_server():
         arch_app_list.extend(program_common.package_filter(arch_desktop_packages))
         arch_app_list.extend(program_common.package_filter(program_common.common_desktop_packages))
