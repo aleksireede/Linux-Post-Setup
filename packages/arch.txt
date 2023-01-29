@@ -49,3 +49,5 @@ v4l2loopback-dkms
 wit
 bluez
 bluez-utils
+alsa-card-profiles
+gst-plugin-pipewire
