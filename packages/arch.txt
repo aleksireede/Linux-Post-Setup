@@ -51,3 +51,4 @@ bluez
 bluez-utils
 alsa-card-profiles
 gst-plugin-pipewire
+xkb-switch-git
