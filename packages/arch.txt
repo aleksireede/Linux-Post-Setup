@@ -60,7 +60,6 @@ qtutilities
 qtutilities-qt6
 qtforkawesome
 git-credential-keepassxc
-pamac
 disable-c6-systemd
 zenstates-git
 amdctl
