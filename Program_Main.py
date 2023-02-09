@@ -6,22 +6,13 @@ import program_debian
 
 
 def main():
+    is_server = program_commands.is_server()
     program_commands.run_script_check()
     if program_commands.os_check() == "arch":
         program_arch.arch()
     elif program_commands.os_check() == "debian":
         program_debian.debian()
-    if program_commands.yes_no_check("Do you want to install oh my zsh?"):
-        program_commands.clear_screen()
-        program_common.oh_my_zsh()
-        program_commands.clear_screen()
-    if program_commands.yes_no_check("Do you want to compile install oreo cursors?"):
-        program_commands.clear_screen()
-        program_common.install_oreo_cursors()
-        program_commands.clear_screen()
-    if program_commands.yes_no_check("Do you want to install noto color emoji apple font?"):
-        program_commands.clear_screen()
-        program_common.noto_emoji_apple()
+    program_common.Main()
     program_commands.clear_screen()
     program_commands.lolcat_print("The script has been competed...\nGoodbye!")
     program_commands.press_enter_to_continue()

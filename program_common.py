@@ -2,15 +2,17 @@ import subprocess
 import pathlib2
 import requests
 import program_commands
+import Program_Main
 import shutil
 import git
+import typing
 
-
-zsh_URL = "https://pastebin.com/raw/t5rM9rxa"
-zsh_response = requests.get(zsh_URL)
 zshrc = pathlib2.Path("/home", program_commands.get_user(), ".zshrc")
-zsh_alias = pathlib2.Path(
-    "/home", program_commands.get_user(), ".zsh_aliases")
+bashrc = pathlib2.Path("/home", program_commands.get_user(), ".bashrc")
+alias_file = open(pathlib2.Path("./text/alias.txt"), "r").read()
+zsh_alias = pathlib2.Path("/home", program_commands.get_user(), ".zsh_aliases")
+zsh_plugin_path = pathlib2.Path(
+    "/home", program_commands.get_user(), ".oh-my-zsh/custom/plugins")
 
 common_packages = open("./packages/common.txt", "r").read()
 common_packages = common_packages.replace("\n", " ")
@@ -29,8 +31,6 @@ def package_filter(package_list):
 
 
 def noto_emoji_apple():
-    if program_commands.is_server():
-        return
     open(pathlib2.Path(r"/tmp/NotoColorEmoji.ttf"), "wb").write(requests.get(
         "https://gitlab.com/timescam/noto-fonts-emoji-apple/-/raw/master/NotoColorEmoji.ttf?inline=false").content)
     if pathlib2.Path("/usr/share/fonts/truetype").exists():
@@ -47,28 +47,30 @@ def noto_emoji_apple():
                         "/usr/share/fonts/noto/NotoColorEmoji.ttf"], check=True, text=True)
 
 
+def install_zsh_plugin(name):
+    git.Repo.clone_from("https://github.com/zsh-users/" +
+                        name+".git",  pathlib2.Path(zsh_plugin_path, name))
+
+
 def oh_my_zsh():
-    subprocess.run(
-        'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended', shell=True)
-    if pathlib2.Path("/home/", program_commands.get_user(), "/.oh-my-zsh/custom/plugins").exists():
+    if zsh_plugin_path.exists():
         return
-    git.Repo.clone_from("https://github.com/zsh-users/zsh-syntax-highlighting.git",
-                        pathlib2.Path("/home", program_commands.get_user(), ".oh-my-zsh/custom/plugins/zsh-syntax-highlighting"))
-    git.Repo.clone_from("https://github.com/zsh-users/zsh-autosuggestions",
-                        pathlib2.Path("/home", program_commands.get_user(), ".oh-my-zsh/custom/plugins/zsh-autosuggestions"))
-    print(program_commands.replace_text("plugins=(git)",
-          "plugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)", zsh_alias))
-    print(program_commands.replace_text('ZSH_THEME="robbyrussell"',
-          'ZSH_THEME="agnoster"', zsh_alias))
-    print(program_commands.insert_text('DEFAULT_USER="' +
-          program_commands.get_user()+'"\nprompt_context(){}'))
-    print(    # shell aliases
-        program_commands.insert_text("if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi", zshrc))
-    open(zsh_alias, "wb").write(zsh_response.content)
+    install_zsh_plugin("zsh-syntax-highlighting")
+    install_zsh_plugin("zsh-autosuggestions")
+    program_commands.text_modify(
+        zshrc, "plugins=(git)", "plugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)")
+    program_commands.text_modify(
+        zshrc, 'ZSH_THEME="robbyrussell"', 'ZSH_THEME="agnoster"')
+    program_commands.text_modify(zshrc, 'DEFAULT_USER="' +
+                                 program_commands.get_user()+'"\nprompt_context(){}')
+    program_commands.text_modify(
+        zshrc, "if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi")
+    program_commands.text_modify(zsh_alias, "#!/usr/bin/env zsh\n"+alias_file)
+    open(bashrc, "w").write("exec zsh")
 
 
 def install_oreo_cursors():
-    if pathlib2.Path("/usr/share/icons/oreo_blue_cursors/cursor.theme").exists() or program_commands.is_server():
+    if pathlib2.Path("/usr/share/icons/oreo_blue_cursors/cursor.theme").exists():
         return  # exit if cursors already exist
     git.Repo.clone_from("https://github.com/varlesh/oreo-cursors.git",
                         pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
@@ -79,3 +81,43 @@ def install_oreo_cursors():
     subprocess.run(["sudo", "make", "install"], cwd=pathlib2.Path(
         pathlib2.Path.cwd(), "oreo-cursors"), check=True, text=True)
     shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
+
+
+def enable_service_systemd(serviceName: str, isUserService: bool):
+    if isUserService:
+        enable_service_list: list[str] = ["sudo", "systemctl", "enable",
+                                          serviceName+"@"+program_commands.get_user()+".service"]
+        start_service_list: list[str] = ["sudo", "systemctl", "start",
+                                         serviceName+"@"+program_commands.get_user()+".service"]
+    else:
+        enable_service_list: list[str] = ["sudo", "systemctl",
+                                          "enable", serviceName+".service"]
+        start_service_list: list[str] = ["sudo", "systemctl",
+                                         "start", serviceName+".service"]
+    subprocess.run(enable_service_list)
+    subprocess.run(start_service_list)
+
+
+def install_custom_git(url: str, directory: pathlib2.Path, command: list):
+    git.Repo.clone_from(url, directory)
+    if any(isinstance(x, typing.List) for x in command):
+        for x in command:
+            subprocess.run(x, check=True, text=True)
+    else:
+        subprocess.run(command, check=True, text=True)
+    shutil.rmtree(directory)
+
+
+def Main():
+    install_custom_git("https://github.com/trakBan/ipfetch.git",
+                       pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
+    enable_service_systemd("syncthing", True)
+    if Program_Main.is_server:
+        return
+    program_commands.clear_screen()
+    noto_emoji_apple()
+    program_commands.clear_screen()
+    install_oreo_cursors()
+    program_commands.clear_screen()
+    oh_my_zsh()
+    program_commands.clear_screen()

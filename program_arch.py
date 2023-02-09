@@ -4,6 +4,7 @@ import shutil
 import git
 import program_commands
 import program_common
+import Program_Main
 
 arch_packages = open("./packages/arch.txt", "r").read()
 arch_packages = arch_packages.replace("\n", " ")
@@ -23,6 +24,10 @@ def arch():
     program_commands.clear_screen()
     arch_packages_install()
     program_commands.clear_screen()
+    subprocess.run("localectl --no-convert set-x11-keymap fi", shell=True)
+    if program_commands.is_tool("gsettings"):
+        subprocess.run(["gsettings", "set", "org.gnome.settings-daemon.plugins.media-keys",
+                       "volume-step 1"], check=True, text=True)
 
 
 def arch_packages_install():
@@ -31,14 +36,16 @@ def arch_packages_install():
     arch_app_list = ["paru", "-Suy", "--needed"]
     arch_app_remove = ["paru", "-R"]
     arch_app_remove.extend(program_common.package_filter(arch_packages_remove))
-    if not program_commands.is_server():
-        arch_app_list.extend(program_common.package_filter(arch_desktop_packages))
-        arch_app_list.extend(program_common.package_filter(program_common.common_desktop_packages))
+    if not Program_Main.is_server:
+        arch_app_list.extend(
+            program_common.package_filter(arch_desktop_packages))
+        arch_app_list.extend(program_common.package_filter(
+            program_common.common_desktop_packages))
     arch_app_list.extend(program_common.package_filter(arch_packages))
     arch_app_list.extend(program_common.package_filter(
         program_common.common_packages))
     if program_commands.is_tool("pulseaudio"):
-        subprocess.run(arch_app_remove,check=True,text=True)
+        subprocess.run(arch_app_remove, check=True, text=True)
     subprocess.run(
         arch_app_list, check=True, text=True)
     subprocess.run("pacman -Qtdq | sudo pacman -Rns -", shell=True)
@@ -55,14 +62,13 @@ def check_for_aur_helper():
 
 
 def pacman_config():
-    if not pacman_conf.exists() or program_commands.is_server():
+    if not pacman_conf.exists() or Program_Main.is_server:
         return
     subprocess.run(["sudo", "chmod", "777", pacman_conf],
                    check=True, text=True)
-    print(program_commands.replace_text("#[multilib]\n#Include = /etc/pacman.d/mirrorlist",
-          "[multilib]\nInclude = /etc/pacman.d/mirrorlist", pacman_conf))
-    print(program_commands.replace_text(
-        "#ParallelDownloads=5", "ParallelDownloads=5", pacman_conf))
-    print(program_commands.replace_text("#Color", "Color", pacman_conf))
+    program_commands.text_modify(
+        pacman_conf, "#[multilib]\n#Include = /etc/pacman.d/mirrorlist", "[multilib]\nInclude = /etc/pacman.d/mirrorlist")
+    program_commands.text_modify(pacman_conf,"#ParallelDownloads=5", "ParallelDownloads=5")
+    program_commands.text_modify(pacman_conf,"#Color", "Color")
     subprocess.run(["sudo", "chmod", "644", pacman_conf],
                    check=True, text=True)

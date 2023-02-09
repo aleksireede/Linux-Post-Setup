@@ -44,25 +44,23 @@ def is_tool(name):    # check if program exists
     return shutil.which(name) is not None
 
 
-def insert_text(text, file):
+def text_modify(file, *args):
+    file = pathlib2.Path(file)
+    if not file.exists():
+        f = open(file, "w")
     data = file.read_text()
-    if text in data:
-        return "Text already inserted:"+text
-    data = data+text
+    if len(args) == 1:
+        if args[0] in data:
+            return print(f"Already in file:{file} text:{args[0]}")
+        data = data+args[0]
+    elif len(args) == 2:
+        if args[1] in data:
+            return print(f"Already replaced{args[1]}")
+        data = data.replace(args[0], args[1])
+    else:
+        return print("invalid number of arguments")
     file.write_text(data)
-    return "Text written"
-
-
-def replace_text(search_text, replace_text, file):
-    data = file.read_text()
-    if search_text not in data and replace_text not in data:
-        insert_text(replace_text, file)
-        return
-    if replace_text in data and search_text not in data:
-        return "Text already replaced"+replace_text
-    data = data.replace(search_text, replace_text)
-    file.write_text(data)
-    return "Text replaced"
+    return print(f"operation successfull args:{args}")
 
 
 def press_enter_to_continue():
@@ -108,6 +106,7 @@ def yes_no_check(greeting_text):
         else:
             print("Please answer yes or no!")
             press_enter_to_continue()
+
 
 def is_server():
     while True:
