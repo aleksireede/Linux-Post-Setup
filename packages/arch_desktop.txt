@@ -80,3 +80,4 @@ lib32-amdgpu-pro-oglp
 vulkan-amdgpu-pro
 lib32-vulkan-amdgpu-pro
 xorg-xlsclients
+pamac-all
