@@ -6,16 +6,16 @@ import pkg_resources
 from program_commands import get_user, os_check, is_tool
 import os
 
-os = os_check()
+system = os_check()
 required = {"yt-dlp", "websockets",
             "GitPython", "pathlib2", "requests"}
 installed = {pkg.key for pkg in pkg_resources.working_set}
 missing = required - installed
 
 if not is_tool("lolcat") and not is_tool("gem"):
-    if os == "arch":
+    if system == "arch":
         subprocess.run(["sudo", "pacman", "-S", "ruby"])
-    elif os == "debian":
+    elif system == "debian":
         subprocess.run(["sudo", "apt", "install", "rubygems"],
                        check=True, text=True)
 if not is_tool("lolcat"):
