@@ -3,7 +3,7 @@ import program_commands
 import program_common
 import program_arch
 import program_debian
-is_server=true
+is_server=True
 
 
 def main():
