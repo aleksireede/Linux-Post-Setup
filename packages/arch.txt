@@ -52,7 +52,6 @@ bluez-utils
 alsa-card-profiles
 gst-plugin-pipewire
 xkb-switch-git
-oh-my-zsh-git
 sshfs
 kio-fuse
 obexftp 
