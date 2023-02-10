@@ -109,6 +109,9 @@ def install_custom_git(url: str, directory: pathlib2.Path, command: list):
 
 
 def Main():
+    if program_commands.is_tool("gsettings"):
+        subprocess.run(["gsettings", "set", "org.gnome.settings-daemon.plugins.media-keys",
+                       "volume-step", "1"], check=True, text=True)
     install_custom_git("https://github.com/trakBan/ipfetch.git",
                        pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
     enable_service_systemd("syncthing", True)
