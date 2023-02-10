@@ -107,11 +107,18 @@ def install_custom_git(url: str, directory: pathlib2.Path, command: list):
         subprocess.run(command, check=True, text=True)
     shutil.rmtree(directory)
 
+def check_gsettings():
+    if not program_commands.is_tool("gsettings"):
+        return
+    try:
+        subprocess.check_output("gsettings list-schemas | grep org.gnome.settings-daemon.plugins.media-keys", shell=True)
+    except:
+        return
+    subprocess.run(["gsettings", "set", "org.gnome.settings-daemon.plugins.media-keys",
+                       "volume-step", "1"], check=True, text=True)
 
 def Main():
-    if program_commands.is_tool("gsettings"):
-        subprocess.run(["gsettings", "set", "org.gnome.settings-daemon.plugins.media-keys",
-                       "volume-step", "1"], check=True, text=True)
+    check_gsettings()
     install_custom_git("https://github.com/trakBan/ipfetch.git",
                        pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
     enable_service_systemd("syncthing", True)
