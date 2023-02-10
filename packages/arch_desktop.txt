@@ -50,7 +50,7 @@ xorg-xcursorgen
 xorg-xkill
 yakuake
 youtube-music-bin
-wireguard
+wireguard-tools
 spectacle
 okular
 telegram-desktop-bin
