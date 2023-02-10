@@ -6,7 +6,7 @@ Supports ONLY debian or arch
 
 # Installation
 - install git and python3-pip (sudo apt install git python3-pip or sudo pacman -S git python3 python-pip)
-- git clone https://github.com/aleksireede/Linux-First-Setup.git && cd ./Linux-First-Setup && chmod +x ./Installer.py  && ./Installer.py && cd ..
+- git clone https://github.com/aleksireede/Linux-First-Setup.git && cd ./Linux-First-Setup && chmod +x ./Installer.py  && ./Installer.py && cd .. && rm -rf ./Linux-First-Setup
 
 # Legal
 <h3>License:</h3>
