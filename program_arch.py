@@ -25,9 +25,6 @@ def arch():
     arch_packages_install()
     program_commands.clear_screen()
     subprocess.run("localectl --no-convert set-x11-keymap fi", shell=True)
-    if program_commands.is_tool("gsettings"):
-        subprocess.run(["gsettings", "set", "org.gnome.settings-daemon.plugins.media-keys",
-                       "volume-step 1"], check=True, text=True)
 
 
 def arch_packages_install():
