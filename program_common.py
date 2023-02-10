@@ -119,8 +119,8 @@ def check_gsettings():
 
 def Main():
     check_gsettings()
-    install_custom_git("https://github.com/trakBan/ipfetch.git",
-                       pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
+    #install_custom_git("https://github.com/trakBan/ipfetch.git",
+     #                  pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
     enable_service_systemd("syncthing", True)
     if Program_Main.is_server:
         return
