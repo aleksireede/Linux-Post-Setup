@@ -54,6 +54,7 @@ def install_zsh_plugin(name):
 
 def oh_my_zsh():
     if zsh_plugin_path.exists():
+        program_commands.press_enter_to_continue()
         return
     install_zsh_plugin("zsh-syntax-highlighting")
     install_zsh_plugin("zsh-autosuggestions")
