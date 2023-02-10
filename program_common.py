@@ -68,6 +68,7 @@ def oh_my_zsh():
         zshrc, "if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi")
     program_commands.text_modify(zsh_alias, "#!/usr/bin/env zsh\n"+alias_file)
     open(bashrc, "w").write("exec zsh")
+    program_commands.press_enter_to_continue()
 
 
 def install_oreo_cursors():
