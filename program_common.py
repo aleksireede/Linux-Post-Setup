@@ -62,7 +62,7 @@ def oh_my_zsh():
     program_commands.text_modify(
         zshrc, 'ZSH_THEME="robbyrussell"', 'ZSH_THEME="agnoster"')
     program_commands.text_modify(zshrc, 'DEFAULT_USER="' +
-                                 program_commands.get_user()+'"\nprompt_context(){}')
+                                 program_commands.get_user()+'"\nprompt_context(){}\n')
     program_commands.text_modify(
         zshrc, "if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi")
     program_commands.text_modify(zsh_alias, "#!/usr/bin/env zsh\n"+alias_file)
