@@ -47,7 +47,7 @@ def is_tool(name):    # check if program exists
 def text_modify(file, *args):
     file = pathlib2.Path(file)
     if not file.exists():
-        f = open(file, "w")
+        f = open(file, "w").write("")
     data = file.read_text()
     if len(args) == 1:
         if args[0] in data:
