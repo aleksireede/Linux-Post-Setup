@@ -7,6 +7,7 @@ is_server=True
 
 
 def main():
+    global is_server
     is_server = program_commands.is_server()
     program_commands.run_script_check()
     if program_commands.os_check() == "arch":
