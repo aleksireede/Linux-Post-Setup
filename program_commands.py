@@ -6,7 +6,6 @@ import os
 import pwd
 import getpass
 
-welcome_text = open("welcome_text.txt", "r").read()
 input_yes = ("y", "yes", "k", "kyllä", "ye", "kyl", "kyll", "kylä")
 input_no = ("n", "no", "e", "ei", "eii", "eiii")
 input_desktop = ("d", "de", "desk", "desktop", "dekstop", "deskto", "des")
@@ -88,7 +87,6 @@ def lolcat_print(lolcat_text):
 
 def run_script_check():
     clear_screen()
-    lolcat_print(welcome_text)
     yes_no_check("Do you wish to run the script?")
 
 
