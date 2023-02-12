@@ -81,3 +81,4 @@ vulkan-amdgpu-pro
 lib32-vulkan-amdgpu-pro
 xorg-xlsclients
 pamac-all
+prismlauncher-bin
