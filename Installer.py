@@ -29,7 +29,7 @@ if not is_tool("lolcat"):
         "https://github.com/aleksireede/lolcat.git", lolcat_temp_path)
     subprocess.run(["sudo", "gem", "install", "lolcat"],
                    cwd=pathlib2.Path(lolcat_temp_path, "bin"))
-    shutil.copy(pathlib2.Path(lolcat_temp_path, "bin", "lolcat"), lolcat_binary_path)
+    shutil.copyfile(pathlib2.Path(lolcat_temp_path, "bin", "lolcat"), lolcat_binary_path)
     shutil.rmtree(lolcat_temp_path)
 
 if missing:
