@@ -10,7 +10,10 @@ import typing
 zshrc = pathlib2.Path("/home", program_commands.get_user(), ".zshrc")
 bashrc = pathlib2.Path("/home", program_commands.get_user(), ".bashrc")
 alias_file = open(pathlib2.Path("./text/alias.txt"), "r").read()
-zsh_alias = pathlib2.Path("/home", program_commands.get_user(), ".zsh_aliases")
+zsh_aliases = pathlib2.Path(
+    "/home", program_commands.get_user(), ".zsh_aliases")
+bash_aliases = pathlib2.Path(
+    "/home", program_commands.get_user(), ".bash_aliases")
 zsh_plugin_path = pathlib2.Path(
     "/home", program_commands.get_user(), ".oh-my-zsh/custom/plugins")
 
@@ -54,7 +57,6 @@ def install_zsh_plugin(name):
 
 def oh_my_zsh():
     if zsh_plugin_path.exists():
-        program_commands.press_enter_to_continue()
         return
     install_zsh_plugin("zsh-syntax-highlighting")
     install_zsh_plugin("zsh-autosuggestions")
@@ -66,9 +68,24 @@ def oh_my_zsh():
                                  program_commands.get_user()+'"\nprompt_context(){}\n')
     program_commands.text_modify(
         zshrc, "if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi")
-    program_commands.text_modify(zsh_alias, "#!/usr/bin/env zsh\n"+alias_file)
-    open(bashrc, "w").write("exec zsh")
-    program_commands.press_enter_to_continue()
+    program_commands.text_modify(
+        bashrc, "if [ -f ~/.bash_aliases ]; then\n. ~/.bash_aliases\nfi")
+    program_commands.text_modify(
+        zsh_aliases, "#!/usr/bin/env zsh\n"+alias_file)
+    program_commands.text_modify(
+        bash_aliases, "#!/usr/bin/env bash\n"+alias_file)
+    # open(bashrc, "w").write("exec zsh")
+
+
+def amogus_cowfile():
+    if pathlib2.Path("/usr/share/cows/amogus.cow").exists() or pathlib2.Path("/usr/share/cowsay/cows/amogus.cow").exists():
+        return
+    if pathlib2.Path("/usr/share/cows").exists():
+        pathlib2.Path(pathlib2.Path.cwd(), "text", "amogus.cow").rename(
+            pathlib2.Path("/usr/share/cows/amogus.cow"))
+    elif pathlib2.Path("/usr/share/cowsay/cows/amogus.cow").exists():
+        pathlib2.Path(pathlib2.Path.cwd(), "text", "amogus.cow").rename(
+            pathlib2.Path("/usr/share/cowsay/cows/amogus.cow"))
 
 
 def install_oreo_cursors():
@@ -109,20 +126,23 @@ def install_custom_git(url: str, directory: pathlib2.Path, command: list):
         subprocess.run(command, check=True, text=True)
     shutil.rmtree(directory)
 
+
 def check_gsettings():
     if not program_commands.is_tool("gsettings"):
         return
     try:
-        subprocess.check_output("gsettings list-schemas | grep org.gnome.settings-daemon.plugins.media-keys", shell=True)
+        subprocess.check_output(
+            "gsettings list-schemas | grep org.gnome.settings-daemon.plugins.media-keys", shell=True)
     except:
         return
     subprocess.run(["gsettings", "set", "org.gnome.settings-daemon.plugins.media-keys",
-                       "volume-step", "1"], check=True, text=True)
+                    "volume-step", "1"], check=True, text=True)
+
 
 def Main():
     check_gsettings()
-    #install_custom_git("https://github.com/trakBan/ipfetch.git",
-     #                  pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
+    # install_custom_git("https://github.com/trakBan/ipfetch.git",
+    #                  pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
     enable_service_systemd("syncthing", True)
     if Program_Main.is_server:
         return
@@ -132,4 +152,6 @@ def Main():
     install_oreo_cursors()
     program_commands.clear_screen()
     oh_my_zsh()
+    program_commands.clear_screen()
+    amogus_cowfile()
     program_commands.clear_screen()

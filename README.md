@@ -5,9 +5,7 @@ Supports ONLY debian or arch
 
 
 # Installation
-- install git and python3-pip (sudo apt install git python3-pip or sudo pacman -S git python3 python-pip)
-- git clone https://github.com/aleksireede/Linux-First-Setup.git && cd ./Linux-First-Setup && chmod +x ./Installer.py  && ./Installer.py && cd .. && rm -rf ./Linux-First-Setup
-
+- sh -c "$(curl -fsSL https://raw.githubusercontent.com/aleksireede/Linux-First-Setup/main/downloader.sh)"
 # Legal
 <h3>License:</h3>
 This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 2 of the License, or (at your option) any later version.
