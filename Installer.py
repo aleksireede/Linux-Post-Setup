@@ -9,7 +9,7 @@ import pathlib2
 import git
 import shutil
 
-lolcat_binary_path = pathlib2.Path("/usr/bin/lolcat")
+lolcat_binary_path = pathlib2.Path("/usr/games/lolcat")
 lolcat_temp_path = pathlib2.Path("/tmp/lolcat")
 
 system = os_check()
