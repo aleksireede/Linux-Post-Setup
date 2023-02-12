@@ -4,7 +4,6 @@ android-tools
 archlinux-keyring
 aur-auto-vote-git
 baobab
-base-devel-meta
 boost-libs
 btw
 c++utilities
