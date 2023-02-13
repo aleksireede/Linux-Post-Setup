@@ -1,10 +1,8 @@
-activate-linux-git
+activate-linux-wayland-git
 apple_cursor
 appmenu-gtk-module
 arduino-ide-bin
 ark
-atlauncher-bin
-dropbox
 dxvk-bin
 etcher-bin
 facebook-desktop-app
@@ -15,8 +13,6 @@ google-chrome
 google-drive-nativefier
 google-keep-nativefier
 googledot-cursor-theme
-handbrake
-instagram-nativefier
 kdeconnect
 kvantum-qt5
 lutris
@@ -31,7 +27,6 @@ nkit
 noto-fonts-cjk
 noto-fonts-emoji-apple
 ocs-url
-ookla-speedtest-bin
 otf-monocraft
 proton-ge-custom-bin
 protonup-qt
@@ -42,10 +37,9 @@ steam
 teams-nativefier
 tor-browser
 ttf-ms-fonts
-visual-studio-code-bin
+vscodium-bin
 vlc
 whatsdesk-bin
-xf86-input-xwiimote-git
 xorg-xcursorgen
 xorg-xkill
 yakuake
