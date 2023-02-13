@@ -28,10 +28,10 @@ def arch():
 
 
 def arch_packages_install():
-    subprocess.run(["sudo", "pacman", "-Sy", "--needed", "archlinux-keyring"],
+    subprocess.run(["sudo", "pacman", "-Sy", "--needed", "--noconfirm", "archlinux-keyring"],
                    check=True, text=True)
     arch_app_list = ["paru", "-Suy", "--needed"]
-    arch_app_remove = ["paru", "-R"]
+    arch_app_remove = ["paru", "-R", "--noconfirm"]
     arch_app_remove.extend(program_common.package_filter(arch_packages_remove))
     if not Program_Main.is_server:
         arch_app_list.extend(
@@ -51,7 +51,7 @@ def arch_packages_install():
 def check_for_aur_helper():
     if program_commands.is_tool("paru") or program_commands.is_tool("yay"):
         return
-    subprocess.run(["sudo", "pacman", "-S", "--needed",
+    subprocess.run(["sudo", "pacman", "-S", "--needed", "--noconfirm",
                    "base-devel"], check=True, text=True)
     git.Repo.clone_from("https://aur.archlinux.org/paru.git", paru_path)
     subprocess.run(["makepkg", "-si"], cwd=paru_path, check=True, text=True)
@@ -65,7 +65,8 @@ def pacman_config():
                    check=True, text=True)
     program_commands.text_modify(
         pacman_conf, "#[multilib]\n#Include = /etc/pacman.d/mirrorlist", "[multilib]\nInclude = /etc/pacman.d/mirrorlist")
-    program_commands.text_modify(pacman_conf,"#ParallelDownloads=5", "ParallelDownloads=5")
-    program_commands.text_modify(pacman_conf,"#Color", "Color")
+    program_commands.text_modify(
+        pacman_conf, "#ParallelDownloads=5", "ParallelDownloads=5")
+    program_commands.text_modify(pacman_conf, "#Color", "Color")
     subprocess.run(["sudo", "chmod", "644", pacman_conf],
                    check=True, text=True)

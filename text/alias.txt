@@ -18,6 +18,7 @@ alias reboot="sudo /sbin/reboot"
 alias poweroff="sudo /sbin/poweroff"
 alias halt="sudo /sbin/halt"
 alias shutdown="sudo /sbin/shutdown"
+alias code="codium --no-sandbox"
 alias sananlasku="clear && fortune | cowsay -f tux | lolcat"
 export PATH="$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin/:$PATH"
 alias youtube-mp3='yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail --rm-cache-dir --add-metadata --ignore-errors --continue --output "%(uploader)s%(title)s.%(ext)s"'

@@ -81,12 +81,15 @@ def amogus_cowfile():
     if pathlib2.Path("/usr/share/cows/amogus.cow").exists() or pathlib2.Path("/usr/share/cowsay/cows/amogus.cow").exists():
         return
     if pathlib2.Path("/usr/share/cows").exists():
-        pathlib2.Path(pathlib2.Path.cwd(), "text", "amogus.cow").rename(
-            pathlib2.Path("/usr/share/cows/amogus.cow"))
-    elif pathlib2.Path("/usr/share/cowsay/cows/amogus.cow").exists():
-        pathlib2.Path(pathlib2.Path.cwd(), "text", "amogus.cow").rename(
-            pathlib2.Path("/usr/share/cowsay/cows/amogus.cow"))
-
+        subprocess.run(["sudo", "chmod", "777", "/usr/share/cows/"],
+                   check=True, text=True)
+        shutil.copyfile(pathlib2.Path(pathlib2.Path.cwd(), "text",
+                        "amogus.cow"), pathlib2.Path("/usr/share/cows/amogus.cow"))
+    elif pathlib2.Path("/usr/share/cowsay/cows/").exists():
+        subprocess.run(["sudo", "chmod", "777", "/usr/share/cowsay/cows"],
+                   check=True, text=True)
+        shutil.copyfile(pathlib2.Path(pathlib2.Path.cwd(
+        ), "text", "amogus.cow"), pathlib2.Path("/usr/share/cowsay/cows/amogus.cow"))
 
 def install_oreo_cursors():
     if pathlib2.Path("/usr/share/icons/oreo_blue_cursors/cursor.theme").exists():
@@ -103,6 +106,7 @@ def install_oreo_cursors():
 
 
 def enable_service_systemd(serviceName: str, isUserService: bool):
+    '''Enables and starts a systemd service. default is system service'''
     if isUserService:
         enable_service_list: list[str] = ["sudo", "systemctl", "enable",
                                           serviceName+"@"+program_commands.get_user()+".service"]
@@ -118,16 +122,18 @@ def enable_service_systemd(serviceName: str, isUserService: bool):
 
 
 def install_custom_git(url: str, directory: pathlib2.Path, command: list):
+    '''Install a program from git url with a custom supplied command list'''
     git.Repo.clone_from(url, directory)
     if any(isinstance(x, typing.List) for x in command):
         for x in command:
-            subprocess.run(x, check=True, text=True)
+            subprocess.run(x, cwd=directory, check=True, text=True)
     else:
-        subprocess.run(command, check=True, text=True)
+        subprocess.run(command, cwd=directory, check=True, text=True)
     shutil.rmtree(directory)
 
 
 def check_gsettings():
+
     if not program_commands.is_tool("gsettings"):
         return
     try:
@@ -141,8 +147,8 @@ def check_gsettings():
 
 def Main():
     check_gsettings()
-    # install_custom_git("https://github.com/trakBan/ipfetch.git",
-    #                  pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
+    install_custom_git("https://github.com/trakBan/ipfetch.git",
+                       pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
     enable_service_systemd("syncthing", True)
     if Program_Main.is_server:
         return

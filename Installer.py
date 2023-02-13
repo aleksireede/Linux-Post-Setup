@@ -9,7 +9,7 @@ import pathlib2
 import git
 import shutil
 
-lolcat_binary_path = pathlib2.Path("/home",get_user(),".local/bin/lolcat")
+lolcat_binary_path = pathlib2.Path("/home", get_user(), ".local/bin/lolcat")
 lolcat_temp_path = pathlib2.Path("/tmp/lolcat")
 
 system = os_check()
@@ -29,7 +29,8 @@ if not is_tool("lolcat"):
         "https://github.com/aleksireede/lolcat.git", lolcat_temp_path)
     subprocess.run(["sudo", "gem", "install", "lolcat"],
                    cwd=pathlib2.Path(lolcat_temp_path, "bin"))
-    shutil.copyfile(pathlib2.Path(lolcat_temp_path, "bin", "lolcat"), lolcat_binary_path)
+    shutil.copyfile(pathlib2.Path(lolcat_temp_path,
+                    "bin", "lolcat"), lolcat_binary_path)
     shutil.rmtree(lolcat_temp_path)
 
 if missing:

@@ -61,13 +61,6 @@ kvantum
 betterdiscord-installer-bin
 discover-overlay
 discord-screenaudio
-obs-studio
-obs-browser
-obs-vkcapture
-lib32-obs-vkcapture
-obs-gstreamer
-gstreamer-vaapi
-obs-studio-amf
 amf-amdgpu-pro
 amdgpu-pro-oglp
 lib32-amdgpu-pro-oglp
