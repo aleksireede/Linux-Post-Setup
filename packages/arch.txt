@@ -2,7 +2,6 @@
 android-sdk-platform-tools
 android-tools
 archlinux-keyring
-aur-auto-vote-git
 baobab
 boost-libs
 btw
@@ -32,7 +31,6 @@ pipewire-v4l2
 carla
 pipewire-enable-bluez5
 pa-notify
-plasma5-applets-volumewin7mixer
 powerline-fonts
 qtforkawesome-qt6
 qtutilities-qt6
@@ -50,7 +48,7 @@ bluez
 bluez-utils
 alsa-card-profiles
 gst-plugin-pipewire
-xkb-switch-git
+xkb-switch
 sshfs
 kio-fuse
 obexftp 
