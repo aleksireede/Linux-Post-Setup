@@ -1,7 +1,7 @@
 aptitude
+fonts-powerline
 glslang-dev
 glslang-tools
-neofetch
 libadwaita-1-dev
 libasound2-plugins:i386
 libclang-dev
@@ -17,13 +17,14 @@ libtbb2-dev
 libudev-dev
 libxnvctrl-dev
 libzita-convolver-dev
+lm-sensors
 mono-complete
-openjdk-8-jre
 openjdk-11-jre
 openjdk-17-jre
+openjdk-8-jre
 p7zip-full
 p7zip-rar
 python3-pip
 python3-venv
 software-properties-common
-fonts-powerline
+usb-modeswitch

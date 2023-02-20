@@ -1,0 +1,10 @@
+pipewire-alsa
+pipewire-audio
+pipewire-enable-bluez5
+pipewire-jack
+pipewire-pulse
+pipewire-v4l2
+pipewire-zeroconf
+lib32-pipewire
+gst-plugin-pipewire
+wireplumber

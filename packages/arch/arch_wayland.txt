@@ -1,0 +1,15 @@
+glew-wayland
+glfw-wayland
+plasma-wayland-session
+qt5-wayland
+qt6-wayland
+waybar
+wayland-protocols
+waypipe
+wl-clipboard
+wl-clipboard-x11
+wlroots
+wofi
+xdg-desktop-portal-wlr
+xorg-xlsclients
+xorg-xwayland

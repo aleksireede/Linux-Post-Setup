@@ -1,13 +1,12 @@
-code
+arduino
+codium
+firefox
 firefoxpwa
+flatpak
 gdebi
 gnome-software-plugin-flatpak
-nemo-gtkhash
-nemo-nextcloud
 synaptic
 syncthing
 ttf-mscorefonts-installer
 wine32
 wine64
-flatpak
-arduino

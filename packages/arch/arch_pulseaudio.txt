@@ -1,13 +1,10 @@
-pulseaudio-alsa
+plasma-pa
 pulseaudio
-pulseeffects-legacy
+pulseaudio-alsa
 pulseaudio-bluetooth
 pulseaudio-equalizer
 pulseaudio-jack
 pulseaudio-lirc
 pulseaudio-rtp
 pulseaudio-zeroconf
-plasma-pa
-plasma5-applets-volumewin7mixer
-konqueror
-itinerary
+pulseeffects-legacy

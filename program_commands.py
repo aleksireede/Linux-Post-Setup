@@ -10,6 +10,10 @@ input_yes = ("y", "yes", "k", "kyllä", "ye", "kyl", "kyll", "kylä")
 input_no = ("n", "no", "e", "ei", "eii", "eiii")
 input_desktop = ("d", "de", "desk", "desktop", "dekstop", "deskto", "des")
 input_server = ("s", "se", "ser", "server", "serv", "srv", "serve")
+input_gnome = ("gnome", "g", "gn", "gno", "gnom", "gmone", "gnoum", "gnomw")
+input_kde = ("k", "kd", "kde", "ked", "kdd", "kded")
+input_pipewire = ("pw", "pipewire")
+input_pulseaudio = ("pa", "pulse", "pulseaudio")
 
 
 def get_user():
@@ -85,39 +89,43 @@ def lolcat_print(lolcat_text):
     subprocess.run(["lolcat"], input=lolcat_text, check=True, text=True)
 
 
+def check_true_false(message: str, choice: str, input_list_true: list, input_list_false: list):
+    '''Displays a message and gives user a choice and returns true/false based on the choice'''
+    while True:
+        clear_screen()
+        lolcat_print(message)
+        choice = input(choice)
+        if choice.lower() in input_list_true:
+            clear_screen()
+            return True
+        elif choice.lower() in input_list_false:
+            clear_screen()
+            return False
+        else:
+            print("Please answer"+choice)
+            press_enter_to_continue()
+
+
+def choice_desktop_environment():
+    if check_true_false("do you want to install gnome or kde desktop environment", "(g/K):", input_gnome, input_kde):
+        return "gnome"
+    else:
+        return "kde"
+
+
+def choice_server_desktop_apps():
+    return check_true_false("do you want to install only (server) or all (desktop) applications?", "(s/D):", input_server, input_desktop)
+
+
 def run_script_check():
-    clear_screen()
-    yes_no_check("Do you wish to run the script?")
+    if check_true_false("Do you wish to run the script?", "(y/N):", input_yes, input_no):
+        return
+    else:
+        exit(1)
 
 
-def yes_no_check(greeting_text):
-    while True:
-        clear_screen()
-        lolcat_print(greeting_text)
-        yes_no = input("(y/N):")
-        if yes_no.lower() in input_yes:
-            clear_screen()
-            return True
-        elif yes_no.lower() in input_no:
-            clear_screen()
-            return False
-        else:
-            print("Please answer yes or no!")
-            press_enter_to_continue()
-
-
-def is_server():
-    while True:
-        clear_screen()
-        lolcat_print(
-            "do you want to install only (server) or all (desktop) applications?")
-        choice = input("(s/D):")
-        if choice.lower() in input_server:
-            clear_screen()
-            return True
-        elif choice.lower() in input_desktop:
-            clear_screen()
-            return False
-        else:
-            print("Please answer server or desktop!")
-            press_enter_to_continue()
+def choice_audio_environment():
+    if check_true_false("do you want to install pipewire or pulseaudio as audio backend", "(pw/PA):", input_pipewire, input_pulseaudio):
+        return "pipewire"
+    else:
+        return "pulseaudio"

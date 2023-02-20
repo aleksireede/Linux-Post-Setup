@@ -5,13 +5,22 @@ import git
 import program_commands
 import program_common
 import Program_Main
+import typing
 
-arch_packages = open("./packages/arch.txt", "r").read()
-arch_packages = arch_packages.replace("\n", " ")
-arch_packages_remove = open("./packages/arch_remove.txt", "r").read()
-arch_packages_remove = arch_packages_remove.replace("\n", " ")
-arch_desktop_packages = open("./packages/arch_desktop.txt", "r").read()
-arch_desktop_packages = arch_desktop_packages.replace("\n", " ")
+arch_packages = program_common.package_filter(
+    open("./packages/arch/arch.txt", "r").read())
+arch_pulseaudio_packages = program_common.package_filter(
+    open("./packages/arch/arch_pulseaudio.txt", "r").read())
+arch_pipewire_packages = program_common.package_filter(
+    open("./packages/arch/arch_pipewire.txt", "r").read())
+arch_desktop_packages = program_common.package_filter(
+    open("./packages/arch/arch_desktop.txt", "r").read())
+arch_kde_packages = program_common.package_filter(
+    open("./packages/arch/arch_kde.txt", "r").read())
+arch_gnome_packages = program_common.package_filter(
+    open("./packages/arch/arch_gnome.txt", "r").read())
+arch_wayland_packages = program_common.package_filter(
+    open("./packages/arch/arch_wayland.txt", "r").read())
 pacman_conf = pathlib2.Path(r"/etc/pacman.conf")
 paru_path = pathlib2.Path(pathlib2.Path.cwd(), "paru")
 
@@ -27,25 +36,61 @@ def arch():
     subprocess.run("localectl --no-convert set-x11-keymap fi", shell=True)
 
 
+class pacman:
+    def update_db():
+        subprocess.run(["sudo", "pacman", "-Sy", "--needed",
+                       "--noconfirm", "archlinux-keyring"], check=True, text=True)
+
+    def install(packages: list):
+        arch_app_list = ["paru", "-S", "--needed"]
+        if any(isinstance(x, typing.List) for x in packages):
+            for package in packages:
+                arch_app_list.extend(package)
+        else:
+            arch_app_list.extend(packages)
+        subprocess.run(arch_app_list, check=True, text=True)
+
+    def update():
+        subprocess.run(["paru", "-Suy", "--noconfirm"], check=True, text=True)
+
+    def autoremove():
+        subprocess.run("pacman -Qtdq | sudo pacman -Rns -", shell=True)
+
+    def remove(packages: list):
+        arch_app_remove = ["paru", "-R", "--noconfirm"]
+        if any(isinstance(x, typing.List) for x in packages):
+            for package in packages:
+                arch_app_remove.extend(package)
+        else:
+            arch_app_remove.extend(packages)
+        try:
+            subprocess.run(arch_app_remove, check=True, text=True)
+        except:
+            return
+
+
 def arch_packages_install():
-    subprocess.run(["sudo", "pacman", "-Sy", "--needed", "--noconfirm", "archlinux-keyring"],
-                   check=True, text=True)
-    arch_app_list = ["paru", "-Suy", "--needed"]
-    arch_app_remove = ["paru", "-R", "--noconfirm"]
-    arch_app_remove.extend(program_common.package_filter(arch_packages_remove))
-    if not Program_Main.is_server:
-        arch_app_list.extend(
-            program_common.package_filter(arch_desktop_packages))
-        arch_app_list.extend(program_common.package_filter(
-            program_common.common_desktop_packages))
-    arch_app_list.extend(program_common.package_filter(arch_packages))
-    arch_app_list.extend(program_common.package_filter(
-        program_common.common_packages))
-    if program_commands.is_tool("pulseaudio"):
-        subprocess.run(arch_app_remove, check=True, text=True)
-    subprocess.run(
-        arch_app_list, check=True, text=True)
-    subprocess.run("pacman -Qtdq | sudo pacman -Rns -", shell=True)
+    pacman.update_db()
+    install_list = [arch_packages, program_common.common_packages,
+                    program_common.common_gnome_packages]
+    uninstall_list = []
+    if Program_Main.audio_environment == "pipewire":
+        uninstall_list.append(arch_pulseaudio_packages)
+    elif Program_Main.audio_environment == "pulseaudio":
+        uninstall_list.append(arch_pipewire_packages)
+    if not Program_Main.is_server_apps:
+        install_list.extend(
+            [arch_desktop_packages, arch_wayland_packages, program_common.common_desktop_packages])
+        if Program_Main.desktop_environment == "kde":
+            install_list.append(arch_kde_packages)
+            uninstall_list.append(arch_gnome_packages)
+        elif Program_Main.desktop_environment == "gnome":
+            uninstall_list.append(arch_kde_packages)
+            install_list.append(arch_gnome_packages)
+    pacman.remove(uninstall_list)
+    pacman.install(install_list)
+    pacman.update()
+    pacman.autoremove()
 
 
 def check_for_aur_helper():
@@ -59,7 +104,7 @@ def check_for_aur_helper():
 
 
 def pacman_config():
-    if not pacman_conf.exists() or Program_Main.is_server:
+    if not pacman_conf.exists() or Program_Main.is_server_apps:
         return
     subprocess.run(["sudo", "chmod", "777", pacman_conf],
                    check=True, text=True)
