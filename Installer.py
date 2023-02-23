@@ -13,8 +13,8 @@ lolcat_binary_path = pathlib2.Path("/home", get_user(), ".local/bin/lolcat")
 lolcat_temp_path = pathlib2.Path("/tmp/lolcat")
 
 system = os_check()
-required = {"yt-dlp", "websockets",
-            "GitPython", "pathlib2", "requests"}
+required = {"yt-dlp", "websockets", "GitPython",
+            "pathlib2", "requests", "translators"}
 installed = {pkg.key for pkg in pkg_resources.working_set}
 missing = required - installed
 
