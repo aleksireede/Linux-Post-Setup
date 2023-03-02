@@ -55,3 +55,4 @@ xorg-xlsclients
 youtube-music-bin
 kdeconnect
 indicator-kdeconnect-git
+grapejuice

@@ -17,3 +17,4 @@ gvfs-goa
 orchis-theme
 yaru-gnome-shell-theme
 nautilus-bluetooth
+gnome-shell-extension-dash-to-panel

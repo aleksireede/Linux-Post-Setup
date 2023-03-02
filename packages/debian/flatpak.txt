@@ -1,1 +1,4 @@
-com.github.wwmm.easyeffects io.mrarm.mcpelauncher
+com.github.wwmm.easyeffects
+io.mrarm.mcpelauncher
+com.heroicgameslauncher.hgl
+net.brinkervii.grapejuice

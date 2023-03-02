@@ -3,7 +3,6 @@ gnome
 gnome-calculator
 gnome-online-accounts
 gnome-shell-extension-appindicator
-gnome-shell-extension-dash-to-panel
 gnome-sound-recorder
 gnome-terminal
 gnome-tweaks

@@ -8,7 +8,6 @@ gimp
 gnome-disk-utility
 goverlay
 gparted
-grapejuice
 inkscape
 kate
 kdenlive

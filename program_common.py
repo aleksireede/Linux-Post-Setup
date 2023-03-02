@@ -72,6 +72,7 @@ def package_filter(package_list):
         if any(app) in character_blacklist:
             continue
         package_list_complete.append(app)
+    package_list_complete = [i for i in package_list_complete if i]
     return package_list_complete
 
 

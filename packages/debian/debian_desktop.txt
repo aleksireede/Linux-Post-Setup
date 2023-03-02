@@ -1,12 +1,9 @@
 arduino
-codium
 firefox
 firefoxpwa
 flatpak
 gdebi
-gnome-software-plugin-flatpak
 synaptic
-syncthing
 ttf-mscorefonts-installer
 wine32
 wine64
