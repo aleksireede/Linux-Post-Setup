@@ -1,7 +1,4 @@
-activate-linux-wayland-git
 amdctl
-amdgpu-pro-oglp
-amf-amdgpu-pro
 arduino-ide-bin
 betterdiscord-installer-bin
 discord-screenaudio
@@ -18,13 +15,8 @@ firefox-pwa-bin
 firefox-wayland-mode-hook
 git-credential-keepassxc
 gmail-nativefier
-google-chrome
 heroic-games-launcher-bin
-lib32-amdgpu-pro-oglp
-lib32-gamemode
-lib32-vulkan-amdgpu-pro
 mangohud-common
-mcbelauncher-bin
 ms-outlook-nativefier
 netcoredbg
 nextcloud-client
@@ -47,7 +39,6 @@ telegram-desktop-bin
 tor-browser
 ttf-ms-fonts
 visual-studio-code-bin
-vulkan-amdgpu-pro
 whatsdesk-bin
 xorg-xcursorgen
 xorg-xkill
@@ -55,4 +46,3 @@ xorg-xlsclients
 youtube-music-bin
 kdeconnect
 indicator-kdeconnect-git
-grapejuice

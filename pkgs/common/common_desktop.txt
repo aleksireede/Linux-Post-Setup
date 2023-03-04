@@ -22,3 +22,4 @@ timeshift
 vlc
 wireguard-tools
 xdg-utils
+flatpak

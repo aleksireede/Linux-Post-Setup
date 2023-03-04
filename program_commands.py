@@ -50,20 +50,24 @@ def is_tool(name):    # check if program exists
 def text_modify(file, *args):
     file = pathlib2.Path(file)
     if not file.exists():
-        subprocess.run(["sudo","touch",file],text=True,check=True)
-        subprocess.run(["sudo","chmod","777",file],text=True,check=True)
+        subprocess.run(["sudo", "touch", file], text=True, check=True)
+        subprocess.run(["sudo", "chmod", "777", file], text=True, check=True)
     data = file.read_text()
     if len(args) == 1:
         if args[0] in data:
+            clear_screen()
             return print(f"Already in file:{file} text:{args[0]}")
         data = data+args[0]
     elif len(args) == 2:
         if args[1] in data:
+            clear_screen()
             return print(f"Already replaced{args[1]}")
         data = data.replace(args[0], args[1])
     else:
+        clear_screen()
         return print("invalid number of arguments")
     file.write_text(data)
+    clear_screen()
     return print(f"operation successfull args:{args}")
 
 
@@ -87,6 +91,7 @@ def clear_screen():
 
 
 def lolcat_print(lolcat_text):
+    clear_screen()
     subprocess.run(["lolcat"], input=lolcat_text, check=True, text=True)
 
 

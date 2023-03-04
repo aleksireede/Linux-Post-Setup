@@ -26,14 +26,9 @@ paru_path = pathlib2.Path(pathlib2.Path.cwd(), "paru")
 
 
 def arch():
-    program_commands.clear_screen()
     pacman_config()
-    program_commands.clear_screen()
     check_for_aur_helper()
-    program_commands.clear_screen()
     arch_packages_install()
-    program_commands.clear_screen()
-    subprocess.run("localectl --no-convert set-x11-keymap fi", shell=True)
 
 
 class pacman:
@@ -91,6 +86,7 @@ def arch_packages_install():
     pacman.install(install_list)
     pacman.update()
     pacman.autoremove()
+    program_commands.clear_screen()
 
 
 def check_for_aur_helper():
@@ -101,6 +97,7 @@ def check_for_aur_helper():
     git.Repo.clone_from("https://aur.archlinux.org/paru.git", paru_path)
     subprocess.run(["makepkg", "-si"], cwd=paru_path, check=True, text=True)
     shutil.rmtree(paru_path, ignore_errors=False, onerror=None)
+    program_commands.clear_screen()
 
 
 def pacman_config():
@@ -115,3 +112,4 @@ def pacman_config():
     program_commands.text_modify(pacman_conf, "#Color", "Color")
     subprocess.run(["sudo", "chmod", "644", pacman_conf],
                    check=True, text=True)
+    program_commands.clear_screen()

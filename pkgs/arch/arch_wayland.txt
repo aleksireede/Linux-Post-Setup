@@ -13,3 +13,4 @@ wofi
 xdg-desktop-portal-wlr
 xorg-xlsclients
 xorg-xwayland
+activate-linux-wayland-git

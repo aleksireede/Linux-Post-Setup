@@ -1,9 +1,9 @@
 arduino
 firefox
 firefoxpwa
-flatpak
 gdebi
 synaptic
 ttf-mscorefonts-installer
 wine32
 wine64
+nextcloud-desktop

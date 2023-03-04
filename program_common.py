@@ -82,6 +82,16 @@ common_desktop_packages = package_filter(
     open("./packages/common/common_desktop.txt", "r").read())
 common_gnome_packages = package_filter(
     open("./packages/common/common_gnome.txt", "r").read())
+common_flatpak_pkgs = package_filter(
+    open("./pkgs/common/flatpak.txt", "r").read())
+
+
+def flatpak():
+    subprocess.run(["flatpak", "remote-add", "--if-not-exists", "flathub",
+                   "https://flathub.org/repo/flathub.flatpakrepo"], check=True, text=True)
+    for app in common_flatpak_pkgs:
+        subprocess.run(["flatpak", "install", "flathub", app],
+                       check=True, text=True)
 
 
 def noto_emoji_apple():
@@ -99,11 +109,13 @@ def noto_emoji_apple():
                 ["sudo", "rm", "/usr/share/fonts/noto/NotoColorEmoji.ttf"], check=True, text=True)
         subprocess.run(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
                         "/usr/share/fonts/noto/NotoColorEmoji.ttf"], check=True, text=True)
+    program_commands.clear_screen()
 
 
 def install_zsh_plugin(name):
     git.Repo.clone_from("https://github.com/zsh-users/" +
                         name+".git",  pathlib2.Path(zsh_plugin_path, name))
+    program_commands.clear_screen()
 
 
 def oh_my_zsh():
@@ -127,10 +139,11 @@ def oh_my_zsh():
         zsh_aliases, "#!/usr/bin/env zsh\n"+alias_file)
     program_commands.text_modify(
         bash_aliases, "#!/usr/bin/env bash\n"+alias_file)
+    program_commands.clear_screen()
 
 
 def amogus_cowfile():
-    if pathlib2.Path("/usr/share/cows/amogus.cow").exists() or pathlib2.Path("/usr/share/cowsay/cows/amogus.cow").exists():
+    if pathlib2.Path("/usr/share/cows/amogus.cow").exists() or pathlib2.Path("/usr/share/cowsay/cows/amogus.cow").exists() or pathlib2.Path("/usr/local/share/cowsay/cows/amogus.cow").exists():
         return
     if pathlib2.Path("/usr/share/cows").exists():
         subprocess.run(["sudo", "chmod", "777", "/usr/share/cows/"],
@@ -142,6 +155,12 @@ def amogus_cowfile():
                        check=True, text=True)
         shutil.copyfile(pathlib2.Path(pathlib2.Path.cwd(
         ), "text", "amogus.cow"), pathlib2.Path("/usr/share/cowsay/cows/amogus.cow"))
+    elif pathlib2.Path("/usr/local/share/cowsay/cows").exists():
+        subprocess.run(["sudo", "chmod", "777",
+                       "/usr/local/share/cowsay/cows"], check=True, text=True)
+        shutil.copyfile(pathlib2.Path(pathlib2.Path.cwd(), "text", "amogus.cow"),
+                        pathlib2.Path("/usr/local/share/cowsay/cows/amogus.cow"))
+    program_commands.clear_screen()
 
 
 def install_oreo_cursors():
@@ -156,6 +175,7 @@ def install_oreo_cursors():
     subprocess.run(["sudo", "make", "install"], cwd=pathlib2.Path(
         pathlib2.Path.cwd(), "oreo-cursors"), check=True, text=True)
     shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
+    program_commands.clear_screen()
 
 
 def install_custom_git(url: str, directory: pathlib2.Path, command: list):
@@ -167,6 +187,7 @@ def install_custom_git(url: str, directory: pathlib2.Path, command: list):
     else:
         subprocess.run(command, cwd=directory, check=True, text=True)
     shutil.rmtree(directory)
+    program_commands.clear_screen()
 
 
 def gnome_volume_steps():
@@ -179,14 +200,22 @@ def gnome_volume_steps():
         return
     subprocess.run(["gsettings", "set", "org.gnome.settings-daemon.plugins.media-keys",
                     "volume-step", "1"], check=True, text=True)
+    program_commands.clear_screen()
 
 
 def change_display_manager():
     systemd_util.disable("display-manager")
     if Program_Main.desktop_environment == "gnome":
+        if Program_Main.linux_distro == "debian":
+            subprocess.run(["sudo", "dpkg-reconfigure", "gdm3"],
+                           check=True, text=True)
         systemd_util.enable("gdm")
     elif Program_Main.desktop_environment == "kde":
+        if Program_Main.linux_distro == "debian":
+            subprocess.run(["sudo", "dpkg-reconfigure", "sddm"],
+                           check=True, text=True)
         systemd_util.enable("sddm")
+    program_commands.clear_screen()
 
 
 def librewolf_keepassxc_browser_fix():
@@ -197,15 +226,66 @@ def librewolf_keepassxc_browser_fix():
     if not librewolf_conf_dir.exists():
         librewolf_conf_dir.mkdir(parents=True, exist_ok=True)
     program_commands.text_modify(librewolf_conf_json, librewolf_conf_text)
+    program_commands.clear_screen()
+
+
+def remove_snap_packagaes():
+    snaps = subprocess.Popen(["snap", "list"], stdout=subprocess.PIPE)
+    snap_list_1 = subprocess.run(
+        ["awk", "!/^Name|^core|^bare|^snapd/ {print $1}"], stdin=snaps.stdout, stdout=subprocess.PIPE)
+    snap_list_2 = subprocess.run(
+        ["awk", "/^bare/ {print $1}"], stdin=snaps.stdout, stdout=subprocess.PIPE)
+    snap_list_3 = subprocess.run(
+        ["awk", "/^core/ {print $1}"], stdin=snaps.stdout, stdout=subprocess.PIPE)
+    snap_list_4 = subprocess.run(
+        ["awk", "/^snapd/ {print $1}"], stdin=snaps.stdout, stdout=subprocess.PIPE)
+    snap_remove_list = ["sudo", "snap", "remove"]
+    # we need to check that the lists are not empty and then fiter the list out of unwanted charatcters like "\n"
+    if snap_list_1.stdout.decode():
+        snap_remove_list.extend(package_filter(snap_list_1.stdout.decode()))
+    if snap_list_2.stdout.decode():
+        snap_remove_list.extend(package_filter(snap_list_2.stdout.decode()))
+    if snap_list_3.stdout.decode():
+        snap_remove_list.extend(package_filter(snap_list_3.stdout.decode()))
+    if snap_list_4.stdout.decode():
+        snap_remove_list.extend(package_filter(snap_list_4.stdout.decode()))
+    if not snap_list_1.stdout.decode() and not snap_list_2.stdout.decode() and not snap_list_3.stdout.decode() and not snap_list_4.stdout.decode():
+        return  # we don't have any snap packages so we don't remove something we don't have
+    subprocess.run(snap_remove_list, check=True, text=True)
+    program_commands.clear_screen()
+
+
+def snap_nuke():
+    if not program_commands.is_tool("snap"):
+        return
+    remove_snap_packagaes()
+    volume_list = subprocess.Popen(["df", "-h"], stdout=subprocess.PIPE)
+    snap_vol_list = subprocess.check_output(
+        ["awk", "/snap/ {print $6}"], stdin=volume_list.stdout)
+    for vol in snap_vol_list:
+        subprocess.run(["sudo", "umount", vol])
+    program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/nosnap.pref"), open(
+        pathlib2.Path(pathlib2.Path.cwd(), "text", "nosnap.pref")).read())
+    program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/firefox-no-snap"), open(
+        pathlib2.Path(pathlib2.Path.cwd(), "text", "firefox-no-snap.pref")).read())
+    if Program_Main.linux_distro == "arch":
+        subprocess.run(["sudo", "pacman", "-Rns", "snapd"],
+                       check=True, text=True)
+    elif Program_Main.linux_distro == "debian":
+        subprocess.run(["sudo", "apt", "purge", "snapd"],
+                       check=True, text=True)
+    program_commands.clear_screen()
 
 
 def Main():
-    program_commands.clear_screen()
+    snap_nuke()
+    flatpak()
     amogus_cowfile()
-    program_commands.clear_screen()
     oh_my_zsh()
     install_custom_git("https://github.com/trakBan/ipfetch.git",
-                       pathlib2.Path(pathlib2.Path.cwd(), "ipfecth"), ["sudo", "sh", "setup.sh"])
+                       pathlib2.Path(pathlib2.Path.cwd(), "tmp", "ipfecth"), ["sudo", "sh", "setup.sh"])
+    install_custom_git("https://github.com/cowsay-org/cowsay.git", pathlib2.Path(
+        pathlib2.Path.cwd(), "tmp", "cowsay"), ["sudo", "make", "install"])
     if Program_Main.is_server_apps:
         return
     systemd_util.start("bluetooth")
@@ -213,7 +293,6 @@ def Main():
     change_display_manager()
     if Program_Main.desktop_environment == "gnome":
         gnome_volume_steps()
-    program_commands.clear_screen()
     noto_emoji_apple()
-    program_commands.clear_screen()
     install_oreo_cursors()
+    subprocess.run("localectl --no-convert set-x11-keymap fi", shell=True)

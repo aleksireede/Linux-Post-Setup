@@ -1,4 +1,3 @@
-plasma-pa
 pulseaudio
 pulseaudio-alsa
 pulseaudio-bluetooth
