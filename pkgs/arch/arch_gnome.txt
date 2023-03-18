@@ -24,9 +24,7 @@ grilo-plugins
 gvfs-afc
 gvfs-goa
 gvfs-google
-gvfs-gphoto
 gvfs-mtp
 gvfs-nfs
 gvfs-smb
 sushi
-tracker-miners

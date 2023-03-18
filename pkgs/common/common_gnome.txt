@@ -43,6 +43,5 @@ malcontent
 nautilus
 orca
 rygel
-gtksimple-scan
 totem
 xdg-user-dirs-gtk
