@@ -18,3 +18,15 @@ orchis-theme
 yaru-gnome-shell-theme
 nautilus-bluetooth
 gnome-shell-extension-dash-to-panel
+gnome-console
+gnome-text-editor
+grilo-plugins
+gvfs-afc
+gvfs-goa
+gvfs-google
+gvfs-gphoto
+gvfs-mtp
+gvfs-nfs
+gvfs-smb
+sushi
+tracker-miners
