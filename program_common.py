@@ -264,14 +264,14 @@ def snap_nuke():
         ["awk", "/snap/ {print $6}"], stdin=volume_list.stdout)
     for vol in snap_vol_list:
         subprocess.run(["sudo", "umount", vol])
-    program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/nosnap.pref"), open(
-        pathlib2.Path(pathlib2.Path.cwd(), "text", "nosnap.pref")).read())
-    program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/firefox-no-snap"), open(
-        pathlib2.Path(pathlib2.Path.cwd(), "text", "firefox-no-snap.pref")).read())
     if Program_Main.linux_distro == "arch":
         subprocess.run(["sudo", "pacman", "-Rns", "snapd"],
                        check=True, text=True)
     elif Program_Main.linux_distro == "debian":
+        program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/nosnap.pref"), open(
+            pathlib2.Path(pathlib2.Path.cwd(), "text", "nosnap.pref")).read())
+        program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/firefox-no-snap"), open(
+            pathlib2.Path(pathlib2.Path.cwd(), "text", "firefox-no-snap.pref")).read())
         subprocess.run(["sudo", "apt", "purge", "snapd"],
                        check=True, text=True)
     program_commands.clear_screen()
