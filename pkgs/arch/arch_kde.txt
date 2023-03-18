@@ -23,4 +23,6 @@ telepathy-kde-desktop-applets
 umbrello
 yakuake
 itinerary
-konqueror
+indicator-kdeconnect-git
+plasma-workspace
+plasma-wayland-session
