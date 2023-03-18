@@ -8,19 +8,19 @@ import Program_Main
 import typing
 
 arch_packages = program_common.package_filter(
-    open("./packages/arch/arch.txt", "r").read())
+    open("./pkgs/arch/arch.txt", "r").read())
 arch_pulseaudio_packages = program_common.package_filter(
-    open("./packages/arch/arch_pulseaudio.txt", "r").read())
+    open("./pkgs/arch/arch_pulseaudio.txt", "r").read())
 arch_pipewire_packages = program_common.package_filter(
-    open("./packages/arch/arch_pipewire.txt", "r").read())
+    open("./pkgs/arch/arch_pipewire.txt", "r").read())
 arch_desktop_packages = program_common.package_filter(
-    open("./packages/arch/arch_desktop.txt", "r").read())
+    open("./pkgs/arch/arch_desktop.txt", "r").read())
 arch_kde_packages = program_common.package_filter(
-    open("./packages/arch/arch_kde.txt", "r").read())
+    open("./pkgs/arch/arch_kde.txt", "r").read())
 arch_gnome_packages = program_common.package_filter(
-    open("./packages/arch/arch_gnome.txt", "r").read())
+    open("./pkgs/arch/arch_gnome.txt", "r").read())
 arch_wayland_packages = program_common.package_filter(
-    open("./packages/arch/arch_wayland.txt", "r").read())
+    open("./pkgs/arch/arch_wayland.txt", "r").read())
 pacman_conf = pathlib2.Path(r"/etc/pacman.conf")
 paru_path = pathlib2.Path(pathlib2.Path.cwd(), "paru")
 
