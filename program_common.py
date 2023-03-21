@@ -76,11 +76,11 @@ def package_filter(package_list):
     return package_list_complete
 
 
-common_packages = package_filter(
+common_pkgs = package_filter(
     open("./pkgs/common/common.txt", "r").read())
-common_desktop_packages = package_filter(
+common_desktop_pkgs = package_filter(
     open("./pkgs/common/common_desktop.txt", "r").read())
-common_gnome_packages = package_filter(
+common_gnome_pkgs = package_filter(
     open("./pkgs/common/common_gnome.txt", "r").read())
 common_flatpak_pkgs = package_filter(
     open("./pkgs/common/flatpak.txt", "r").read())
