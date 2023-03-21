@@ -279,7 +279,6 @@ def snap_nuke():
 
 def Main():
     snap_nuke()
-    flatpak()
     amogus_cowfile()
     oh_my_zsh()
     install_custom_git("https://github.com/trakBan/ipfetch.git",
@@ -288,6 +287,7 @@ def Main():
         pathlib2.Path.cwd(), "tmp", "cowsay"), ["sudo", "make", "install"])
     if Program_Main.is_server_apps:
         return
+    flatpak()
     systemd_util.start("bluetooth")
     systemd_util.start_user("syncthing")
     change_display_manager()
