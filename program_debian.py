@@ -90,11 +90,11 @@ def debian_pkgs_install():
     if not Program_Main.is_server_apps:
         debian_pkgs.extend(debian_desktop_pkgs)
         debian_pkgs.extend(program_common.common_desktop_pkgs)
+        debian_pkgs.extend(program_common.common_gnome_pkgs)
+        debian_pkgs.extend(debian_gnome_pkgs)
         subprocess.run(
             ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"], check=True, text=True)
     debian_pkgs.extend(program_common.common_pkgs)
-    debian_pkgs.extend(program_common.common_gnome_pkgs)
-    debian_pkgs.extend(debian_gnome_pkgs)
     apt.install(debian_pkgs)
     apt.autoremove()
 
