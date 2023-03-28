@@ -49,8 +49,17 @@ class apt:
                         "upgrade"], check=True, text=True)
 
     def add_repo(repo: str):
-        subprocess.run(["sudo", "add-apt-repository", repo],
+        try:
+            repo_list = subprocess.check_output(["sudo", "grep", "-h", "^deb", "/etc/apt/sources.list", "/etc/apt/sources.list.d/*"])
+        except subprocess.CalledProcessError:
+            repo_list = []
+        if repo in repo_list:
+            return
+        try:
+            subprocess.run(["sudo", "add-apt-repository", repo],
                        check=True, text=True)
+        except subprocess.CalledProcessError:
+            subprocess.run(["sudo", "apt-get", "install", "software-properties-common"],check=True,text=True)
 
     def autoremove():
         subprocess.run(["sudo", "apt", "-qq", "autoremove"],
@@ -60,6 +69,12 @@ class apt:
         apt_install_list = ["sudo", "apt", "--assume-yes", "install"]
         apt_install_list.extend(apps)
         subprocess.run(apt_install_list, check=True, text=True)
+
+    def aria2_install(url):
+        subprocess.run(["aria2c", "-o", "temp.deb", url],
+                       cwd=pathlib2.Path(pathlib2.Path.cwd(), "temp"), check=True, text=True)
+        apt.install("temp.deb")
+        os.remove(pathlib2.Path(pathlib2.Path.cwd(), "temp", "temp.deb"))
 
 
 def debian_pkgs_install():
@@ -82,6 +97,7 @@ def debian_pkgs_install():
     apt.add_repo("multiverse")
     apt.add_repo("ppa:nextcloud-devs/client")
     apt.add_repo("ppa:mozillateam/ppa")
+    apt.add_repo("ppa:yt-dlp/stable")
     subprocess.run(["sudo", "dpkg", "--add-architecture",
                    "i386"], check=True, text=True)
     apt.update()
@@ -92,8 +108,8 @@ def debian_pkgs_install():
         debian_pkgs.extend(program_common.common_desktop_pkgs)
         debian_pkgs.extend(program_common.common_gnome_pkgs)
         debian_pkgs.extend(debian_gnome_pkgs)
-        subprocess.run(
-            ["xdg-open", "https://discord.com/api/download?platform=linux&format=deb"], check=True, text=True)
+        apt.aria2_install(
+            "https://discord.com/api/download?platform=linux&format=deb")
     debian_pkgs.extend(program_common.common_pkgs)
     apt.install(debian_pkgs)
     apt.autoremove()

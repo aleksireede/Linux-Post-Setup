@@ -66,7 +66,12 @@ def text_modify(file, *args):
     else:
         clear_screen()
         return print("invalid number of arguments")
-    file.write_text(data)
+    try:
+        file.write_text(data)
+    except PermissionError:
+        subprocess.run(["sudo", "chmod", "777", file], text=True, check=True)
+        file.write_text(data)
+        subprocess.run(["sudo", "chmod", "655", file], text=True, check=True)
     clear_screen()
     return print(f"operation successfull args:{args}")
 

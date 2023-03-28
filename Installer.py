@@ -2,21 +2,18 @@
 import Program_Main
 import sys
 import subprocess
-import pkg_resources
-from program_commands import get_user, os_check, is_tool
 import os
 import pathlib2
 import git
 import shutil
+from program_commands import get_user, os_check, is_tool
 
+os.environ["PATH"] += ":/home/"+get_user()+"/.local/bin/:/home/" + \
+    get_user()+"/.local/share/gem/ruby/3.0.0/bin/"
 lolcat_binary_path = pathlib2.Path("/home", get_user(), ".local/bin/lolcat")
 lolcat_temp_path = pathlib2.Path("/tmp/lolcat")
-
 system = os_check()
-required = {"yt-dlp", "websockets", "GitPython",
-            "pathlib2", "requests", "translators", "filetype"}
-installed = {pkg.key for pkg in pkg_resources.working_set}
-missing = required - installed
+
 
 if not is_tool("lolcat") and not is_tool("gem"):
     if system == "arch":
@@ -24,6 +21,8 @@ if not is_tool("lolcat") and not is_tool("gem"):
     elif system == "debian":
         subprocess.run(["sudo", "apt", "-y", "install", "rubygems"],
                        check=True, text=True)
+
+
 if not is_tool("lolcat"):
     git.Repo.clone_from(
         "https://github.com/aleksireede/lolcat.git", lolcat_temp_path)
@@ -32,11 +31,4 @@ if not is_tool("lolcat"):
     shutil.copyfile(pathlib2.Path(lolcat_temp_path,
                     "bin", "lolcat"), lolcat_binary_path)
     shutil.rmtree(lolcat_temp_path)
-
-if missing:
-    python = sys.executable
-    subprocess.check_call(
-        [python, '-m', 'pip', 'install', *missing], stdout=subprocess.DEVNULL)
-os.environ["PATH"] += ":/home/"+get_user()+"/.local/bin/:/home/" + \
-    get_user()+"/.local/share/gem/ruby/3.0.0/bin/"
 Program_Main.main()

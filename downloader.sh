@@ -14,6 +14,7 @@ fi
 git clone https://github.com/aleksireede/Linux-First-Setup.git
 cd ./Linux-First-Setup
 chmod +x ./Installer.py
+pip install -r requirements.txt
 ./Installer.py
 cd ..
 rm -rf ./Linux-First-Setup
