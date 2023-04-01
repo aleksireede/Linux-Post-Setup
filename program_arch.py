@@ -73,7 +73,7 @@ def arch_packages_install():
         uninstall_list.append(arch_pulseaudio_packages)
     elif Program_Main.audio_environment == "pulseaudio":
         uninstall_list.append(arch_pipewire_packages)
-    if not Program_Main.is_server_apps:
+    if not Program_Main.is_server_install_type:
         install_list.extend(
             [arch_desktop_packages, arch_wayland_packages, program_common.common_desktop_packages])
         if Program_Main.desktop_environment == "kde":
@@ -101,15 +101,9 @@ def check_for_aur_helper():
 
 
 def pacman_config():
-    if not pacman_conf.exists() or Program_Main.is_server_apps:
-        return
-    subprocess.run(["sudo", "chmod", "777", pacman_conf],
-                   check=True, text=True)
     program_commands.text_modify(
         pacman_conf, "#[multilib]\n#Include = /etc/pacman.d/mirrorlist", "[multilib]\nInclude = /etc/pacman.d/mirrorlist")
     program_commands.text_modify(
         pacman_conf, "#ParallelDownloads=5", "ParallelDownloads=5")
     program_commands.text_modify(pacman_conf, "#Color", "Color")
-    subprocess.run(["sudo", "chmod", "644", pacman_conf],
-                   check=True, text=True)
     program_commands.clear_screen()

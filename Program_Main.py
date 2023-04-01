@@ -3,24 +3,23 @@ import program_commands
 import program_common
 import program_arch
 import program_debian
-is_server_apps = True
+import Installer
+is_server_install_type = True
 desktop_environment = ""
 audio_environment = ""
-linux_distro = ""
+linux_distro = Installer.system
 
 
 def main():
-    global is_server_apps, desktop_environment, audio_environment, linux_distro
+    global is_server_install_type, desktop_environment, audio_environment, linux_distro
     program_commands.run_script_check()
-    is_server_apps = program_commands.choice_server_desktop_apps()
-    if not is_server_apps:
-        desktop_environment = program_commands.choice_desktop_environment()
-        audio_environment = program_commands.choice_audio_environment()
-    if program_commands.os_check() == "arch":
-        linux_distro = "arch"
+    if linux_distro == "arch":
         program_arch.arch()
-    elif program_commands.os_check() == "debian":
-        linux_distro = "debian"
+        is_server_install_type = program_commands.choice_server_desktop_apps()
+        if not is_server_install_type:
+            desktop_environment = program_commands.choice_desktop_environment()
+            audio_environment = program_commands.choice_audio_environment()
+    elif linux_distro == "debian":
         program_debian.debian()
     program_common.Main()
     program_commands.clear_screen()

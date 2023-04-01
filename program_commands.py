@@ -16,7 +16,7 @@ input_pipewire = ("pw", "pipewire")
 input_pulseaudio = ("pa", "pulse", "pulseaudio")
 
 
-def get_user():
+def get_username():
     """Try to find the user who called sudo/pkexec."""
     try:
         return os.getlogin()
@@ -40,18 +40,20 @@ def get_user():
         except KeyError:
             # no pkexec was used
             pass
+        print("Username Auto-detect Failed!")
+        user = input("Please enter your username:")
     return user
 
 
-def is_tool(name):    # check if program exists
+def is_tool(name):
     return shutil.which(name) is not None
 
 
 def text_modify(file, *args):
     file = pathlib2.Path(file)
-    if not file.exists():
+    if not file.exists(): # create file if it doesn't exist
         subprocess.run(["sudo", "touch", file], text=True, check=True)
-        subprocess.run(["sudo", "chmod", "777", file], text=True, check=True)
+        subprocess.run(["sudo", "chmod", "644", file], text=True, check=True)
     data = file.read_text()
     if len(args) == 1:
         if args[0] in data:
@@ -71,7 +73,7 @@ def text_modify(file, *args):
     except PermissionError:
         subprocess.run(["sudo", "chmod", "777", file], text=True, check=True)
         file.write_text(data)
-        subprocess.run(["sudo", "chmod", "655", file], text=True, check=True)
+        subprocess.run(["sudo", "chmod", "644", file], text=True, check=True)
     clear_screen()
     return print(f"operation successfull args:{args}")
 

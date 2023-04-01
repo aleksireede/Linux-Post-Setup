@@ -11,6 +11,7 @@ else
     echo ""
     exit
 fi
+cd ~
 git clone https://github.com/aleksireede/Linux-First-Setup.git
 cd ./Linux-First-Setup
 chmod +x ./Installer.py

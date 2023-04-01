@@ -5,6 +5,7 @@ import os
 import program_commands
 import program_common
 import Program_Main
+import Installer
 
 debian_pkgs = program_common.package_filter(
     open("./pkgs/debian/debian.txt", "r").read())
@@ -18,18 +19,13 @@ fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
 
 
 def debian():
-    program_commands.clear_screen()
     debian_pkgs_install()
-    if Program_Main.is_server_apps:
+    if Program_Main.is_server_install_type:
         return
-    program_commands.clear_screen()
     debian_steam()
-    program_commands.clear_screen()
     flatpak()
-    program_commands.clear_screen()
     if not program_commands.is_tool("mangohud"):
         debian_mangohud()
-        program_commands.clear_screen()
 
 
 def flatpak():
@@ -38,6 +34,7 @@ def flatpak():
     for app in debian_flatpak_pkgs:
         subprocess.run(["flatpak", "install", "flathub", app],
                        check=True, text=True)
+    program_commands.clear_screen()
 
 
 class apt:
@@ -60,6 +57,7 @@ class apt:
                        check=True, text=True)
         except subprocess.CalledProcessError:
             subprocess.run(["sudo", "apt-get", "install", "software-properties-common"],check=True,text=True)
+            #needs possibly fixing
 
     def autoremove():
         subprocess.run(["sudo", "apt", "-qq", "autoremove"],
@@ -78,10 +76,10 @@ class apt:
 
 
 def debian_pkgs_install():
-    if not pathlib2.Path("/home"+program_commands.get_user()+".cargo/bin").exists:
+    if not pathlib2.Path("/home"+Installer.username+".cargo/bin").exists:
         subprocess.run("curl https://sh.rustup.rs -sSf | sh", shell=True)
         os.environ["PATH"] += ":/home/" + \
-            program_commands.get_user()+"/.cargo/bin"
+            Installer.username+"/.cargo/bin"
     download_file_from_url("/etc/apt/trusted.gpg.d/ani-cli.asc",
                            "https://Wiener234.github.io/ani-cli-ppa/KEY.gpg")
     download_file_from_url("/etc/apt/sources.list.d/ani-cli-debian.list",
@@ -103,7 +101,7 @@ def debian_pkgs_install():
     apt.update()
     apt.upgrade()
     apt.install(["gnupg", "curl", "apt-transport-https"])
-    if not Program_Main.is_server_apps:
+    if not Program_Main.is_server_install_type:
         debian_pkgs.extend(debian_desktop_pkgs)
         debian_pkgs.extend(program_common.common_desktop_pkgs)
         debian_pkgs.extend(program_common.common_gnome_pkgs)

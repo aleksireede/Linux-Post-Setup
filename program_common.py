@@ -6,21 +6,22 @@ import Program_Main
 import shutil
 import git
 import typing
+import Installer
 
 
 librewolf_conf_text = open(pathlib2.Path(
     pathlib2.Path.cwd(), "text", "keepassxc_browser_plugin.json")).read()
 character_blacklist = [" ", "\\", "/", "\"",
                        "\'", ",", ".", "\n", "\r", "\t", "\b", "\f"]
-zshrc = pathlib2.Path("/home", program_commands.get_user(), ".zshrc")
-bashrc = pathlib2.Path("/home", program_commands.get_user(), ".bashrc")
+zshrc = pathlib2.Path("/home", Installer.username, ".zshrc")
+bashrc = pathlib2.Path("/home", Installer.username, ".bashrc")
 alias_file = open(pathlib2.Path("./text/alias.txt"), "r").read()
 zsh_aliases = pathlib2.Path(
-    "/home", program_commands.get_user(), ".zsh_aliases")
+    "/home", Installer.username, ".zsh_aliases")
 bash_aliases = pathlib2.Path(
-    "/home", program_commands.get_user(), ".bash_aliases")
+    "/home", Installer.username, ".bash_aliases")
 zsh_plugin_path = pathlib2.Path(
-    "/home", program_commands.get_user(), ".oh-my-zsh/custom/plugins")
+    "/home", Installer.username, ".oh-my-zsh/custom/plugins")
 
 
 class systemd_util:
@@ -32,7 +33,7 @@ class systemd_util:
     def start_user(service_name: str):
         '''Starts a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "start", service_name +
-                        "@"+program_commands.get_user()+".service"])
+                        "@"+Installer.username+".service"])
 
     def enable(service_name: str):
         '''Enables a systemd service. default is system service'''
@@ -42,7 +43,7 @@ class systemd_util:
     def enable_user(service_name: str):
         '''Enables a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "enable", service_name +
-                        "@"+program_commands.get_user()+".service"])
+                        "@"+Installer.username+".service"])
 
     def disable(service_name: str):
         '''Disables a systemd service. default is system service'''
@@ -52,7 +53,7 @@ class systemd_util:
     def disable_user(service_name: str):
         '''Disables a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "disable", service_name +
-                        "@"+program_commands.get_user()+".service"])
+                        "@"+Installer.username+".service"])
 
     def stop(service_name: str):
         '''Stops a systemd system service.'''
@@ -62,7 +63,7 @@ class systemd_util:
     def stop_user(service_name: str):
         '''Stops a systemd user service.'''
         subprocess.run(["sudo", "systemctl", "stop", service_name +
-                        "@"+program_commands.get_user()+".service"])
+                        "@"+Installer.username+".service"])
 
 
 def package_filter(package_list):
@@ -130,7 +131,7 @@ def oh_my_zsh():
     program_commands.text_modify(
         zshrc, 'ZSH_THEME="robbyrussell"', 'ZSH_THEME="agnoster"')
     program_commands.text_modify(zshrc, 'DEFAULT_USER="' +
-                                 program_commands.get_user()+'"\nprompt_context(){}\n')
+                                 Installer.username+'"\nprompt_context(){}\n')
     program_commands.text_modify(
         zshrc, "if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi")
     program_commands.text_modify(
@@ -219,7 +220,7 @@ def change_display_manager():
 
 
 def librewolf_keepassxc_browser_fix():
-    librewolf_conf_dir = pathlib2.Path("/home", program_commands.get_user(), ".librewolf",
+    librewolf_conf_dir = pathlib2.Path("/home", Installer.username, ".librewolf",
                                        "native-messaging-hosts")
     librewolf_conf_json = pathlib2.Path(
         librewolf_conf_dir, "org.keepassxc.keepassxc_browser.json")
@@ -285,7 +286,7 @@ def Main():
                        pathlib2.Path(pathlib2.Path.cwd(), "tmp", "ipfecth"), ["sudo", "sh", "setup.sh"])
     install_custom_git("https://github.com/cowsay-org/cowsay.git", pathlib2.Path(
         pathlib2.Path.cwd(), "tmp", "cowsay"), ["sudo", "make", "install"])
-    if Program_Main.is_server_apps:
+    if Program_Main.is_server_install_type:
         return
     flatpak()
     systemd_util.start("bluetooth")

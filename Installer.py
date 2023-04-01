@@ -6,11 +6,12 @@ import os
 import pathlib2
 import git
 import shutil
-from program_commands import get_user, os_check, is_tool
+from program_commands import get_username, os_check, is_tool
 
-os.environ["PATH"] += ":/home/"+get_user()+"/.local/bin/:/home/" + \
-    get_user()+"/.local/share/gem/ruby/3.0.0/bin/"
-lolcat_binary_path = pathlib2.Path("/home", get_user(), ".local/bin/lolcat")
+username = get_username()
+os.environ["PATH"] += ":/home/"+username+"/.local/bin/:/home/" + \
+    username+"/.local/share/gem/ruby/3.0.0/bin/"
+lolcat_binary_path = pathlib2.Path("/home", username, ".local/bin/lolcat")
 lolcat_temp_path = pathlib2.Path("/tmp/lolcat")
 system = os_check()
 
