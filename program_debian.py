@@ -75,10 +75,10 @@ class apt:
 
 
 def debian_pkgs_install():
-    if not pathlib2.Path("/home"+Program_Main.username+".cargo/bin").exists:
+    if not pathlib2.Path("/home"+username+".cargo/bin").exists:
         subprocess.run("curl https://sh.rustup.rs -sSf | sh", shell=True)
         os.environ["PATH"] += ":/home/" + \
-            Program_Main.username+"/.cargo/bin"
+            username+"/.cargo/bin"
     download_file_from_url("/etc/apt/trusted.gpg.d/ani-cli.asc",
                            "https://Wiener234.github.io/ani-cli-ppa/KEY.gpg")
     download_file_from_url("/etc/apt/sources.list.d/ani-cli-debian.list",

@@ -43,7 +43,7 @@ def get_username():
         print("Username Auto-detect Failed!")
         user = input("Please enter your username:")
     return user
-
+username= get_username()
 
 def is_tool(name):
     return shutil.which(name) is not None
@@ -91,7 +91,7 @@ def os_check():
         return "arch"
     elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_version").is_file() or pathlib2.Path("/etc/linuxmint/info").is_file():
         return "debian"
-
+linux_distro = os_check(S)
 
 def clear_screen():
     subprocess.run(["clear"], check=True, text=True)

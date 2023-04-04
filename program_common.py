@@ -6,21 +6,23 @@ import Program_Main
 import shutil
 import git
 import typing
+linux_distro = program_commands.linux_distro
+username = program_commands.username
 
 
 librewolf_conf_text = open(pathlib2.Path(
     pathlib2.Path.cwd(), "text", "keepassxc_browser_plugin.json")).read()
 character_blacklist = [" ", "\\", "/", "\"",
                        "\'", ",", ".", "\n", "\r", "\t", "\b", "\f"]
-zshrc = pathlib2.Path("/home", Program_Main.username, ".zshrc")
-bashrc = pathlib2.Path("/home", Program_Main.username, ".bashrc")
+zshrc = pathlib2.Path("/home", username, ".zshrc")
+bashrc = pathlib2.Path("/home", username, ".bashrc")
 alias_file = open(pathlib2.Path("./text/alias.txt"), "r").read()
 zsh_aliases = pathlib2.Path(
-    "/home", Program_Main.username, ".zsh_aliases")
+    "/home", username, ".zsh_aliases")
 bash_aliases = pathlib2.Path(
-    "/home", Program_Main.username, ".bash_aliases")
+    "/home", username, ".bash_aliases")
 zsh_plugin_path = pathlib2.Path(
-    "/home", Program_Main.username, ".oh-my-zsh/custom/plugins")
+    "/home", username, ".oh-my-zsh/custom/plugins")
 
 
 class systemd_util:
@@ -32,7 +34,7 @@ class systemd_util:
     def start_user(service_name: str):
         '''Starts a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "start", service_name +
-                        "@"+Program_Main.username+".service"])
+                        "@"+username+".service"])
 
     def enable(service_name: str):
         '''Enables a systemd service. default is system service'''
@@ -42,7 +44,7 @@ class systemd_util:
     def enable_user(service_name: str):
         '''Enables a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "enable", service_name +
-                        "@"+Program_Main.username+".service"])
+                        "@"+username+".service"])
 
     def disable(service_name: str):
         '''Disables a systemd service. default is system service'''
@@ -52,7 +54,7 @@ class systemd_util:
     def disable_user(service_name: str):
         '''Disables a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "disable", service_name +
-                        "@"+Program_Main.username+".service"])
+                        "@"+username+".service"])
 
     def stop(service_name: str):
         '''Stops a systemd system service.'''
@@ -62,7 +64,7 @@ class systemd_util:
     def stop_user(service_name: str):
         '''Stops a systemd user service.'''
         subprocess.run(["sudo", "systemctl", "stop", service_name +
-                        "@"+Program_Main.username+".service"])
+                        "@"+username+".service"])
 
 
 def package_filter(package_list):
@@ -130,7 +132,7 @@ def oh_my_zsh():
     program_commands.text_modify(
         zshrc, 'ZSH_THEME="robbyrussell"', 'ZSH_THEME="agnoster"')
     program_commands.text_modify(zshrc, 'DEFAULT_USER="' +
-                                 Program_Main.username+'"\nprompt_context(){}\n')
+                                 username+'"\nprompt_context(){}\n')
     program_commands.text_modify(
         zshrc, "if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi")
     program_commands.text_modify(
@@ -206,12 +208,12 @@ def gnome_volume_steps():
 def change_display_manager():
     systemd_util.disable("display-manager")
     if Program_Main.desktop_environment == "gnome":
-        if Program_Main.linux_distro == "debian":
+        if linux_distro == "debian":
             subprocess.run(["sudo", "dpkg-reconfigure", "gdm3"],
                            check=True, text=True)
         systemd_util.enable("gdm")
     elif Program_Main.desktop_environment == "kde":
-        if Program_Main.linux_distro == "debian":
+        if linux_distro == "debian":
             subprocess.run(["sudo", "dpkg-reconfigure", "sddm"],
                            check=True, text=True)
         systemd_util.enable("sddm")
@@ -219,7 +221,7 @@ def change_display_manager():
 
 
 def librewolf_keepassxc_browser_fix():
-    librewolf_conf_dir = pathlib2.Path("/home", Program_Main.username, ".librewolf",
+    librewolf_conf_dir = pathlib2.Path("/home", username, ".librewolf",
                                        "native-messaging-hosts")
     librewolf_conf_json = pathlib2.Path(
         librewolf_conf_dir, "org.keepassxc.keepassxc_browser.json")
@@ -264,10 +266,10 @@ def snap_nuke():
         ["awk", "/snap/ {print $6}"], stdin=volume_list.stdout)
     for vol in snap_vol_list:
         subprocess.run(["sudo", "umount", vol])
-    if Program_Main.linux_distro == "arch":
+    if linux_distro == "arch":
         subprocess.run(["sudo", "pacman", "-Rns", "snapd"],
                        check=True, text=True)
-    elif Program_Main.linux_distro == "debian":
+    elif linux_distro == "debian":
         program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/nosnap.pref"), open(
             pathlib2.Path(pathlib2.Path.cwd(), "text", "nosnap.pref")).read())
         program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/firefox-no-snap"), open(

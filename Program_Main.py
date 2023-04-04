@@ -6,8 +6,8 @@ import program_debian
 is_server_install_type = True
 desktop_environment = ""
 audio_environment = ""
-linux_distro = program_commands.os_check()
-username = program_commands.get_username()
+linux_distro = program_commands.linux_distro
+username = program_commands.username
 
 
 def main():
