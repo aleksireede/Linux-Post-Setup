@@ -88,12 +88,12 @@ def debian_pkgs_install():
     download_file_from_url("/etc/apt/sources.list.d/ani-cli-debian.list",
                            "https://Wiener234.github.io/ani-cli-ppa/ani-cli-debian.list")
     download_file_from_url("/etc/apt/trusted.gpg.d/microsoft.asc",
-                           "https://packages.microsoft.com/keys/microsoft.asc")
+                           "https://pkgs.microsoft.com/keys/microsoft.asc")
     subprocess.run("curl -fsSL https://packagecloud.io/filips/FirefoxPWA/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/firefoxpwa-keyring.gpg > /dev/null", shell=True)
     program_commands.text_modify(pathlib2.Path("/etc/apt/sources.list.d/firefoxpwa.list"),
                                  "deb [signed-by=/usr/share/keyrings/firefoxpwa-keyring.gpg] https://packagecloud.io/filips/FirefoxPWA/any any main")
     program_commands.text_modify(pathlib2.Path("/etc/apt/sources.list.d/vscode.list"),
-                                 'deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main')
+                                 'deb [arch=amd64] https://pkgs.microsoft.com/repos/vscode stable main')
     apt.add_repo("universe")
     apt.add_repo("multiverse")
     apt.add_repo("ppa:nextcloud-devs/client")

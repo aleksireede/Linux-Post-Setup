@@ -252,7 +252,7 @@ def remove_snap_packagaes():
     if snap_list_4.stdout.decode():
         snap_remove_list.extend(package_filter(snap_list_4.stdout.decode()))
     if not snap_list_1.stdout.decode() and not snap_list_2.stdout.decode() and not snap_list_3.stdout.decode() and not snap_list_4.stdout.decode():
-        return  # we don't have any snap packages so we don't remove something we don't have
+        return  # we don't have any snap pkgs so we don't remove something we don't have
     subprocess.run(snap_remove_list, check=True, text=True)
     program_commands.clear_screen()
 
