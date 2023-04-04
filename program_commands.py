@@ -43,7 +43,10 @@ def get_username():
         print("Username Auto-detect Failed!")
         user = input("Please enter your username:")
     return user
-username= get_username()
+
+
+username = get_username()
+
 
 def is_tool(name):
     return shutil.which(name) is not None
@@ -51,7 +54,7 @@ def is_tool(name):
 
 def text_modify(file, *args):
     file = pathlib2.Path(file)
-    if not file.exists(): # create file if it doesn't exist
+    if not file.exists():  # create file if it doesn't exist
         subprocess.run(["sudo", "touch", file], text=True, check=True)
         subprocess.run(["sudo", "chmod", "644", file], text=True, check=True)
     data = file.read_text()
@@ -91,7 +94,10 @@ def os_check():
         return "arch"
     elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_version").is_file() or pathlib2.Path("/etc/linuxmint/info").is_file():
         return "debian"
+
+
 linux_distro = os_check()
+
 
 def clear_screen():
     subprocess.run(["clear"], check=True, text=True)
@@ -99,7 +105,10 @@ def clear_screen():
 
 def lolcat_print(lolcat_text):
     clear_screen()
-    subprocess.run(["lolcat"], input=lolcat_text, check=True, text=True)
+    try:
+        subprocess.run(["lolcat"], input=lolcat_text, check=True, text=True)
+    except subprocess.CalledProcessError:
+        print(lolcat_text)
 
 
 def check_true_false(message: str, choice: str, input_list_true: list, input_list_false: list):

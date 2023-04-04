@@ -5,6 +5,8 @@ import os
 import program_commands
 import program_common
 import Program_Main
+linux_distro = program_commands.linux_distro
+username = program_commands.username
 
 debian_pkgs = program_common.package_filter(
     open("./pkgs/debian/debian.txt", "r").read())
@@ -46,17 +48,19 @@ class apt:
 
     def add_repo(repo: str):
         try:
-            repo_list = subprocess.check_output(["sudo", "grep", "-h", "^deb", "/etc/apt/sources.list", "/etc/apt/sources.list.d/*"])
+            repo_list = subprocess.check_output(
+                ["sudo", "grep", "-h", "^deb", "/etc/apt/sources.list", "/etc/apt/sources.list.d/*"])
         except subprocess.CalledProcessError:
             repo_list = []
         if repo in repo_list:
             return
         try:
             subprocess.run(["sudo", "add-apt-repository", repo],
-                       check=True, text=True)
+                           check=True, text=True)
         except subprocess.CalledProcessError:
-            subprocess.run(["sudo", "apt-get", "install", "software-properties-common"],check=True,text=True)
-            #needs possibly fixing
+            subprocess.run(["sudo", "apt-get", "install",
+                           "software-properties-common"], check=True, text=True)
+            # needs possibly fixing
 
     def autoremove():
         subprocess.run(["sudo", "apt", "-qq", "autoremove"],
