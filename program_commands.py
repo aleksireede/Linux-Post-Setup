@@ -91,7 +91,7 @@ def os_check():
         return "arch"
     elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_version").is_file() or pathlib2.Path("/etc/linuxmint/info").is_file():
         return "debian"
-linux_distro = os_check(S)
+linux_distro = os_check()
 
 def clear_screen():
     subprocess.run(["clear"], check=True, text=True)
