@@ -27,8 +27,10 @@ if not is_tool("lolcat"):
     git.Repo.clone_from(
         "https://github.com/aleksireede/lolcat.git", lolcat_temp_path)
     subprocess.run(["sudo", "gem", "install", "lolcat"],
-                   cwd=pathlib2.Path(lolcat_temp_path, "bin"))
+                   cwd=pathlib2.Path(lolcat_temp_path, "bin"), check=True, text=True)
     shutil.copyfile(pathlib2.Path(lolcat_temp_path,
                     "bin", "lolcat"), lolcat_binary_path)
+    subprocess.run(["sudo", "chmod", "+x", lolcat_binary_path],
+                   check=True, text=True)
     shutil.rmtree(lolcat_temp_path)
 Program_Main.main()
