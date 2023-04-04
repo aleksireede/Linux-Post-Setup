@@ -3,11 +3,11 @@ import program_commands
 import program_common
 import program_arch
 import program_debian
-import Installer
 is_server_install_type = True
 desktop_environment = ""
 audio_environment = ""
-linux_distro = Installer.system
+linux_distro = program_commands.os_check()
+username = program_commands.get_username()
 
 
 def main():

@@ -6,22 +6,21 @@ import Program_Main
 import shutil
 import git
 import typing
-import Installer
 
 
 librewolf_conf_text = open(pathlib2.Path(
     pathlib2.Path.cwd(), "text", "keepassxc_browser_plugin.json")).read()
 character_blacklist = [" ", "\\", "/", "\"",
                        "\'", ",", ".", "\n", "\r", "\t", "\b", "\f"]
-zshrc = pathlib2.Path("/home", Installer.username, ".zshrc")
-bashrc = pathlib2.Path("/home", Installer.username, ".bashrc")
+zshrc = pathlib2.Path("/home", Program_Main.username, ".zshrc")
+bashrc = pathlib2.Path("/home", Program_Main.username, ".bashrc")
 alias_file = open(pathlib2.Path("./text/alias.txt"), "r").read()
 zsh_aliases = pathlib2.Path(
-    "/home", Installer.username, ".zsh_aliases")
+    "/home", Program_Main.username, ".zsh_aliases")
 bash_aliases = pathlib2.Path(
-    "/home", Installer.username, ".bash_aliases")
+    "/home", Program_Main.username, ".bash_aliases")
 zsh_plugin_path = pathlib2.Path(
-    "/home", Installer.username, ".oh-my-zsh/custom/plugins")
+    "/home", Program_Main.username, ".oh-my-zsh/custom/plugins")
 
 
 class systemd_util:
@@ -33,7 +32,7 @@ class systemd_util:
     def start_user(service_name: str):
         '''Starts a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "start", service_name +
-                        "@"+Installer.username+".service"])
+                        "@"+Program_Main.username+".service"])
 
     def enable(service_name: str):
         '''Enables a systemd service. default is system service'''
@@ -43,7 +42,7 @@ class systemd_util:
     def enable_user(service_name: str):
         '''Enables a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "enable", service_name +
-                        "@"+Installer.username+".service"])
+                        "@"+Program_Main.username+".service"])
 
     def disable(service_name: str):
         '''Disables a systemd service. default is system service'''
@@ -53,7 +52,7 @@ class systemd_util:
     def disable_user(service_name: str):
         '''Disables a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "disable", service_name +
-                        "@"+Installer.username+".service"])
+                        "@"+Program_Main.username+".service"])
 
     def stop(service_name: str):
         '''Stops a systemd system service.'''
@@ -63,7 +62,7 @@ class systemd_util:
     def stop_user(service_name: str):
         '''Stops a systemd user service.'''
         subprocess.run(["sudo", "systemctl", "stop", service_name +
-                        "@"+Installer.username+".service"])
+                        "@"+Program_Main.username+".service"])
 
 
 def package_filter(package_list):
@@ -131,7 +130,7 @@ def oh_my_zsh():
     program_commands.text_modify(
         zshrc, 'ZSH_THEME="robbyrussell"', 'ZSH_THEME="agnoster"')
     program_commands.text_modify(zshrc, 'DEFAULT_USER="' +
-                                 Installer.username+'"\nprompt_context(){}\n')
+                                 Program_Main.username+'"\nprompt_context(){}\n')
     program_commands.text_modify(
         zshrc, "if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi")
     program_commands.text_modify(
@@ -220,7 +219,7 @@ def change_display_manager():
 
 
 def librewolf_keepassxc_browser_fix():
-    librewolf_conf_dir = pathlib2.Path("/home", Installer.username, ".librewolf",
+    librewolf_conf_dir = pathlib2.Path("/home", Program_Main.username, ".librewolf",
                                        "native-messaging-hosts")
     librewolf_conf_json = pathlib2.Path(
         librewolf_conf_dir, "org.keepassxc.keepassxc_browser.json")

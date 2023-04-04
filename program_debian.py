@@ -5,7 +5,6 @@ import os
 import program_commands
 import program_common
 import Program_Main
-import Installer
 
 debian_pkgs = program_common.package_filter(
     open("./pkgs/debian/debian.txt", "r").read())
@@ -76,10 +75,10 @@ class apt:
 
 
 def debian_pkgs_install():
-    if not pathlib2.Path("/home"+Installer.username+".cargo/bin").exists:
+    if not pathlib2.Path("/home"+Program_Main.username+".cargo/bin").exists:
         subprocess.run("curl https://sh.rustup.rs -sSf | sh", shell=True)
         os.environ["PATH"] += ":/home/" + \
-            Installer.username+"/.cargo/bin"
+            Program_Main.username+"/.cargo/bin"
     download_file_from_url("/etc/apt/trusted.gpg.d/ani-cli.asc",
                            "https://Wiener234.github.io/ani-cli-ppa/KEY.gpg")
     download_file_from_url("/etc/apt/sources.list.d/ani-cli-debian.list",
