@@ -30,7 +30,6 @@ prismlauncher-bin
 qpwgraph
 rdesktop
 signal-desktop-beta-bin
-sndcpy
 spectacle
 steam
 syncthing-appmenu
