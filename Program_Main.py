@@ -14,11 +14,11 @@ def main():
     global is_server_install_type, desktop_environment, audio_environment, linux_distro
     program_commands.run_script_check()
     if linux_distro == "arch":
-        program_arch.arch()
         is_server_install_type = program_commands.choice_server_desktop_apps()
         if not is_server_install_type:
             desktop_environment = program_commands.choice_desktop_environment()
             audio_environment = program_commands.choice_audio_environment()
+        program_arch.arch()
     elif linux_distro == "debian":
         program_debian.debian()
     program_common.Main()
