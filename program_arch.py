@@ -43,7 +43,11 @@ class pacman:
                 arch_app_list.extend(package)
         else:
             arch_app_list.extend(pkgs)
-        subprocess.run(arch_app_list, check=True, text=True)
+        try:
+            subprocess.run(arch_app_list, check=True, text=True)
+        except:
+            print("Error when installing packages skipping...")
+            program_commands.press_enter_to_continue()
 
     def update():
         subprocess.run(["paru", "-Suy", "--noconfirm"], check=True, text=True)
