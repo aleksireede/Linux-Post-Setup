@@ -41,4 +41,3 @@ vim
 wget
 wit
 zsh
-yt-dlp
