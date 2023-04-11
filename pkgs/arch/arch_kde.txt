@@ -1,5 +1,4 @@
 dolphin
-kde-applications
 kdevelop
 kdevelop-php
 kdevelop-python
