@@ -23,7 +23,6 @@ noto-fonts-cjk
 noto-fonts-emoji-apple
 ocs-url
 otf-monocraft
-pamac-aur
 powerline-fonts
 prismlauncher-bin
 qpwgraph
