@@ -9,7 +9,6 @@ kvantum
 plasma
 plasma-pa
 plasma-wayland-session
-plasma5-applets-volumewin7mixer
 plasma5-applets-window-appmenu
 plasma5-applets-window-buttons
 qtforkawesome

@@ -27,7 +27,6 @@ mda.lv2
 mkinitcpio-firmware
 pa-notify
 python-gobject
-python-pyclip
 realtime-privileges
 ryzen-controller-bin
 soundfont-fluid

@@ -3,7 +3,6 @@ arduino-ide-bin
 betterdiscord-installer-bin
 discord-screenaudio
 discord_arch_electron
-discover-overlay
 dotnet-runtime
 dotnet-sdk
 dxvk-bin
@@ -24,7 +23,7 @@ noto-fonts-cjk
 noto-fonts-emoji-apple
 ocs-url
 otf-monocraft
-pamac-nosnap
+pamac-aur
 powerline-fonts
 prismlauncher-bin
 qpwgraph
@@ -45,3 +44,4 @@ xorg-xlsclients
 youtube-music-bin
 kdeconnect
 indicator-kdeconnect-git
+google-chrome
