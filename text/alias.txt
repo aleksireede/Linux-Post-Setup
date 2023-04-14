@@ -5,7 +5,7 @@ export LC_CTYPE=en_US.UTF-8
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:$HOME/.local/share/gem/ruby/3.0.0/bin/:$PATH"
 alias flex="clear && screenfetch | lolcat"
 alias sus="clear && fortune | cowsay -f amogus | lolcat"
-alias myip="curl ipinfo.io/ip"
+alias myip="echo $(curl -s ipinfo.io/ip)"
 alias localip="ifconfig | grep broadcast"
 alias mnt="mount | awk -F' ' '{ printf \"%s\t%s\n\",\$1,\$3; }' | column -t | egrep ^/dev/ | sort"
 alias gh="history|grep"
@@ -24,5 +24,5 @@ alias poweroff="sudo /sbin/poweroff"
 alias halt="sudo /sbin/halt"
 alias shutdown="sudo /sbin/shutdown"
 alias sananlasku="clear && fortune | cowsay -f tux | lolcat"
-alias youtube-mp3='yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail --rm-cache-dir --add-metadata --ignore-errors --continue --output "%(uploader)s%(title)s.%(ext)s"'
-clear && fortune | cowsay -f tux | lolcat
+alias youtube-mp3='yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail --windows-filenames --rm-cache-dir --add-metadata --ignore-errors --continue --force-overwrites --output "%(uploader)s%(title)s.%(ext)s"'
+clear && fortune | cowsay -f tux | lolcat3

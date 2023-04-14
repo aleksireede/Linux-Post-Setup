@@ -283,9 +283,11 @@ def Main():
     snap_nuke()
     amogus_cowfile()
     oh_my_zsh()
-    install_custom_git("https://github.com/trakBan/ipfetch.git",
+    if not program_commands.is_tool("ipfetch"):
+        install_custom_git("https://github.com/trakBan/ipfetch.git",
                        pathlib2.Path(pathlib2.Path.cwd(), "tmp", "ipfecth"), ["sudo", "sh", "setup.sh"])
-    install_custom_git("https://github.com/cowsay-org/cowsay.git", pathlib2.Path(
+    if not program_commands.is_tool("cowsay"):
+        install_custom_git("https://github.com/cowsay-org/cowsay.git", pathlib2.Path(
         pathlib2.Path.cwd(), "tmp", "cowsay"), ["sudo", "make", "install"])
     if Program_Main.is_server_install_type:
         return
