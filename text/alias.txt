@@ -24,5 +24,5 @@ alias poweroff="sudo /sbin/poweroff"
 alias halt="sudo /sbin/halt"
 alias shutdown="sudo /sbin/shutdown"
 alias sananlasku="clear && fortune | cowsay -f tux | lolcat"
-alias youtube-mp3='yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail --windows-filenames --rm-cache-dir --add-metadata --ignore-errors --continue --force-overwrites --output "%(uploader)s%(title)s.%(ext)s"'
+alias youtube-mp3='yt-dlp --extract-audio --audio-format mp3 --embed-thumbnail --windows-filenames --rm-cache-dir --add-metadata --ignore-errors --continue --force-overwrites --output "%(uploader)s%-(title)s.%(ext)s"'
 clear && fortune | cowsay -f tux | lolcat3
