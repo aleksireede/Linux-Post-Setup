@@ -1,10 +1,11 @@
 #!/bin/sh
 if [ -f /etc/arch-release ]
 then
-    sudo pacman -S --noconfirm git python3 python-pip
+    sudo pacman -Suy --noconfirm git python3 python-pip
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
-    sudo apt install git python-pip
+    sudo apt update
+    sudo apt install git python3-pip
 else
     echo ""
     echo "Your system is not supported!"
