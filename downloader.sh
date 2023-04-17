@@ -4,7 +4,7 @@ then
     sudo pacman -S --noconfirm git python3 python-pip
 elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
 then
-    sudo apt install git python3-pip
+    sudo apt install git python-pip
 else
     echo ""
     echo "Your system is not supported!"
