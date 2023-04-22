@@ -7,19 +7,19 @@ import program_common
 import Program_Main
 import typing
 
-arch_pkgs = program_common.package_filter(
+arch_pkgs = program_commands.text_filter(
     open("./pkgs/arch/arch.txt", "r").read())
-arch_pulseaudio_pkgs = program_common.package_filter(
+arch_pulseaudio_pkgs = program_commands.text_filter(
     open("./pkgs/arch/arch_pulseaudio.txt", "r").read())
-arch_pipewire_pkgs = program_common.package_filter(
+arch_pipewire_pkgs = program_commands.text_filter(
     open("./pkgs/arch/arch_pipewire.txt", "r").read())
-arch_desktop_pkgs = program_common.package_filter(
+arch_desktop_pkgs = program_commands.text_filter(
     open("./pkgs/arch/arch_desktop.txt", "r").read())
-arch_kde_pkgs = program_common.package_filter(
+arch_kde_pkgs = program_commands.text_filter(
     open("./pkgs/arch/arch_kde.txt", "r").read())
-arch_gnome_pkgs = program_common.package_filter(
+arch_gnome_pkgs = program_commands.text_filter(
     open("./pkgs/arch/arch_gnome.txt", "r").read())
-arch_wayland_pkgs = program_common.package_filter(
+arch_wayland_pkgs = program_commands.text_filter(
     open("./pkgs/arch/arch_wayland.txt", "r").read())
 pacman_conf = pathlib2.Path(r"/etc/pacman.conf")
 paru_path = pathlib2.Path(pathlib2.Path.cwd(), "paru")
@@ -71,12 +71,13 @@ class pacman:
 
 def arch_pkgs_install():
     pacman.update_db()
-    install_list = [arch_pkgs, program_common.common_pkgs,
-                    program_common.common_gnome_pkgs]
+    install_list = [arch_pkgs, program_common.common_pkgs]
     uninstall_list = []
     if Program_Main.audio_environment == "pipewire":
         uninstall_list.append(arch_pulseaudio_pkgs)
+        install_list.append(arch_pipewire_pkgs)
     elif Program_Main.audio_environment == "pulseaudio":
+        install_list.append(arch_pulseaudio_pkgs)
         uninstall_list.append(arch_pipewire_pkgs)
     if not Program_Main.is_server_install_type:
         install_list.extend(
@@ -84,9 +85,11 @@ def arch_pkgs_install():
         if Program_Main.desktop_environment == "kde":
             install_list.append(arch_kde_pkgs)
             uninstall_list.append(arch_gnome_pkgs)
+            uninstall_list.append(program_common.common_gnome_pkgs)
         elif Program_Main.desktop_environment == "gnome":
             uninstall_list.append(arch_kde_pkgs)
             install_list.append(arch_gnome_pkgs)
+            install_list.append(program_common.common_gnome_pkgs)
     pacman.remove(uninstall_list)
     pacman.install(install_list)
     pacman.update()
@@ -95,7 +98,7 @@ def arch_pkgs_install():
 
 
 def check_for_aur_helper():
-    if program_commands.is_tool("paru") or program_commands.is_tool("yay"):
+    if program_commands.is_tool("paru"):
         return
     subprocess.run(["sudo", "pacman", "-S", "--needed", "--noconfirm",
                    "base-devel"], check=True, text=True)
@@ -109,6 +112,6 @@ def pacman_config():
     program_commands.text_modify(
         pacman_conf, "#[multilib]\n#Include = /etc/pacman.d/mirrorlist", "[multilib]\nInclude = /etc/pacman.d/mirrorlist")
     program_commands.text_modify(
-        pacman_conf, "#ParallelDownloads=5", "ParallelDownloads=5")
+        pacman_conf, "#ParallelDownloads = 5", "ParallelDownloads = 8")
     program_commands.text_modify(pacman_conf, "#Color", "Color")
     program_commands.clear_screen()

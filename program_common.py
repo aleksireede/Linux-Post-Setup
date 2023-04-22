@@ -5,6 +5,7 @@ import program_commands
 import Program_Main
 import shutil
 import git
+import tempfile
 import typing
 linux_distro = program_commands.linux_distro
 username = program_commands.username
@@ -12,8 +13,6 @@ username = program_commands.username
 
 librewolf_conf_text = open(pathlib2.Path(
     pathlib2.Path.cwd(), "text", "keepassxc_browser_plugin.json")).read()
-character_blacklist = [" ", "\\", "/", "\"",
-                       "\'", ",", ".", "\n", "\r", "\t", "\b", "\f"]
 zshrc = pathlib2.Path("/home", username, ".zshrc")
 bashrc = pathlib2.Path("/home", username, ".bashrc")
 alias_file = open(pathlib2.Path("./text/alias.txt"), "r").read()
@@ -67,24 +66,13 @@ class systemd_util:
                         "@"+username+".service"])
 
 
-def package_filter(package_list):
-    package_list = package_list.replace("\n", " ")
-    package_list_complete = []
-    for app in package_list.split(" "):
-        if any(app) in character_blacklist:
-            continue
-        package_list_complete.append(app)
-    package_list_complete = [i for i in package_list_complete if i]
-    return package_list_complete
-
-
-common_pkgs = package_filter(
+common_pkgs = program_commands.text_filter(
     open("./pkgs/common/common.txt", "r").read())
-common_desktop_pkgs = package_filter(
+common_desktop_pkgs = program_commands.text_filter(
     open("./pkgs/common/common_desktop.txt", "r").read())
-common_gnome_pkgs = package_filter(
+common_gnome_pkgs = program_commands.text_filter(
     open("./pkgs/common/common_gnome.txt", "r").read())
-common_flatpak_pkgs = package_filter(
+common_flatpak_pkgs = program_commands.text_filter(
     open("./pkgs/common/flatpak.txt", "r").read())
 
 
@@ -97,20 +85,20 @@ def flatpak():
 
 
 def noto_emoji_apple():
-    open(pathlib2.Path(r"/tmp/NotoColorEmoji.ttf"), "wb").write(requests.get(
-        "https://gitlab.com/timescam/noto-fonts-emoji-apple/-/raw/master/NotoColorEmoji.ttf?inline=false").content)
-    if pathlib2.Path("/usr/share/fonts/truetype").exists():
-        if pathlib2.Path("/usr/share/fonts/truetype/NotoColorEmoji.ttf").exists():
-            subprocess.run(
-                ["sudo", "rm", "/usr/share/fonts/truetype/NotoColorEmoji.ttf"], check=True, text=True)
-        subprocess.run(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
-                        "/usr/share/fonts/truetype/NotoColorEmoji.ttf"], check=True, text=True)
-    elif pathlib2.Path("/usr/share/fonts/noto").exists():
-        if pathlib2.Path("/usr/share/fonts/noto/NotoColorEmoji.ttf").exists():
-            subprocess.run(
-                ["sudo", "rm", "/usr/share/fonts/noto/NotoColorEmoji.ttf"], check=True, text=True)
-        subprocess.run(["sudo", "mv", "/tmp/NotoColorEmoji.ttf",
-                        "/usr/share/fonts/noto/NotoColorEmoji.ttf"], check=True, text=True)
+    response = requests.get(
+        "https://gitlab.com/timescam/noto-fonts-emoji-apple/-/raw/master/NotoColorEmoji.ttf?inline=false")
+    response.raise_for_status()
+    with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+        temp_file.write(response.content)
+    if program_commands.is_tool("fc-cache"):
+        font_dir = "/usr/share/fonts/truetype"
+    else:
+        font_dir = "/usr/share/fonts/noto"
+    font_path = pathlib2.Path(font_dir, "NotoColorEmoji.ttf")
+    if font_path.exists():
+        subprocess.run(["sudo", "rm", str(font_path)], check=True, text=True)
+    subprocess.run(["sudo", "mv", temp_file.name, str(font_path)],
+                   check=True, text=True)
     program_commands.clear_screen()
 
 
@@ -120,7 +108,7 @@ def install_zsh_plugin(name):
     program_commands.clear_screen()
 
 
-def oh_my_zsh():
+def shell_customize():
     if zsh_plugin_path.exists():
         return
     subprocess.run(
@@ -244,13 +232,17 @@ def remove_snap_packagaes():
     snap_remove_list = ["sudo", "snap", "remove"]
     # we need to check that the lists are not empty and then fiter the list out of unwanted charatcters like "\n"
     if snap_list_1.stdout.decode():
-        snap_remove_list.extend(package_filter(snap_list_1.stdout.decode()))
+        snap_remove_list.extend(
+            program_commands.text_filter(snap_list_1.stdout.decode()))
     if snap_list_2.stdout.decode():
-        snap_remove_list.extend(package_filter(snap_list_2.stdout.decode()))
+        snap_remove_list.extend(
+            program_commands.text_filter(snap_list_2.stdout.decode()))
     if snap_list_3.stdout.decode():
-        snap_remove_list.extend(package_filter(snap_list_3.stdout.decode()))
+        snap_remove_list.extend(
+            program_commands.text_filter(snap_list_3.stdout.decode()))
     if snap_list_4.stdout.decode():
-        snap_remove_list.extend(package_filter(snap_list_4.stdout.decode()))
+        snap_remove_list.extend(
+            program_commands.text_filter(snap_list_4.stdout.decode()))
     if not snap_list_1.stdout.decode() and not snap_list_2.stdout.decode() and not snap_list_3.stdout.decode() and not snap_list_4.stdout.decode():
         return  # we don't have any snap pkgs so we don't remove something we don't have
     subprocess.run(snap_remove_list, check=True, text=True)
@@ -282,13 +274,13 @@ def snap_nuke():
 def Main():
     snap_nuke()
     amogus_cowfile()
-    oh_my_zsh()
+    shell_customize()
     if not program_commands.is_tool("ipfetch"):
         install_custom_git("https://github.com/trakBan/ipfetch.git",
-                       pathlib2.Path(pathlib2.Path.cwd(), "tmp", "ipfecth"), ["sudo", "sh", "setup.sh"])
+                           pathlib2.Path(pathlib2.Path.cwd(), "tmp", "ipfecth"), ["sudo", "sh", "setup.sh"])
     if not program_commands.is_tool("cowsay"):
         install_custom_git("https://github.com/cowsay-org/cowsay.git", pathlib2.Path(
-        pathlib2.Path.cwd(), "tmp", "cowsay"), ["sudo", "make", "install"])
+            pathlib2.Path.cwd(), "tmp", "cowsay"), ["sudo", "make", "install"])
     if Program_Main.is_server_install_type:
         return
     flatpak()

@@ -1,6 +1,5 @@
 amdctl
 arduino-ide-bin
-betterdiscord-installer-bin
 discord-screenaudio
 discord_arch_electron
 dotnet-runtime
@@ -8,13 +7,11 @@ dotnet-sdk
 dxvk-bin
 easyeffects
 etcher-bin
-facebook-desktop-app
 firefox-nightly-bin
 firefox-pwa-bin
 firefox-wayland-mode-hook
 git-credential-keepassxc
 gmail-nativefier
-heroic-games-launcher-bin
 mangohud-common
 ms-outlook-nativefier
 netcoredbg
@@ -24,7 +21,6 @@ noto-fonts-emoji-apple
 ocs-url
 otf-monocraft
 powerline-fonts
-prismlauncher-bin
 qpwgraph
 rdesktop
 signal-desktop-beta-bin
@@ -36,11 +32,10 @@ telegram-desktop-bin
 tor-browser
 ttf-ms-fonts
 visual-studio-code-bin
-whatsdesk-bin
+whatsapp-for-linux
 xorg-xcursorgen
 xorg-xkill
 xorg-xlsclients
 youtube-music-bin
 kdeconnect
-indicator-kdeconnect-git
 google-chrome

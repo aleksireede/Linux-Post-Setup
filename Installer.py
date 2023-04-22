@@ -16,6 +16,8 @@ if not is_tool("lolcat") and not is_tool("gem"):
     elif system == "debian":
         subprocess.run(["sudo", "apt", "-y", "install", "rubygems"],
                        check=True, text=True)
+    elif system == "android":
+        subprocess.run(["pkg", "install", "ruby"], check=True, text=True)
 
 
 if not is_tool("lolcat"):

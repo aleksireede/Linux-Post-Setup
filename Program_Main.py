@@ -12,7 +12,6 @@ username = program_commands.username
 
 def main():
     global is_server_install_type, desktop_environment, audio_environment, linux_distro
-    program_commands.run_script_check()
     if linux_distro == "arch":
         is_server_install_type = program_commands.choice_server_desktop_apps()
         if not is_server_install_type:

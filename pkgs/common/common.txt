@@ -8,7 +8,7 @@ cowsay
 curl
 dnsutils
 dos2unix
-emacs
+emacs-nox
 flex
 fluidsynth
 fortune-mod

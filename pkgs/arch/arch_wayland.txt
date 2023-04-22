@@ -1,5 +1,5 @@
 glew-wayland
-glfw-wayland
+glfw-x11
 plasma-wayland-session
 qt5-wayland
 qt6-wayland

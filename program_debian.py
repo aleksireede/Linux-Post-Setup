@@ -8,13 +8,13 @@ import Program_Main
 linux_distro = program_commands.linux_distro
 username = program_commands.username
 
-debian_pkgs = program_common.package_filter(
+debian_pkgs = program_commands.text_filter(
     open("./pkgs/debian/debian.txt", "r").read())
-debian_gnome_pkgs = program_common.package_filter(
+debian_gnome_pkgs = program_commands.text_filter(
     open("./pkgs/debian/debian_gnome.txt", "r").read())
-debian_desktop_pkgs = program_common.package_filter(
+debian_desktop_pkgs = program_commands.text_filter(
     open("./pkgs/debian/debian_desktop.txt", "r").read())
-debian_flatpak_pkgs = program_common.package_filter(
+debian_flatpak_pkgs = program_commands.text_filter(
     open("./pkgs/debian/flatpak.txt", "r").read())
 fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
 

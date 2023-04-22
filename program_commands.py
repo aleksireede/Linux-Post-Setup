@@ -1,7 +1,7 @@
 import shutil
 import subprocess
 import pathlib2
-import sys
+import re
 import os
 import pwd
 import getpass
@@ -14,6 +14,7 @@ input_gnome = ("gnome", "g", "gn", "gno", "gnom", "gmone", "gnoum", "gnomw")
 input_kde = ("k", "kd", "kde", "ked", "kdd", "kded")
 input_pipewire = ("pw", "pipewire")
 input_pulseaudio = ("pa", "pulse", "pulseaudio")
+character_blacklist = "[^a-zA-Z0-9-_\n]"
 
 
 def get_username():
@@ -59,9 +60,6 @@ def text_modify(file, *args):
         subprocess.run(["sudo", "chmod", "644", file], text=True, check=True)
     data = file.read_text()
     if len(args) == 1:
-        if args[0] in data:
-            clear_screen()
-            return print(f"Already in file:{file} text:{args[0]}")
         data = data+args[0]
     elif len(args) == 2:
         if args[1] in data:
@@ -86,14 +84,12 @@ def press_enter_to_continue():
 
 
 def os_check():
-    if sys.platform != "linux":
-        print("This is only for linux!\nThe program will now terminate!\nGoodbye!")
-        press_enter_to_continue()
-        exit(1)
     if pathlib2.Path("/etc/arch-release").is_file():
         return "arch"
     elif pathlib2.Path("/etc/lsb-release").is_file() or pathlib2.Path("/etc/debian_version").is_file() or pathlib2.Path("/etc/linuxmint/info").is_file():
         return "debian"
+    if is_tool("termux-setup-storage"):
+        return "android"
 
 
 linux_distro = os_check()
@@ -139,15 +135,11 @@ def choice_server_desktop_apps():
     return check_true_false("do you want to install only (server) or all (desktop) applications?", "(s/D):", input_server, input_desktop)
 
 
-def run_script_check():
-    if check_true_false("Do you wish to run the script?", "(y/N):", input_yes, input_no):
-        return
-    else:
-        exit(1)
-
-
 def choice_audio_environment():
     if check_true_false("do you want to install pipewire or pulseaudio as audio backend", "(pw/PA):", input_pipewire, input_pulseaudio):
         return "pipewire"
     else:
         return "pulseaudio"
+
+def text_filter(text):
+    return re.sub(character_blacklist, "", text)
