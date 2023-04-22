@@ -14,7 +14,7 @@ input_gnome = ("gnome", "g", "gn", "gno", "gnom", "gmone", "gnoum", "gnomw")
 input_kde = ("k", "kd", "kde", "ked", "kdd", "kded")
 input_pipewire = ("pw", "pipewire")
 input_pulseaudio = ("pa", "pulse", "pulseaudio")
-character_blacklist = "[^a-zA-Z0-9-_\n]"
+character_blacklist = "[^a-zA-Z0-9-_\n .+]"
 
 
 def get_username():
@@ -142,4 +142,4 @@ def choice_audio_environment():
         return "pulseaudio"
 
 def text_filter(text):
-    return re.sub(character_blacklist, "", text)
+    return re.sub(character_blacklist, "", text).split("\n")

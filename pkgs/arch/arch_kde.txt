@@ -15,7 +15,7 @@ qtforkawesome
 qtforkawesome-qt6
 qtutilities
 qtutilities-qt6
-sddm
+sddm-git
 syncthingtray-qt6
 telepathy-kde-desktop-applets
 umbrello
