@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 if [ ! command -v pip3 ] && [ ! command -v git ] #check if we have pip and git and if not then install
 then
     if [ -f /etc/arch-release ]
@@ -14,7 +14,7 @@ then
     then
         apt update
         apt upgrade
-        apt install python3
+        apt install python3 git
     else
         echo ""
         echo "Your system is not supported!"
