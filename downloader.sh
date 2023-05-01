@@ -14,7 +14,7 @@ then
     then
         apt update
         apt upgrade
-        apt install python3 git
+        apt install python3 git libxml2-dev libxslt-dev python-dev
     else
         echo ""
         echo "Your system is not supported!"
