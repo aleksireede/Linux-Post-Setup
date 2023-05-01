@@ -10,7 +10,7 @@ then
         sudo apt update
         sudo apt upgrade
         sudo apt install git python3-pip
-    elif [ command -v termux-setup-storage ]
+    elif [ ! command -v termux-setup-storage ]
     then
         apt update
         apt upgrade
