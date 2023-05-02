@@ -22,7 +22,6 @@ then
         exit
     fi
 fi
-
 cd ~
 if [ -f ./Linux-First-Setup ]
 then
