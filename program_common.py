@@ -66,17 +66,20 @@ class systemd_util:
                         "@"+username+".service"])
 
 
+common_pkg_directory = pathlib2.Path(pathlib2.Path.cwd(), "pkgs", "common")
 common_pkgs = program_commands.text_filter(
-    open("./pkgs/common/common.txt", "r").read())
+    open(pathlib2.Path(common_pkg_directory, "common.txt"), "r").read())
 common_desktop_pkgs = program_commands.text_filter(
-    open("./pkgs/common/common_desktop.txt", "r").read())
+    open(pathlib2.Path(common_pkg_directory, "common_desktop.txt"), "r").read())
 common_gnome_pkgs = program_commands.text_filter(
-    open("./pkgs/common/common_gnome.txt", "r").read())
+    open(pathlib2.Path(common_pkg_directory, "common_gnome.txt"), "r").read())
 common_flatpak_pkgs = program_commands.text_filter(
-    open("./pkgs/common/flatpak.txt", "r").read())
+    open(pathlib2.Path(common_pkg_directory, "flatpak.txt"), "r").read())
 
 
 def flatpak():
+    if not program_commands.is_tool("flatpak"):
+        return "error no flatpak executable found"
     subprocess.run(["flatpak", "remote-add", "--if-not-exists", "flathub",
                    "https://flathub.org/repo/flathub.flatpakrepo"], check=True, text=True)
     for app in common_flatpak_pkgs:
@@ -109,12 +112,6 @@ def install_zsh_plugin(name):
 
 
 def shell_customize():
-    if zsh_plugin_path.exists():
-        return
-    subprocess.run(
-        'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended', shell=True)
-    install_zsh_plugin("zsh-syntax-highlighting")
-    install_zsh_plugin("zsh-autosuggestions")
     program_commands.text_modify(
         zshrc, "plugins=(git)", "plugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)")
     program_commands.text_modify(
@@ -129,6 +126,12 @@ def shell_customize():
         zsh_aliases, "#!/usr/bin/env zsh\n"+alias_file)
     program_commands.text_modify(
         bash_aliases, "#!/usr/bin/env bash\n"+alias_file)
+    if zsh_plugin_path.exists():
+        return
+    subprocess.run(
+        'sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended', shell=True)
+    install_zsh_plugin("zsh-syntax-highlighting")
+    install_zsh_plugin("zsh-autosuggestions")
     program_commands.clear_screen()
 
 

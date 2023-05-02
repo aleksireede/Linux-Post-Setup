@@ -32,7 +32,7 @@ telegram-desktop-bin
 tor-browser
 ttf-ms-fonts
 visual-studio-code-bin
-whatsapp-for-linux
+whatsapp-nativefier
 xorg-xcursorgen
 xorg-xkill
 xorg-xlsclients

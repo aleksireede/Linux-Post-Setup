@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-if ! [ "command -v pip3" ]  &&  ! [ "command -v git" ] #check if we have pip and git and if not then install
+
+if ! command -v pip3 && ! command -v git # check if we have pip and git and if not then install
 then
     if [ -f /etc/arch-release ]
     then
@@ -8,13 +9,13 @@ then
     elif [ -f /etc/lsb-release ] || [ -f /etc/debian_version ] || [ -f /etc/linuxmint/info ]
     then
         sudo apt update
-        sudo apt upgrade
-        sudo apt install git python3-pip
-    elif ! [ "command -v termux-setup-storage" ]
+        sudo apt -y upgrade
+        sudo apt install -y git python3-pip git
+    elif ! command -v termux-setup-storage
     then
         apt update
         apt upgrade
-        apt install python3 git libxml2 libxslt libiconv
+        apt install python3 git libxml2 libxslt libiconv rust
     else
         echo ""
         echo "Your system is not supported!"
@@ -22,7 +23,9 @@ then
         exit
     fi
 fi
+
 cd ~
+
 if [ -f ./Linux-First-Setup ]
 then
     rm -rf ./Linux-First-Setup

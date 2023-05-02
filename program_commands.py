@@ -5,6 +5,7 @@ import re
 import os
 import pwd
 import getpass
+import platform
 
 input_yes = ("y", "yes", "k", "kyllä", "ye", "kyl", "kyll", "kylä")
 input_no = ("n", "no", "e", "ei", "eii", "eiii")
@@ -55,12 +56,19 @@ def is_tool(name):
 
 def text_modify(file, *args):
     file = pathlib2.Path(file)
-    if not file.exists():  # create file if it doesn't exist
-        subprocess.run(["sudo", "touch", file], text=True, check=True)
-        subprocess.run(["sudo", "chmod", "644", file], text=True, check=True)
+    if not file.exists():
+        try:
+            subprocess.run(["sudo", "touch", file], text=True,
+                           check=True, input=getpass.getpass())
+            subprocess.run(["sudo", "chmod", "644", file],
+                           text=True, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e)
+            return
+
     data = file.read_text()
     if len(args) == 1:
-        data = data+args[0]
+        data += args[0]
     elif len(args) == 2:
         if args[1] in data:
             clear_screen()
@@ -69,14 +77,22 @@ def text_modify(file, *args):
     else:
         clear_screen()
         return print("invalid number of arguments")
+
     try:
         file.write_text(data)
     except PermissionError:
-        subprocess.run(["sudo", "chmod", "777", file], text=True, check=True)
-        file.write_text(data)
-        subprocess.run(["sudo", "chmod", "644", file], text=True, check=True)
+        try:
+            subprocess.run(["sudo", "chmod", "777", file],
+                           text=True, check=True, input=getpass.getpass())
+            file.write_text(data)
+            subprocess.run(["sudo", "chmod", "644", file],
+                           text=True, check=True)
+        except subprocess.CalledProcessError as e:
+            print(e)
+            return
+
     clear_screen()
-    return print(f"operation successfull args:{args}")
+    return print(f"operation successful args:{args}")
 
 
 def press_enter_to_continue():
@@ -90,7 +106,6 @@ def os_check():
         return "debian"
     if is_tool("termux-setup-storage"):
         return "android"
-
 
 linux_distro = os_check()
 
@@ -141,5 +156,31 @@ def choice_audio_environment():
     else:
         return "pulseaudio"
 
+
 def text_filter(text):
     return re.sub(character_blacklist, "", text).split("\n")
+
+
+def detect_graphics_card():
+    output = subprocess.check_output(['lspci', '-nnk']).decode('utf-8')
+    if 'VGA compatible controller' in output:
+        if 'NVIDIA Corporation' in output:
+            print("Nvidia graphics card detected")
+        elif 'Advanced Micro Devices, Inc.' in output:
+            print("AMD graphics card detected")
+        else:
+            print("Unknown graphics card detected")
+    else:
+        print("No graphics card detected")
+
+
+def check_machine_type():
+    machine_type = platform.machine()
+    if machine_type.startswith('arm') or machine_type.startswith("aarch64"):
+        return "Arm"
+    elif machine_type.startswith('x86'):
+        return "x86"
+    else:
+        print('Unknown machine type')
+
+cpu_architecture = check_machine_type()

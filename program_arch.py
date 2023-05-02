@@ -7,20 +7,22 @@ import program_common
 import Program_Main
 import typing
 
+arch_package_directory = pathlib2.Path(pathlib2.Path.cwd(), "pkgs", "arch")
 arch_pkgs = program_commands.text_filter(
-    open("./pkgs/arch/arch.txt", "r").read())
+    open(pathlib2.Path(arch_package_directory, "arch.txt"), "r").read())
 arch_pulseaudio_pkgs = program_commands.text_filter(
-    open("./pkgs/arch/arch_pulseaudio.txt", "r").read())
+    open(pathlib2.Path(arch_package_directory, "arch_pulseaudio.txt"), "r").read())
 arch_pipewire_pkgs = program_commands.text_filter(
-    open("./pkgs/arch/arch_pipewire.txt", "r").read())
+    open(pathlib2.Path(arch_package_directory, "arch_pipewire.txt"), "r").read())
 arch_desktop_pkgs = program_commands.text_filter(
-    open("./pkgs/arch/arch_desktop.txt", "r").read())
+    open(pathlib2.Path(arch_package_directory, "arch_desktop.txt"), "r").read())
 arch_kde_pkgs = program_commands.text_filter(
-    open("./pkgs/arch/arch_kde.txt", "r").read())
+    open(pathlib2.Path(arch_package_directory, "arch_kde.txt"), "r").read())
 arch_gnome_pkgs = program_commands.text_filter(
-    open("./pkgs/arch/arch_gnome.txt", "r").read())
+    open(pathlib2.Path(arch_package_directory, "arch_gnome.txt"), "r").read())
 arch_wayland_pkgs = program_commands.text_filter(
-    open("./pkgs/arch/arch_wayland.txt", "r").read())
+    open(pathlib2.Path(arch_package_directory, "arch_wayland.txt"), "r").read())
+
 pacman_conf = pathlib2.Path(r"/etc/pacman.conf")
 paru_path = pathlib2.Path(pathlib2.Path.cwd(), "paru")
 

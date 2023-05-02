@@ -13,3 +13,4 @@ See file project/gpl-2.0.txt or http://www.gnu.org/licenses/gpl-2.0.txt for deta
 
 ## todo
 - add debian pipewire pulseaudio and common pw/pa
+- use graphic card detection to disable wayland on nvidia

@@ -8,14 +8,16 @@ import Program_Main
 linux_distro = program_commands.linux_distro
 username = program_commands.username
 
+debian_package_directory = pathlib2.Path(pathlib2.Path.cwd(), "pkgs", "debian")
 debian_pkgs = program_commands.text_filter(
-    open("./pkgs/debian/debian.txt", "r").read())
+    open(pathlib2.Path(debian_package_directory, "debian.txt"), "r").read())
 debian_gnome_pkgs = program_commands.text_filter(
-    open("./pkgs/debian/debian_gnome.txt", "r").read())
+    open(pathlib2.Path(debian_package_directory, "debian_gnome.txt"), "r").read())
 debian_desktop_pkgs = program_commands.text_filter(
-    open("./pkgs/debian/debian_desktop.txt", "r").read())
+    open(pathlib2.Path(debian_package_directory, "debian_desktop.txt"), "r").read())
 debian_flatpak_pkgs = program_commands.text_filter(
-    open("./pkgs/debian/flatpak.txt", "r").read())
+    open(pathlib2.Path(debian_package_directory, "flatpak.txt"), "r").read())
+
 fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
 
 
@@ -46,13 +48,13 @@ class apt:
         subprocess.run(["sudo", "apt", "-q", "--assume-yes",
                         "upgrade"], check=True, text=True)
 
+    def check_apt_repository_exists(repo_url):
+        output = subprocess.check_output(
+            ["grep", "-r", f"^{repo_url}", "/etc/apt/sources.list*", "/etc/apt/sources.list.d/*"])
+        return output.decode("utf-8").strip() != ""
+
     def add_repo(repo: str):
-        try:
-            repo_list = subprocess.check_output(
-                ["sudo", "grep", "-h", "^deb", "/etc/apt/sources.list", "/etc/apt/sources.list.d/*"])
-        except subprocess.CalledProcessError:
-            repo_list = []
-        if repo in repo_list:
+        if apt.check_apt_repository_exists(repo):
             return
         try:
             subprocess.run(["sudo", "add-apt-repository", repo],
@@ -77,16 +79,17 @@ class apt:
         apt.install("temp.deb")
         os.remove(pathlib2.Path(pathlib2.Path.cwd(), "temp", "temp.deb"))
 
+    def is_32bit_support_enabled():
+        output = subprocess.check_output(
+            ['dpkg', '--print-foreign-architectures']).decode('utf-8').strip()
+        return 'i386' in output.split('\n')
+
 
 def debian_pkgs_install():
     if not pathlib2.Path("/home"+username+".cargo/bin").exists:
         subprocess.run("curl https://sh.rustup.rs -sSf | sh", shell=True)
         os.environ["PATH"] += ":/home/" + \
             username+"/.cargo/bin"
-    download_file_from_url("/etc/apt/trusted.gpg.d/ani-cli.asc",
-                           "https://Wiener234.github.io/ani-cli-ppa/KEY.gpg")
-    download_file_from_url("/etc/apt/sources.list.d/ani-cli-debian.list",
-                           "https://Wiener234.github.io/ani-cli-ppa/ani-cli-debian.list")
     download_file_from_url("/etc/apt/trusted.gpg.d/microsoft.asc",
                            "https://pkgs.microsoft.com/keys/microsoft.asc")
     subprocess.run("curl -fsSL https://packagecloud.io/filips/FirefoxPWA/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/firefoxpwa-keyring.gpg > /dev/null", shell=True)
@@ -99,8 +102,9 @@ def debian_pkgs_install():
     apt.add_repo("ppa:nextcloud-devs/client")
     apt.add_repo("ppa:mozillateam/ppa")
     apt.add_repo("ppa:yt-dlp/stable")
-    subprocess.run(["sudo", "dpkg", "--add-architecture",
-                   "i386"], check=True, text=True)
+    if not apt.is_32bit_support_enabled and program_commands.cpu_architecture == "x86":
+        subprocess.run(["sudo", "dpkg", "--add-architecture",
+                        "i386"], check=True, text=True)
     apt.update()
     apt.upgrade()
     apt.install(["gnupg", "curl", "apt-transport-https"])
@@ -109,8 +113,6 @@ def debian_pkgs_install():
         debian_pkgs.extend(program_common.common_desktop_pkgs)
         debian_pkgs.extend(program_common.common_gnome_pkgs)
         debian_pkgs.extend(debian_gnome_pkgs)
-        apt.aria2_install(
-            "https://discord.com/api/download?platform=linux&format=deb")
     debian_pkgs.extend(program_common.common_pkgs)
     apt.install(debian_pkgs)
     apt.autoremove()
