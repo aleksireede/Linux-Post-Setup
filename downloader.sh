@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [ ! command -v pip3 ] && [ ! command -v git ] #check if we have pip and git and if not then install
+if ! [ command -v pip3 ]  &&  ! [ command -v git ] #check if we have pip and git and if not then install
 then
     if [ -f /etc/arch-release ]
     then
@@ -10,11 +10,11 @@ then
         sudo apt update
         sudo apt upgrade
         sudo apt install git python3-pip
-    elif [ ! command -v termux-setup-storage ]
+    elif ! [ command -v termux-setup-storage ]
     then
         apt update
         apt upgrade
-        apt install python3 git libxml2-dev libxslt-dev python-dev
+        apt install python3 git libxml2 libxslt libiconv
     else
         echo ""
         echo "Your system is not supported!"
