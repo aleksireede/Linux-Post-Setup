@@ -17,6 +17,8 @@ debian_desktop_pkgs = program_commands.text_filter(
     open(pathlib2.Path(debian_package_directory, "debian_desktop.txt"), "r").read())
 debian_flatpak_pkgs = program_commands.text_filter(
     open(pathlib2.Path(debian_package_directory, "flatpak.txt"), "r").read())
+debian_i386_pkgs = program_commands.text_filter(
+    open(pathlib2.Path(debian_package_directory, "debian_i386.txt"), "r").read())
 
 fastfetchpath = pathlib2.Path(pathlib2.Path.cwd(), "fastfetch")
 
@@ -105,6 +107,8 @@ def debian_pkgs_install():
     apt.update()
     apt.upgrade()
     apt.install(["gnupg", "curl", "apt-transport-https"])
+    if program_commands.cpu_architecture=="x86":
+        debian_pkgs.extend(debian_i386_pkgs)
     if not Program_Main.is_server_install_type:
         debian_pkgs.extend(debian_desktop_pkgs)
         debian_pkgs.extend(program_common.common_desktop_pkgs)
