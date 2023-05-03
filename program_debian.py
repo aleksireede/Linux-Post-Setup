@@ -99,7 +99,6 @@ def debian_pkgs_install():
                                  "deb [signed-by=/usr/share/keyrings/firefoxpwa-keyring.gpg] https://packagecloud.io/filips/FirefoxPWA/any any main")
     program_commands.text_modify(pathlib2.Path("/etc/apt/sources.list.d/vscode.list"),
                                  'deb [arch=amd64] https://pkgs.microsoft.com/repos/vscode stable main')
-    apt.add_repo("ppa:yt-dlp/stable")
     if not apt.is_32bit_support_enabled and program_commands.cpu_architecture == "x86":
         subprocess.run(["sudo", "dpkg", "--add-architecture",
                         "i386"], check=True, text=True)
