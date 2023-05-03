@@ -164,7 +164,7 @@ def text_filter(text):
             if i == "":
                 continue
             temp += re.sub(character_blacklist, "", i)
-         return temp
+        return temp
     return re.sub(character_blacklist, "", text).split("\n")
 
 
