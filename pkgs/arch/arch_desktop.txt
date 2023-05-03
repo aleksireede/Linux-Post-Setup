@@ -14,7 +14,6 @@ git-credential-keepassxc
 gmail-nativefier
 mangohud-common
 ms-outlook-nativefier
-netcoredbg
 nextcloud-client
 noto-fonts-cjk
 noto-fonts-emoji-apple
