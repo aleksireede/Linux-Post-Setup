@@ -56,7 +56,7 @@ class apt:
         return output.decode("utf-8").strip() != ""
 
     def add_repo(repo: str):
-        if apt.check_apt_repository_exists(repo):
+        if apt.check_apt_repository_exists(repo)!="":
             return
         try:
             subprocess.run(["sudo", "add-apt-repository", repo],
