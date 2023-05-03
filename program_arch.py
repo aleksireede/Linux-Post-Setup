@@ -76,22 +76,20 @@ def arch_pkgs_install():
     install_list = [arch_pkgs, program_common.common_pkgs]
     uninstall_list = []
     if Program_Main.audio_environment == "pipewire":
-        uninstall_list.append(arch_pulseaudio_pkgs)
-        install_list.append(arch_pipewire_pkgs)
+        uninstall_list.extend(arch_pulseaudio_pkgs)
+        install_list.extend(arch_pipewire_pkgs)
     elif Program_Main.audio_environment == "pulseaudio":
-        install_list.append(arch_pulseaudio_pkgs)
-        uninstall_list.append(arch_pipewire_pkgs)
+        install_list.extend(arch_pulseaudio_pkgs)
+        uninstall_list.extend(arch_pipewire_pkgs)
     if not Program_Main.is_server_install_type:
         install_list.extend(
             [arch_desktop_pkgs, arch_wayland_pkgs, program_common.common_desktop_pkgs])
         if Program_Main.desktop_environment == "kde":
-            install_list.append(arch_kde_pkgs)
-            uninstall_list.append(arch_gnome_pkgs)
-            uninstall_list.append(program_common.common_gnome_pkgs)
+            install_list.extend(arch_kde_pkgs)
+            uninstall_list.extend([arch_gnome_pkgs,program_common.common_gnome_pkgs])
         elif Program_Main.desktop_environment == "gnome":
-            uninstall_list.append(arch_kde_pkgs)
-            install_list.append(arch_gnome_pkgs)
-            install_list.append(program_common.common_gnome_pkgs)
+            uninstall_list.extend(arch_kde_pkgs)
+            install_list.extend([arch_gnome_pkgs,program_common.common_gnome_pkgs])
     pacman.remove(uninstall_list)
     print(install_list)
     pacman.install(install_list)
