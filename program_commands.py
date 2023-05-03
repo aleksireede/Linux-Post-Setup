@@ -158,21 +158,6 @@ def choice_audio_environment():
 
 
 def text_filter(text):
-    if type(text) == list:
-        temp = []
-        for i in text:
-            if i == "":
-                continue
-            temptemp=[]
-            if type(i)==list:
-                for x in i:
-                    if x =="":
-                        continue
-                    temptemp.extend(re.sub(character_blacklist, "", x))
-                temp.extend(temptemp)
-            else:
-                temp.extend(re.sub(character_blacklist, "", i))
-        return temp
     return re.sub(character_blacklist, "", text).split("\n")
 
 
