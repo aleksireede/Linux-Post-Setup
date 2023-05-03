@@ -102,6 +102,7 @@ def arch_pkgs_install():
 def check_for_aur_helper():
     if program_commands.is_tool("paru"):
         return
+    pacman.update_db()
     subprocess.run(["sudo", "pacman", "-S", "--needed", "--noconfirm",
                    "base-devel"], check=True, text=True)
     git.Repo.clone_from("https://aur.archlinux.org/paru.git", paru_path)
