@@ -163,6 +163,7 @@ def text_filter(text):
         for i in text:
             if i == "":
                 continue
+            temptemp=[]
             if type(i)==list:
                 for x in i:
                     if x =="":
