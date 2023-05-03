@@ -68,7 +68,7 @@ def text_modify(file, *args):
 
     data = file.read_text()
     if len(args) == 1:
-        data += args[0]
+        data = args[0]
     elif len(args) == 2:
         if args[1] in data:
             clear_screen()

@@ -93,7 +93,7 @@ def debian_pkgs_install():
         os.environ["PATH"] += ":/home/" + \
             username+"/.cargo/bin"
     download_file_from_url("/etc/apt/trusted.gpg.d/microsoft.asc",
-                           "https://pkgs.microsoft.com/keys/microsoft.asc")
+                           "https://packages.microsoft.com/keys/microsoft.asc")
     subprocess.run("curl -fsSL https://packagecloud.io/filips/FirefoxPWA/gpgkey | gpg --dearmor | sudo tee /usr/share/keyrings/firefoxpwa-keyring.gpg > /dev/null", shell=True)
     program_commands.text_modify(pathlib2.Path("/etc/apt/sources.list.d/firefoxpwa.list"),
                                  "deb [signed-by=/usr/share/keyrings/firefoxpwa-keyring.gpg] https://packagecloud.io/filips/FirefoxPWA/any any main")
