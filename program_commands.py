@@ -163,7 +163,13 @@ def text_filter(text):
         for i in text:
             if i == "":
                 continue
-            temp += re.sub(character_blacklist, "", i)
+            if type(i)==list:
+                for x in i:
+                    if x =="":
+                        continue
+                    temptemp.extend(re.sub(character_blacklist, "", x))
+                temp,extend(temptemp)
+            temp.extend(re.sub(character_blacklist, "", i))
         return temp
     return re.sub(character_blacklist, "", text).split("\n")
 
