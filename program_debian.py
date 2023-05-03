@@ -49,8 +49,10 @@ class apt:
                         "upgrade"], check=True, text=True)
 
     def check_apt_repository_exists(repo_url):
-        output = subprocess.check_output(
-            ["grep", "-r", f"^{repo_url}", "/etc/apt/sources.list", "/etc/apt/sources.list.d/"])
+        try: output = subprocess.check_output(
+                ["grep", "-r", f"^{repo_url}", "/etc/apt/sources.list", "/etc/apt/sources.list.d/"])
+        except subprocess.CalledProcessError:
+            output = ""
         return output.decode("utf-8").strip() != ""
 
     def add_repo(repo: str):
