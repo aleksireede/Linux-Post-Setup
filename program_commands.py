@@ -118,7 +118,7 @@ def lolcat_print(lolcat_text):
     clear_screen()
     try:
         subprocess.run(["lolcat"], input=lolcat_text, check=True, text=True)
-    except subprocess.CalledProcessError:
+    except (subprocess.CalledProcessError,FileNotFoundError) as error:
         print(lolcat_text)
 
 
