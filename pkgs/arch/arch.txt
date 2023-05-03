@@ -7,7 +7,7 @@ boost-libs
 btw
 c++utilities
 carla
-disable-c6-systemd
+amd-disable-c6-git
 downgrade
 freepats-general-midi
 gtk-layer-shell
