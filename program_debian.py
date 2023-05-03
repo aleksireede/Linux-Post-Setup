@@ -52,7 +52,7 @@ class apt:
         try: output = subprocess.check_output(
                 ["grep", "-r", f"^{repo_url}", "/etc/apt/sources.list", "/etc/apt/sources.list.d/"])
         except subprocess.CalledProcessError:
-            output = ""
+            return ""
         return output.decode("utf-8").strip() != ""
 
     def add_repo(repo: str):
