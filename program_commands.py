@@ -169,7 +169,7 @@ def text_filter(text):
                     if x =="":
                         continue
                     temptemp.extend(re.sub(character_blacklist, "", x))
-                temp,extend(temptemp)
+                temp.extend(temptemp)
             temp.extend(re.sub(character_blacklist, "", i))
         return temp
     return re.sub(character_blacklist, "", text).split("\n")
