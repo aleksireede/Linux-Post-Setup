@@ -161,7 +161,7 @@ def text_filter(text):
     if type(text) == list:
         temp = []
         for i in text:
-            if i = "":
+            if i == "":
                 continue
             temp += re.sub(character_blacklist, "", i)
          return temp
