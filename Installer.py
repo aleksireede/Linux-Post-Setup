@@ -14,6 +14,8 @@ system = os_check()
 
 if not is_tool("lolcat"):
     if system == "arch":
+        subprocess.run(["sudo", "pacman", "-Sy", "--nocobfirm" ,"archlinux-keyring"],
+                       check=True, text=True)
         subprocess.run(["sudo", "pacman", "-S", "--noconfirm", "ruby"],
                        check=True, text=True)
         subprocess.run(["sudo", "gem", "install", "lolcat"],
