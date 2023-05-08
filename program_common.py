@@ -122,12 +122,14 @@ def install_zsh_plugin(name):
 
 
 def shell_customize():
+    program_commands.text_modify(zshrc, 'export ZSH="$HOME/.oh-my-zsh"')
     program_commands.text_modify(
-        zshrc, "plugins=(git)", "plugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)")
+        zshrc, 'ZSH_THEME="robbyrussell"', '\nZSH_THEME="agnoster"')
     program_commands.text_modify(
-        zshrc, 'ZSH_THEME="robbyrussell"', 'ZSH_THEME="agnoster"')
-    program_commands.text_modify(zshrc, 'DEFAULT_USER="' +
+        zshrc, "plugins=(git)", "\nplugins=(\ngit\nzsh-autosuggestions\nzsh-syntax-highlighting\n)")
+    program_commands.text_modify(zshrc, '\nDEFAULT_USER="' +
                                  username+'"\nprompt_context(){}\n')
+    program_commands.text_modify(zshrc, "source $ZSH/oh-my-zsh.sh\n")
     program_commands.text_modify(
         zshrc, "if [ -f ~/.zsh_aliases ]; then\n. ~/.zsh_aliases\nfi")
     program_commands.text_modify(

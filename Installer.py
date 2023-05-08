@@ -27,3 +27,4 @@ if not is_tool("lolcat"):
         subprocess.run(["pkg", "install", "ruby"], check=True, text=True)
         subprocess.run(["gem", "install", "lolcat"], check=True, text=True)
 Program_Main.main()
+ 

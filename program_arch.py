@@ -39,7 +39,7 @@ class pacman:
                        "--noconfirm", "archlinux-keyring"], check=True, text=True, input=program_commands.password)
 
     def install(pkgs: list):
-        arch_app_list = ["paru", "-S", "--needed"]
+        arch_app_list = ["paru", "-S", "--needed", "--noconfirm"]
         if any(isinstance(x, typing.List) for x in pkgs):
             for package in pkgs:
                 arch_app_list.extend(package)
@@ -56,7 +56,7 @@ class pacman:
         subprocess.run(["paru", "-Suy", "--noconfirm"], check=True, text=True)
 
     def autoremove():
-        subprocess.run("pacman -Qtdq | sudo pacman -Rns -",
+        subprocess.run("pacman -Qtdq | sudo pacman --noconfirm -Rns -",
                        shell=True)
 
     def remove(pkgs: list):
@@ -99,7 +99,6 @@ def arch_pkgs_install():
     uninstall_list = program_commands.text_filter(uninstall_list)
     install_list = program_commands.text_filter(install_list)
     pacman.remove(uninstall_list)
-    program_commands.press_enter_to_continue()
     pacman.install(install_list)
     pacman.update()
     pacman.autoremove()

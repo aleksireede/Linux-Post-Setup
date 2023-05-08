@@ -66,19 +66,24 @@ def text_modify(file, *args):
         except subprocess.CalledProcessError as e:
             print(e)
             return
-
     data = file.read_text()
     if len(args) == 1:
-        data = args[0]
+        if args[0] in data:
+            return
+        data += args[0]
     elif len(args) == 2:
         if args[1] in data:
             clear_screen()
             return print(f"Already replaced{args[1]}")
-        data = data.replace(args[0], args[1])
+        if not args[0] in data:
+            data += args[1]
+        else:
+            data = data.replace(args[0], args[1])
     else:
         clear_screen()
         return print("invalid number of arguments")
-
+    if not data:
+        return
     try:
         file.write_text(data)
     except PermissionError:
@@ -91,7 +96,6 @@ def text_modify(file, *args):
         except subprocess.CalledProcessError as e:
             print(e)
             return
-
     clear_screen()
     return print(f"operation successful args:{args}")
 
@@ -130,8 +134,7 @@ def check_true_false(message: str, choice: str, input_list_true: list, input_lis
     while True:
         clear_screen()
         lolcat_print(message)
-        lolcat_print(choice)
-        choice = input()
+        choice = input(choice)
         if choice.lower() in input_list_true:
             clear_screen()
             return True
