@@ -35,3 +35,4 @@ usb_modeswitch
 xkb-switch
 zenpower3-dkms
 zenstates-git
+lolcat

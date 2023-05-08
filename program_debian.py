@@ -36,46 +36,48 @@ def debian():
 def flatpak():
     subprocess.run(["flatpak", "remote-add", "--if-not-exists", "flathub",
                    "https://flathub.org/repo/flathub.flatpakrepo"], check=True, text=True)
-    for app in debian_flatpak_pkgs:
-        subprocess.run(["flatpak", "install", "flathub", app],
-                       check=True, text=True)
+    subprocess.run(["flatpak", "install", "flathub", debian_flatpak_pkgs],
+                   check=True, text=True)
     program_commands.clear_screen()
 
 
 class apt:
     def update():
-        subprocess.run(["sudo", "apt", "-q", "update"], check=True, text=True)
+        subprocess.run(["sudo", "apt", "-q", "update"], check=True,
+                       text=True, input=program_commands.password)
 
     def upgrade():
         subprocess.run(["sudo", "apt", "-q", "--assume-yes",
-                        "upgrade"], check=True, text=True)
+                        "upgrade"], check=True, text=True, input=program_commands.password)
 
     def check_apt_repository_exists(repo_url):
-        try: output = subprocess.check_output(
+        try:
+            output = subprocess.check_output(
                 ["grep", "-r", f"^{repo_url}", "/etc/apt/sources.list", "/etc/apt/sources.list.d/"])
         except subprocess.CalledProcessError:
             return ""
         return output.decode("utf-8").strip() != ""
 
     def add_repo(repo: str):
-        if apt.check_apt_repository_exists(repo)!="":
+        if apt.check_apt_repository_exists(repo) != "":
             return
         try:
             subprocess.run(["sudo", "add-apt-repository", repo],
-                           check=True, text=True)
+                           check=True, text=True, input=program_commands.password)
         except subprocess.CalledProcessError:
             subprocess.run(["sudo", "apt-get", "install",
-                           "software-properties-common"], check=True, text=True)
+                           "software-properties-common"], check=True, text=True, input=program_commands.password)
             # needs possibly fixing
 
     def autoremove():
         subprocess.run(["sudo", "apt", "-qq", "autoremove"],
-                       check=True, text=True)
+                       check=True, text=True, input=program_commands.password)
 
     def install(apps: list[str]):
         apt_install_list = ["sudo", "apt", "--assume-yes", "install"]
         apt_install_list.extend(apps)
-        subprocess.run(apt_install_list, check=True, text=True)
+        subprocess.run(apt_install_list, check=True, text=True,
+                       input=program_commands.password)
 
     def aria2_install(url):
         subprocess.run(["aria2c", "-o", "temp.deb", url],
@@ -103,11 +105,11 @@ def debian_pkgs_install():
                                  'deb [arch=amd64] https://pkgs.microsoft.com/repos/vscode stable main')
     if not apt.is_32bit_support_enabled and program_commands.cpu_architecture == "x86":
         subprocess.run(["sudo", "dpkg", "--add-architecture",
-                        "i386"], check=True, text=True)
+                        "i386"], check=True, text=True, input=program_commands.password)
     apt.update()
     apt.upgrade()
     apt.install(["gnupg", "curl", "apt-transport-https"])
-    if program_commands.cpu_architecture=="x86":
+    if program_commands.cpu_architecture == "x86":
         debian_pkgs.extend(debian_i386_pkgs)
     if not Program_Main.is_server_install_type:
         debian_pkgs.extend(debian_desktop_pkgs)
@@ -122,9 +124,10 @@ def debian_pkgs_install():
 def download_file_from_url(output_file, content_url):
     if pathlib2.Path(output_file).exists():
         return
-    subprocess.run(["sudo", "touch", output_file], text=True, check=True)
+    subprocess.run(["sudo", "touch", output_file], text=True,
+                   check=True, input=program_commands.password)
     subprocess.run(["sudo", "chmod", "777", output_file],
-                   text=True, check=True)
+                   text=True, check=True, input=program_commands.password)
     program_commands.text_modify(pathlib2.Path(
         output_file), requests.get(content_url).text)
 

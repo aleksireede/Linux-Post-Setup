@@ -28,42 +28,42 @@ class systemd_util:
     def start(service_name: str):
         '''Starts a systemd service. default is system service'''
         subprocess.run(
-            ["sudo", "systemctl", "start", service_name+".service"])
+            ["sudo", "systemctl", "start", service_name+".service"], check=True, text=True, input=program_commands.password)
 
     def start_user(service_name: str):
         '''Starts a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "start", service_name +
-                        "@"+username+".service"])
+                        "@"+username+".service"], check=True, text=True, input=program_commands.password)
 
     def enable(service_name: str):
         '''Enables a systemd service. default is system service'''
         subprocess.run(
-            ["sudo", "systemctl", "enable", service_name+".service"])
+            ["sudo", "systemctl", "enable", service_name+".service"], check=True, text=True, input=program_commands.password)
 
     def enable_user(service_name: str):
         '''Enables a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "enable", service_name +
-                        "@"+username+".service"])
+                        "@"+username+".service"], check=True, text=True, input=program_commands.password)
 
     def disable(service_name: str):
         '''Disables a systemd service. default is system service'''
         subprocess.run(
-            ["sudo", "systemctl", "disable", service_name+".service"])
+            ["sudo", "systemctl", "disable", service_name+".service"], check=True, text=True, input=program_commands.password)
 
     def disable_user(service_name: str):
         '''Disables a systemd service. default is system service'''
         subprocess.run(["sudo", "systemctl", "disable", service_name +
-                        "@"+username+".service"])
+                        "@"+username+".service"], check=True, text=True, input=program_commands.password)
 
     def stop(service_name: str):
         '''Stops a systemd system service.'''
         subprocess.run(
-            ["sudo", "systemctl", "stop", service_name+".service"])
+            ["sudo", "systemctl", "stop", service_name+".service"], check=True, text=True, input=program_commands.password)
 
     def stop_user(service_name: str):
         '''Stops a systemd user service.'''
         subprocess.run(["sudo", "systemctl", "stop", service_name +
-                        "@"+username+".service"])
+                        "@"+username+".service"], check=True, text=True, input=program_commands.password)
 
 
 common_pkg_directory = pathlib2.Path(pathlib2.Path.cwd(), "pkgs", "common")
@@ -82,9 +82,18 @@ def flatpak():
         return "error no flatpak executable found"
     subprocess.run(["flatpak", "remote-add", "--if-not-exists", "flathub",
                    "https://flathub.org/repo/flathub.flatpakrepo"], check=True, text=True)
-    for app in common_flatpak_pkgs:
-        subprocess.run(["flatpak", "install", "flathub", app],
-                       check=True, text=True)
+    flatpak_install_list = ["flatpak", "install", "flathub"]
+    if any(isinstance(x, typing.List) for x in common_flatpak_pkgs):
+        for package in common_flatpak_pkgs:
+            flatpak_install_list.extend(package)
+    else:
+        flatpak_install_list.extend(common_flatpak_pkgs)
+    try:
+        subprocess.run(flatpak_install_list, check=True, text=True)
+    except:
+        print("Error when installing packages aborting...")
+        program_commands.press_enter_to_continue()
+        exit()
 
 
 def noto_emoji_apple():
@@ -94,14 +103,15 @@ def noto_emoji_apple():
     with tempfile.NamedTemporaryFile(delete=False) as temp_file:
         temp_file.write(response.content)
     if program_commands.is_tool("fc-cache"):
-        font_dir = "/usr/share/fonts/truetype"
-    else:
         font_dir = "/usr/share/fonts/noto"
+    else:
+        font_dir = "/usr/share/fonts/truetype"
     font_path = pathlib2.Path(font_dir, "NotoColorEmoji.ttf")
     if font_path.exists():
-        subprocess.run(["sudo", "rm", str(font_path)], check=True, text=True)
+        subprocess.run(["sudo", "rm", str(font_path)], check=True,
+                       text=True, input=program_commands.password)
     subprocess.run(["sudo", "mv", temp_file.name, str(font_path)],
-                   check=True, text=True)
+                   check=True, text=True, input=program_commands.password)
     program_commands.clear_screen()
 
 
@@ -140,34 +150,19 @@ def amogus_cowfile():
         return
     if pathlib2.Path("/usr/share/cows").exists():
         subprocess.run(["sudo", "chmod", "777", "/usr/share/cows/"],
-                       check=True, text=True)
+                       check=True, text=True, input=program_commands.password)
         shutil.copyfile(pathlib2.Path(pathlib2.Path.cwd(), "text",
                         "amogus.cow"), pathlib2.Path("/usr/share/cows/amogus.cow"))
     elif pathlib2.Path("/usr/share/cowsay/cows/").exists():
         subprocess.run(["sudo", "chmod", "777", "/usr/share/cowsay/cows"],
-                       check=True, text=True)
+                       check=True, text=True, input=program_commands.password)
         shutil.copyfile(pathlib2.Path(pathlib2.Path.cwd(
         ), "text", "amogus.cow"), pathlib2.Path("/usr/share/cowsay/cows/amogus.cow"))
     elif pathlib2.Path("/usr/local/share/cowsay/cows").exists():
         subprocess.run(["sudo", "chmod", "777",
-                       "/usr/local/share/cowsay/cows"], check=True, text=True)
+                       "/usr/local/share/cowsay/cows"], text=True, check=True, input=program_commands.password)
         shutil.copyfile(pathlib2.Path(pathlib2.Path.cwd(), "text", "amogus.cow"),
                         pathlib2.Path("/usr/local/share/cowsay/cows/amogus.cow"))
-    program_commands.clear_screen()
-
-
-def install_oreo_cursors():
-    if pathlib2.Path("/usr/share/icons/oreo_blue_cursors/cursor.theme").exists():
-        return  # exit if cursors already exist
-    git.Repo.clone_from("https://github.com/varlesh/oreo-cursors.git",
-                        pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
-    subprocess.run(["ruby", "generator/convert.rb"],
-                   cwd=pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"), check=True, text=True)
-    subprocess.run(["make", "build"], cwd=pathlib2.Path(
-        pathlib2.Path.cwd(), "oreo-cursors"), check=True, text=True)
-    subprocess.run(["sudo", "make", "install"], cwd=pathlib2.Path(
-        pathlib2.Path.cwd(), "oreo-cursors"), check=True, text=True)
-    shutil.rmtree(pathlib2.Path(pathlib2.Path.cwd(), "oreo-cursors"))
     program_commands.clear_screen()
 
 
@@ -201,12 +196,12 @@ def change_display_manager():
     if Program_Main.desktop_environment == "gnome":
         if linux_distro == "debian":
             subprocess.run(["sudo", "dpkg-reconfigure", "gdm3"],
-                           check=True, text=True)
+                           check=True, text=True, input=program_commands.password)
         systemd_util.enable("gdm")
     elif Program_Main.desktop_environment == "kde":
         if linux_distro == "debian":
             subprocess.run(["sudo", "dpkg-reconfigure", "sddm"],
-                           check=True, text=True)
+                           check=True, text=True, input=program_commands.password)
         systemd_util.enable("sddm")
     program_commands.clear_screen()
 
@@ -248,7 +243,8 @@ def remove_snap_packagaes():
             program_commands.text_filter(snap_list_4.stdout.decode()))
     if not snap_list_1.stdout.decode() and not snap_list_2.stdout.decode() and not snap_list_3.stdout.decode() and not snap_list_4.stdout.decode():
         return  # we don't have any snap pkgs so we don't remove something we don't have
-    subprocess.run(snap_remove_list, check=True, text=True)
+    subprocess.run(snap_remove_list, check=True, text=True,
+                   input=program_commands.password)
     program_commands.clear_screen()
 
 
@@ -260,17 +256,18 @@ def snap_nuke():
     snap_vol_list = subprocess.check_output(
         ["awk", "/snap/ {print $6}"], stdin=volume_list.stdout)
     for vol in snap_vol_list:
-        subprocess.run(["sudo", "umount", vol])
+        subprocess.run(["sudo", "umount", vol], check=True,
+                       text=True, input=program_commands.password)
     if linux_distro == "arch":
         subprocess.run(["sudo", "pacman", "-Rns", "snapd"],
-                       check=True, text=True)
+                       check=True, text=True, input=program_commands.password)
     elif linux_distro == "debian":
         program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/nosnap.pref"), open(
             pathlib2.Path(pathlib2.Path.cwd(), "text", "nosnap.pref")).read())
         program_commands.text_modify(pathlib2.Path("/etc/apt/preferences.d/firefox-no-snap"), open(
             pathlib2.Path(pathlib2.Path.cwd(), "text", "firefox-no-snap.pref")).read())
         subprocess.run(["sudo", "apt", "purge", "snapd"],
-                       check=True, text=True)
+                       check=True, text=True, input=program_commands.password)
     program_commands.clear_screen()
 
 
@@ -293,5 +290,8 @@ def Main():
     if Program_Main.desktop_environment == "gnome":
         gnome_volume_steps()
     noto_emoji_apple()
-    install_oreo_cursors()
     subprocess.run("localectl --no-convert set-x11-keymap fi", shell=True)
+    subprocess.run(
+        "timedatectl set-local-rtc 1 --adjust-system-clock", shell=True)
+    subprocess.run(
+        "chsh -s /bin/zsh", shell=True)

@@ -16,6 +16,7 @@ input_kde = ("k", "kd", "kde", "ked", "kdd", "kded")
 input_pipewire = ("pw", "pipewire")
 input_pulseaudio = ("pa", "pulse", "pulseaudio")
 character_blacklist = "[^a-zA-Z0-9-_\n .+]"
+password = getpass.getpass()
 
 
 def get_username():
@@ -59,9 +60,9 @@ def text_modify(file, *args):
     if not file.exists():
         try:
             subprocess.run(["sudo", "touch", file], text=True,
-                           check=True, input=getpass.getpass())
+                           check=True, input=password)
             subprocess.run(["sudo", "chmod", "644", file],
-                           text=True, check=True)
+                           text=True, check=True, input=password)
         except subprocess.CalledProcessError as e:
             print(e)
             return
@@ -83,10 +84,10 @@ def text_modify(file, *args):
     except PermissionError:
         try:
             subprocess.run(["sudo", "chmod", "777", file],
-                           text=True, check=True, input=getpass.getpass())
+                           text=True, check=True, input=password)
             file.write_text(data)
             subprocess.run(["sudo", "chmod", "644", file],
-                           text=True, check=True)
+                           text=True, check=True, input=password)
         except subprocess.CalledProcessError as e:
             print(e)
             return
@@ -96,7 +97,8 @@ def text_modify(file, *args):
 
 
 def press_enter_to_continue():
-    input("Press the Enter key to continue...")
+    lolcat_print("Press the Enter key to continue...")
+    input()
 
 
 def os_check():
@@ -106,6 +108,7 @@ def os_check():
         return "debian"
     if is_tool("termux-setup-storage"):
         return "android"
+
 
 linux_distro = os_check()
 
@@ -118,7 +121,7 @@ def lolcat_print(lolcat_text):
     clear_screen()
     try:
         subprocess.run(["lolcat"], input=lolcat_text, check=True, text=True)
-    except (subprocess.CalledProcessError,FileNotFoundError) as error:
+    except (subprocess.CalledProcessError, FileNotFoundError) as error:
         print(lolcat_text)
 
 
@@ -127,7 +130,8 @@ def check_true_false(message: str, choice: str, input_list_true: list, input_lis
     while True:
         clear_screen()
         lolcat_print(message)
-        choice = input(choice)
+        lolcat_print(choice)
+        choice = input()
         if choice.lower() in input_list_true:
             clear_screen()
             return True
@@ -158,22 +162,14 @@ def choice_audio_environment():
 
 
 def text_filter(text):
+    # will return a list of strings with disallowed characters removed
+    return_list = []
     if type(text) == list:
-        temp = []
-        for i in text:
-            if i == "":
-                continue
-            temptemp=[]
-            if type(i)==list:
-                for x in i:
-                    if x =="":
-                        continue
-                    temptemp.extend(re.sub(character_blacklist, "", x))
-                temp.extend(temptemp)
-            else:
-                temp.extend(re.sub(character_blacklist, "", i))
-        return temp
-    return re.sub(character_blacklist, "", text).split("\n")
+        string = ' '.join([str(item)for item in text])
+        return_list = re.sub(character_blacklist, "", string).split(" ")
+    else:
+        return_list = re.sub(character_blacklist, "", text).split("\n")
+    return list(filter(lambda x: x != '', return_list))
 
 
 def detect_graphics_card():
@@ -197,5 +193,6 @@ def check_machine_type():
         return "x86"
     else:
         print('Unknown machine type')
+
 
 cpu_architecture = check_machine_type()

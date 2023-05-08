@@ -6,7 +6,6 @@ eog-plugins
 gamemode
 gimp
 gnome-disk-utility
-goverlay
 gparted
 inkscape
 kate
@@ -14,11 +13,10 @@ kdenlive
 keepassxc
 libreoffice
 lutris
-mangohud
 mpv
 okular
 scrcpy
-timeshift
+
 vlc
 wireguard-tools
 xdg-utils

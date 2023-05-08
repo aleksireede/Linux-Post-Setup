@@ -12,7 +12,6 @@ firefox-pwa-bin
 firefox-wayland-mode-hook
 git-credential-keepassxc
 gmail-nativefier
-mangohud-common
 ms-outlook-nativefier
 nextcloud-client
 noto-fonts-cjk
@@ -38,3 +37,6 @@ xorg-xlsclients
 youtube-music-bin
 kdeconnect
 google-chrome
+mangohud-git
+goverlay-git
+timeshift-bin
