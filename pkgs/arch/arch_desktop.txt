@@ -37,6 +37,6 @@ xorg-xlsclients
 youtube-music-bin
 kdeconnect
 google-chrome
-mangohud-git
-goverlay-git
 timeshift-bin
+prismlauncher-git
+galculator-gtk2

@@ -31,6 +31,7 @@ def arch():
     pacman_config()
     check_for_aur_helper()
     arch_pkgs_install()
+    mangohud()
 
 
 class pacman:
@@ -124,6 +125,21 @@ def pacman_config():
         pacman_conf, "#ParallelDownloads = 5", "ParallelDownloads = 8")
     program_commands.text_modify(pacman_conf, "#Color", "Color")
     program_commands.clear_screen()
+
+
+def mangohud():
+    if pathlib2.Path("/usr/local/lib/mangohud/libMangoHud.so").exists():
+        return
+    mangohud_path = pathlib2.Path(pathlib2.Path.cwd(), "MangoHud")
+    if not mangohud_path.exists():
+        mangohud_path.mkdir()
+    subprocess.run(["git", "clone", "--recurse-submodules",
+                   "https://github.com/flightlessmango/MangoHud.git"], cwd=pathlib2.Path.cwd(), text=True, check=True)
+    subprocess.run(["meson", "build"], cwd=mangohud_path,
+                   text=True, check=True)
+    subprocess.run(["ninja", "-C", "build", "install"],
+                   cwd=mangohud_path, text=True, check=True)
+    shutil.rmtree(mangohud_path, ignore_errors=False, onerror=None)
 
 
 if __name__ == "__main__":

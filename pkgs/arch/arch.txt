@@ -36,3 +36,5 @@ xkb-switch
 zenpower3-dkms
 zenstates-git
 lolcat
+python-mako 
+libxnvctrl

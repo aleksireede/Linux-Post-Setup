@@ -2,3 +2,4 @@ com.github.wwmm.easyeffects
 io.github.mimbrero.WhatsAppDesktop
 org.telegram.desktop
 io.github.spacingbat3.webcord
+org.prismlauncher.PrismLauncher

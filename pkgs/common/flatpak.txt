@@ -2,4 +2,3 @@ org.chromium.Chromium
 io.mrarm.mcpelauncher
 net.brinkervii.grapejuice
 com.heroicgameslauncher.hgl
-org.prismlauncher.PrismLauncher
