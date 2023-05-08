@@ -83,6 +83,8 @@ def arch_pkgs_install():
     elif Program_Main.audio_environment == "pulseaudio":
         install_list.extend(arch_pulseaudio_pkgs)
         uninstall_list.extend(arch_pipewire_pkgs)
+        install_list.extend(arch_pulseaudio_pkgs)
+        uninstall_list.extend(arch_pipewire_pkgs)
     if not Program_Main.is_server_install_type:
         install_list.extend(
             [arch_desktop_pkgs, arch_wayland_pkgs, program_common.common_desktop_pkgs])
