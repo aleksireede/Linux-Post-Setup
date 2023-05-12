@@ -3,6 +3,7 @@ import program_commands
 import program_common
 import program_arch
 import program_debian
+import program_android
 is_server_install_type = True
 desktop_environment = ""
 audio_environment = ""
@@ -20,6 +21,9 @@ def main():
         program_arch.arch()
     elif linux_distro == "debian":
         program_debian.debian()
+    elif linux_distro == "android":
+        program_android.start()
+        return
     program_common.Main()
     program_commands.clear_screen()
     program_commands.lolcat_print("The script has been completed...\nGoodbye!")

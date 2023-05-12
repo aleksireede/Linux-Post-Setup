@@ -1,0 +1,14 @@
+screenfetch
+tidy
+zsh
+wget
+htop
+gnupg
+git
+fortune
+flex
+nano
+dos2unix
+curl
+cowsay
+ani-cli

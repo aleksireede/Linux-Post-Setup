@@ -23,7 +23,7 @@ qpwgraph
 rdesktop
 signal-desktop-beta-bin
 spectacle
-steam
+steam-native-runtime
 syncthing-appmenu
 teams-nativefier
 telegram-desktop-bin

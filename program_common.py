@@ -13,15 +13,13 @@ username = program_commands.username
 
 librewolf_conf_text = open(pathlib2.Path(
     pathlib2.Path.cwd(), "text", "keepassxc_browser_plugin.json")).read()
-zshrc = pathlib2.Path("/home", username, ".zshrc")
-bashrc = pathlib2.Path("/home", username, ".bashrc")
+zshrc = pathlib2.Path(pathlib2.Path.home(), ".zshrc")
+bashrc = pathlib2.Path(pathlib2.Path.home(), ".bashrc")
 alias_file = open(pathlib2.Path("./text/alias.txt"), "r").read()
-zsh_aliases = pathlib2.Path(
-    "/home", username, ".zsh_aliases")
-bash_aliases = pathlib2.Path(
-    "/home", username, ".bash_aliases")
+zsh_aliases = pathlib2.Path(pathlib2.Path.home(), ".zsh_aliases")
+bash_aliases = pathlib2.Path(pathlib2.Path.home(), ".bash_aliases")
 zsh_plugin_path = pathlib2.Path(
-    "/home", username, ".oh-my-zsh/custom/plugins")
+    pathlib2.Path.home(), ".oh-my-zsh/custom/plugins")
 
 
 class systemd_util:

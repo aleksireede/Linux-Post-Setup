@@ -38,3 +38,4 @@ zenstates-git
 lolcat
 python-mako 
 libxnvctrl
+calf

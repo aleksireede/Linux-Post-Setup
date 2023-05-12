@@ -15,7 +15,7 @@ then
     then
         apt update
         apt upgrade
-        apt install python3 git libxml2 libxslt libiconv rust
+        apt install python3 git libxml2 libxslt libiconv rust build-essential python-cryptography python-numpy
     else
         echo ""
         echo "Your system is not supported!"

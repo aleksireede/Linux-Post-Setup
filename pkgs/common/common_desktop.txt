@@ -16,7 +16,6 @@ lutris
 mpv
 okular
 scrcpy
-
 vlc
 wireguard-tools
 xdg-utils
