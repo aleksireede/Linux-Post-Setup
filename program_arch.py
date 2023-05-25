@@ -76,7 +76,7 @@ class pacman:
 
 def arch_pkgs_install():
     pacman.update_db()
-    install_list = [arch_pkgs, program_common.common_pkgs]
+    install_list = [arch_pkgs]
     uninstall_list = []
     if Program_Main.audio_environment == "pipewire":
         uninstall_list.append(arch_pulseaudio_pkgs)
@@ -88,15 +88,13 @@ def arch_pkgs_install():
         uninstall_list.extend(arch_pipewire_pkgs)
     if not Program_Main.is_server_install_type:
         install_list.extend(
-            [arch_desktop_pkgs, arch_wayland_pkgs, program_common.common_desktop_pkgs])
+            [arch_desktop_pkgs, arch_wayland_pkgs])
         if Program_Main.desktop_environment == "kde":
             install_list.extend(arch_kde_pkgs)
             uninstall_list.extend(arch_gnome_pkgs)
-            uninstall_list.extend(program_common.common_gnome_pkgs)
         elif Program_Main.desktop_environment == "gnome":
             uninstall_list.extend(arch_kde_pkgs)
             install_list.extend(arch_gnome_pkgs)
-            install_list.extend(program_common.common_gnome_pkgs)
     uninstall_list = program_commands.text_filter(uninstall_list)
     install_list = program_commands.text_filter(install_list)
     pacman.remove(uninstall_list)

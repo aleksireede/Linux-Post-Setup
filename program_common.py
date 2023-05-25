@@ -67,12 +67,6 @@ class systemd_util:
 common_pkg_directory = pathlib2.Path(pathlib2.Path.cwd(), "pkgs", "common")
 common_pkgs = program_commands.text_filter(
     open(pathlib2.Path(common_pkg_directory, "common.txt"), "r").read())
-common_desktop_pkgs = program_commands.text_filter(
-    open(pathlib2.Path(common_pkg_directory, "common_desktop.txt"), "r").read())
-common_gnome_pkgs = program_commands.text_filter(
-    open(pathlib2.Path(common_pkg_directory, "common_gnome.txt"), "r").read())
-common_flatpak_pkgs = program_commands.text_filter(
-    open(pathlib2.Path(common_pkg_directory, "flatpak.txt"), "r").read())
 
 
 def flatpak():

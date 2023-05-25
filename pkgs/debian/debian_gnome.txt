@@ -1,5 +1,0 @@
-gdm3
-gnome-shell-extension-manager
-syncthing-gtk
-gnome-software-plugin-flatpak
-gtksimple-scan

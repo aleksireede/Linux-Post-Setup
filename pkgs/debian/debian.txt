@@ -15,7 +15,6 @@ mono-complete
 openjdk-11-jre
 openjdk-17-jre
 p7zip-full
-p7zip-rar
 python3-pip
 python3-venv
 software-properties-common
