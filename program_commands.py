@@ -15,7 +15,7 @@ input_gnome = ("gnome", "g", "gn", "gno", "gnom", "gmone", "gnoum", "gnomw")
 input_kde = ("k", "kd", "kde", "ked", "kdd", "kded")
 input_pipewire = ("pw", "pipewire")
 input_pulseaudio = ("pa", "pulse", "pulseaudio")
-character_blacklist = "[^a-zA-Z0-9-_\n .+]"
+character_blacklist = "[^a-zA-Z0-9-_\n .:+]"
 password = getpass.getpass()
 
 
