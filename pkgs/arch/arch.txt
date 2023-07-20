@@ -39,3 +39,4 @@ lolcat
 python-mako 
 libxnvctrl
 calf
+github-cli
