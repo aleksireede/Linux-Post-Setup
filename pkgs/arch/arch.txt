@@ -40,3 +40,4 @@ python-mako
 libxnvctrl
 calf
 github-cli
+bcompare
